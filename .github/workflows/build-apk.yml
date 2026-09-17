@@ -1,88 +1,18 @@
 
-name: Build Android APK
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - android-port
-
-jobs:
-  build:
-    name: Build Pasargad APK
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Install npm dependencies
-        run: npm ci
-
-      - name: Install Capacitor
-        run: npm install @capacitor/core @capacitor/cli @capacitor/android
-
-      - name: Prepare web files
-        run: |
-          rm -rf www
-          mkdir -p www
-
-          cp index.html www/
-          cp cheque.html www/ || true
-          cp splash.html www/ || true
-          cp confirm-worker.js www/ || true
-
-          cp -r css www/
-          cp -r js www/
-          cp -r assets www/
-
-      - name: Create Capacitor config
-        run: |
-          cat > capacitor.config.json <<'EOF'
-          {
-            "appId": "com.pasargad.app",
-            "appName": "Pasargad",
-            "webDir": "www"
-          }
-          EOF
-
       - name: Install Android SDK packages
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platform-tools" \
-            "platforms;android-35" \
-            "build-tools;35.0.0"
+          SDKMANAGER=$(find "$ANDROID_SDK_ROOT/cmdline-tools" -type f -name sdkmanager | head -n 1)
 
-      - name: Add Android platform
-        run: |
-          if [ ! -d "android" ]; then
-            npx cap add android
+          if [ -z "$SDKMANAGER" ]; then
+            echo "sdkmanager not found"
+            exit 1
           fi
 
-      - name: Sync Capacitor
-        run: npx cap sync android
+          echo "Using sdkmanager: $SDKMANAGER"
 
-      - name: Build APK
-        working-directory: android
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Pasargad-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-          if-no-files-found: error
+          "$SDKMANAGER" \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0"
