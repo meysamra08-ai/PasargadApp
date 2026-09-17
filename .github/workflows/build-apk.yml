@@ -34,6 +34,15 @@ jobs:
         run: |
           npm install --no-save @capacitor/core @capacitor/cli @capacitor/android
 
+      - name: Add Android platform
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+        
       - name: Sync Capacitor
         run: npx cap sync android
 
