@@ -8,9 +8,6 @@
     "rebuild": "electron-rebuild"
   },
   "dependencies": {
-    "@capacitor/android": "^8.5.2",
-    "@capacitor/cli": "^8.5.2",
-    "@capacitor/core": "^8.5.2",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
