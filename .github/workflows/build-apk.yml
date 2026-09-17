@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    name: Build Pasargad APK
     runs-on: ubuntu-latest
 
     steps:
@@ -27,11 +28,48 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install dependencies
+      - name: Install npm dependencies
         run: npm ci
+
+      - name: Install Capacitor
+        run: npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      - name: Prepare web files
+        run: |
+          rm -rf www
+          mkdir -p www
+
+          cp index.html www/
+          cp cheque.html www/ || true
+          cp splash.html www/ || true
+          cp confirm-worker.js www/ || true
+
+          cp -r css www/
+          cp -r js www/
+          cp -r assets www/
+
+      - name: Create Capacitor config
+        run: |
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.pasargad.app",
+            "appName": "Pasargad",
+            "webDir": "www"
+          }
+          EOF
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0"
+
+      - name: Add Android platform
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
 
       - name: Sync Capacitor
         run: npx cap sync android
@@ -47,3 +85,4 @@ jobs:
         with:
           name: Pasargad-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
