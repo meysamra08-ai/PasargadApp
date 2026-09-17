@@ -3,6 +3,7 @@ name: Build Android APK
 
 on:
   workflow_dispatch:
+
   push:
     branches:
       - android-port
@@ -10,128 +11,341 @@ on:
 permissions:
   contents: read
 
+env:
+  ANDROID_HOME: /usr/local/lib/android/sdk
+  ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+  NODE_VERSION: 20
+  KOTLIN_VERSION: 1.8.22
+
 jobs:
-  build:
+  build-apk:
     name: Build Pasargad APK
     runs-on: ubuntu-22.04
 
-    env:
-      ANDROID_HOME: /usr/local/lib/android/sdk
-      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-
     steps:
-      - name: Checkout project
+      # --------------------------------------------------
+      # 1. Download repository
+      # --------------------------------------------------
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --------------------------------------------------
+      # 2. Setup Node.js
+      # --------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
-      - name: Setup Java
+      # --------------------------------------------------
+      # 3. Setup Java
+      # --------------------------------------------------
+      - name: Setup Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "17"
+          cache: gradle
 
-      - name: Configure Android SDK path
+      # --------------------------------------------------
+      # 4. Configure Android SDK paths
+      # --------------------------------------------------
+      - name: Configure Android SDK
+        shell: bash
         run: |
+          set -e
+
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+
           echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+          echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
           echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
           echo "$ANDROID_HOME/cmdline-tools/16.0/bin" >> "$GITHUB_PATH"
-          echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
           echo "$ANDROID_HOME/tools/bin" >> "$GITHUB_PATH"
 
-      - name: Install npm dependencies
-        run: npm ci
-
-      - name: Install Capacitor packages
-        run: |
-          npm install --no-save \
-            @capacitor/core \
-            @capacitor/cli \
-            @capacitor/android
-
-      - name: Prepare web files
-        run: |
-          rm -rf www
-          mkdir -p www
-
-          cp index.html www/
-          cp cheque.html www/ || true
-          cp splash.html www/ || true
-          cp confirm-worker.js www/ || true
-
-          cp -r css www/
-          cp -r js www/
-          cp -r assets www/
-
-      - name: Create Capacitor configuration
-        run: |
-          cat > capacitor.config.json <<'EOF'
-          {
-            "appId": "com.pasargad.app",
-            "appName": "Pasargad",
-            "webDir": "www"
-          }
-          EOF
-
-          echo "Capacitor configuration:"
-          cat capacitor.config.json
-
+      # --------------------------------------------------
+      # 5. Install Android SDK packages
+      # --------------------------------------------------
       - name: Install Android SDK packages
+        shell: bash
         run: |
+          set -e
+
           SDKMANAGER=""
 
           if [ -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
             SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           elif [ -x "$ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager" ]; then
             SDKMANAGER="$ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager"
+          elif command -v sdkmanager >/dev/null 2>&1; then
+            SDKMANAGER="$(command -v sdkmanager)"
           else
-            SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" \
-              -type f \
-              -name sdkmanager \
-              2>/dev/null | head -n 1)
-          fi
-
-          if [ -z "$SDKMANAGER" ]; then
-            echo "sdkmanager not found"
+            echo "sdkmanager was not found"
+            find "$ANDROID_HOME" -name sdkmanager -type f 2>/dev/null || true
             exit 1
           fi
 
-          echo "Using sdkmanager: $SDKMANAGER"
+          echo "Using SDK Manager: $SDKMANAGER"
 
-          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          yes | "$SDKMANAGER" --licenses >/dev/null || true
 
           "$SDKMANAGER" \
             "platform-tools" \
             "platforms;android-35" \
             "build-tools;35.0.0"
 
-      - name: Add Android platform
+      # --------------------------------------------------
+      # 6. Install npm dependencies
+      # --------------------------------------------------
+      - name: Install npm dependencies
+        shell: bash
         run: |
-          if [ ! -d "android" ]; then
-            npx cap add android
+          set -e
+
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
           fi
 
-      - name: Sync Capacitor
-        run: npx cap sync android
-
-      - name: Create Android SDK local properties
+      # --------------------------------------------------
+      # 7. Install Capacitor
+      # --------------------------------------------------
+      - name: Install Capacitor packages
+        shell: bash
         run: |
+          set -e
+
+          npm install --no-save \
+            @capacitor/core \
+            @capacitor/cli \
+            @capacitor/android
+
+      # --------------------------------------------------
+      # 8. Prepare web files
+      # --------------------------------------------------
+      - name: Prepare web directory
+        shell: bash
+        run: |
+          set -e
+
+          rm -rf www
+          mkdir -p www
+
+          # Main HTML files
+          [ -f index.html ] && cp index.html www/
+          [ -f cheque.html ] && cp cheque.html www/
+          [ -f splash.html ] && cp splash.html www/
+          [ -f confirm-worker.js ] && cp confirm-worker.js www/
+
+          # Web resources
+          [ -d css ] && cp -r css www/
+          [ -d js ] && cp -r js www/
+          [ -d assets ] && cp -r assets www/
+          [ -d database ] && cp -r database www/
+
+          echo "Web directory contents:"
+          find www -maxdepth 3 -type f | sort
+
+      # --------------------------------------------------
+      # 9. Create Capacitor configuration
+      # --------------------------------------------------
+      - name: Create Capacitor configuration
+        shell: bash
+        run: |
+          set -e
+
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.pasargad.app",
+            "appName": "Pasargad",
+            "webDir": "www",
+            "bundledWebRuntime": false,
+            "server": {
+              "androidScheme": "https"
+            }
+          }
+          EOF
+
+          echo "Capacitor configuration:"
+          cat capacitor.config.json
+
+      # --------------------------------------------------
+      # 10. Add Android platform
+      # --------------------------------------------------
+      - name: Add Android platform
+        shell: bash
+        run: |
+          set -e
+
+          if [ ! -d "android" ]; then
+            npx cap add android
+          else
+            echo "Android platform already exists"
+          fi
+
+      # --------------------------------------------------
+      # 11. Configure Android SDK location
+      # --------------------------------------------------
+      - name: Configure local.properties
+        shell: bash
+        run: |
+          set -e
+
+          mkdir -p android
+
           echo "sdk.dir=$ANDROID_HOME" > android/local.properties
 
+          echo "Android local.properties:"
+          cat android/local.properties
+
+      # --------------------------------------------------
+      # 12. Synchronize Capacitor
+      # --------------------------------------------------
+      - name: Capacitor sync
+        shell: bash
+        run: |
+          set -e
+
+          npx cap sync android
+
+      # --------------------------------------------------
+      # 13. Fix Kotlin duplicate classes
+      # --------------------------------------------------
+      - name: Fix Kotlin duplicate classes
+        shell: bash
+        run: |
+          set -e
+
+          ANDROID_BUILD_FILE="android/build.gradle"
+
+          if [ ! -f "$ANDROID_BUILD_FILE" ]; then
+            echo "android/build.gradle was not found"
+            exit 1
+          fi
+
+          cat >> "$ANDROID_BUILD_FILE" <<'EOF'
+
+          // Kotlin dependency compatibility fix
+          allprojects {
+              configurations.configureEach {
+                  resolutionStrategy {
+                      force "org.jetbrains.kotlin:kotlin-stdlib:1.8.22"
+                      force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22"
+                      force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22"
+                  }
+              }
+          }
+          EOF
+
+          echo "Kotlin resolution strategy added."
+
+      # --------------------------------------------------
+      # 14. Configure Gradle properties
+      # --------------------------------------------------
+      - name: Configure Gradle properties
+        shell: bash
+        run: |
+          set -e
+
+          GRADLE_PROPERTIES="android/gradle.properties"
+
+          touch "$GRADLE_PROPERTIES"
+
+          if ! grep -q "^android.useAndroidX=" "$GRADLE_PROPERTIES"; then
+            echo "android.useAndroidX=true" >> "$GRADLE_PROPERTIES"
+          fi
+
+          if ! grep -q "^android.enableJetifier=" "$GRADLE_PROPERTIES"; then
+            echo "android.enableJetifier=true" >> "$GRADLE_PROPERTIES"
+          fi
+
+          if ! grep -q "^org.gradle.jvmargs=" "$GRADLE_PROPERTIES"; then
+            echo "org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8" >> "$GRADLE_PROPERTIES"
+          fi
+
+          if ! grep -q "^kotlin.code.style=" "$GRADLE_PROPERTIES"; then
+            echo "kotlin.code.style=official" >> "$GRADLE_PROPERTIES"
+          fi
+
+          echo "Gradle properties:"
+          cat "$GRADLE_PROPERTIES"
+
+      # --------------------------------------------------
+      # 15. Check Kotlin dependencies
+      # --------------------------------------------------
+      - name: Check Kotlin dependencies
+        working-directory: android
+        shell: bash
+        run: |
+          set -e
+
+          chmod +x gradlew
+
+          ./gradlew \
+            :app:dependencies \
+            --configuration debugRuntimeClasspath \
+            --no-daemon \
+            --stacktrace
+
+      # --------------------------------------------------
+      # 16. Clean Android build
+      # --------------------------------------------------
+      - name: Clean Android project
+        working-directory: android
+        shell: bash
+        run: |
+          set -e
+
+          chmod +x gradlew
+
+          ./gradlew clean --no-daemon
+
+      # --------------------------------------------------
+      # 17. Build Debug APK
+      # --------------------------------------------------
       - name: Build Debug APK
         working-directory: android
+        shell: bash
         run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          set -e
 
-      - name: Upload APK
+          chmod +x gradlew
+
+          ./gradlew \
+            assembleDebug \
+            --no-daemon \
+            --stacktrace \
+            --info
+
+      # --------------------------------------------------
+      # 18. Check generated APK
+      # --------------------------------------------------
+      - name: Check APK output
+        shell: bash
+        run: |
+          set -e
+
+          APK_PATH="android/app/build/outputs/apk/debug/app-debug.apk"
+
+          if [ ! -f "$APK_PATH" ]; then
+            echo "APK file was not generated."
+            find android/app/build -type f 2>/dev/null || true
+            exit 1
+          fi
+
+          echo "APK successfully generated:"
+          ls -lh "$APK_PATH"
+
+      # --------------------------------------------------
+      # 19. Upload APK artifact
+      # --------------------------------------------------
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: Pasargad-debug-apk
+          name: pasargad-debug-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
