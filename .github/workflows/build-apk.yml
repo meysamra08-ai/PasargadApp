@@ -23,47 +23,68 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # -----------------------------------------------
+      # ===============================================
       # 1. Checkout repository
-      # -----------------------------------------------
+      # ===============================================
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -----------------------------------------------
+      # ===============================================
       # 2. Setup Node.js 22
-      # -----------------------------------------------
-      - name: Setup Node.js
+      # ===============================================
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: "22"
           cache: npm
 
-      # -----------------------------------------------
-      # 3. Setup Java 17
-      # -----------------------------------------------
-      - name: Setup Java 17
+      # ===============================================
+      # 3. Setup Java 21
+      # ===============================================
+      - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           cache: gradle
 
-      # -----------------------------------------------
-      # 4. Verify Node.js and npm
-      # -----------------------------------------------
-      - name: Verify Node.js version
+      # ===============================================
+      # 4. Verify Node.js and Java
+      # ===============================================
+      - name: Verify Node.js and Java
         shell: bash
         run: |
           set -e
 
+          echo "Node.js version:"
           node --version
+
+          echo "npm version:"
           npm --version
 
-          node -e "const major = Number(process.versions.node.split('.')[0]); if (major < 22) { process.exit(1); }"
+          echo "Java version:"
+          java -version
 
-      # -----------------------------------------------
+          echo "Javac version:"
+          javac -version
+
+          NODE_MAJOR=$(node -p "process.versions.node.split('.')[0]")
+
+          if [ "$NODE_MAJOR" -lt 22 ]; then
+            echo "ERROR: Node.js 22 or newer is required."
+            exit 1
+          fi
+
+          JAVA_MAJOR=$(java -version 2>&1 | sed -n 's/.*version "\( [0-9]* \).*/\1/p' | tr -d ' ')
+
+          if ! java -version 2>&1 | grep -q '"21'; then
+            echo "ERROR: Java 21 is required."
+            exit 1
+          fi
+
+      # ===============================================
       # 5. Configure Android SDK paths
-      # -----------------------------------------------
+      # ===============================================
       - name: Configure Android SDK
         shell: bash
         run: |
@@ -78,9 +99,9 @@ jobs:
           echo "$ANDROID_HOME/cmdline-tools/16.0/bin" >> "$GITHUB_PATH"
           echo "$ANDROID_HOME/tools/bin" >> "$GITHUB_PATH"
 
-      # -----------------------------------------------
+      # ===============================================
       # 6. Install Android SDK packages
-      # -----------------------------------------------
+      # ===============================================
       - name: Install Android SDK packages
         shell: bash
         run: |
@@ -109,9 +130,9 @@ jobs:
             "platforms;android-35" \
             "build-tools;35.0.0"
 
-      # -----------------------------------------------
+      # ===============================================
       # 7. Install npm dependencies
-      # -----------------------------------------------
+      # ===============================================
       - name: Install npm dependencies
         shell: bash
         run: |
@@ -123,9 +144,9 @@ jobs:
             npm install
           fi
 
-      # -----------------------------------------------
+      # ===============================================
       # 8. Install Capacitor
-      # -----------------------------------------------
+      # ===============================================
       - name: Install Capacitor packages
         shell: bash
         run: |
@@ -136,20 +157,20 @@ jobs:
             @capacitor/cli \
             @capacitor/android
 
-      # -----------------------------------------------
+      # ===============================================
       # 9. Verify Capacitor CLI
-      # -----------------------------------------------
+      # ===============================================
       - name: Verify Capacitor CLI
         shell: bash
         run: |
           set -e
 
-          node --version
+          echo "Capacitor version:"
           npx cap --version
 
-      # -----------------------------------------------
+      # ===============================================
       # 10. Prepare web directory
-      # -----------------------------------------------
+      # ===============================================
       - name: Prepare web directory
         shell: bash
         run: |
@@ -195,9 +216,9 @@ jobs:
           echo "Web directory contents:"
           find www -maxdepth 3 -type f | sort
 
-      # -----------------------------------------------
+      # ===============================================
       # 11. Create Capacitor configuration
-      # -----------------------------------------------
+      # ===============================================
       - name: Create Capacitor configuration
         shell: bash
         run: |
@@ -218,9 +239,9 @@ jobs:
           echo "Capacitor configuration:"
           cat capacitor.config.json
 
-      # -----------------------------------------------
+      # ===============================================
       # 12. Add Android platform
-      # -----------------------------------------------
+      # ===============================================
       - name: Add Android platform
         shell: bash
         run: |
@@ -232,9 +253,9 @@ jobs:
             echo "Android platform already exists."
           fi
 
-      # -----------------------------------------------
+      # ===============================================
       # 13. Configure Android SDK location
-      # -----------------------------------------------
+      # ===============================================
       - name: Configure local.properties
         shell: bash
         run: |
@@ -247,9 +268,9 @@ jobs:
           echo "Android local.properties:"
           cat android/local.properties
 
-      # -----------------------------------------------
+      # ===============================================
       # 14. Synchronize Capacitor
-      # -----------------------------------------------
+      # ===============================================
       - name: Capacitor sync
         shell: bash
         run: |
@@ -257,9 +278,9 @@ jobs:
 
           npx cap sync android
 
-      # -----------------------------------------------
+      # ===============================================
       # 15. Fix Kotlin duplicate classes
-      # -----------------------------------------------
+      # ===============================================
       - name: Fix Kotlin duplicate classes
         shell: bash
         run: |
@@ -272,7 +293,8 @@ jobs:
             exit 1
           fi
 
-          cat >> "$ANDROID_BUILD_FILE" <<'EOF'
+          if ! grep -q "Kotlin dependency compatibility fix" "$ANDROID_BUILD_FILE"; then
+            cat >> "$ANDROID_BUILD_FILE" <<'EOF'
 
           // Kotlin dependency compatibility fix
           allprojects {
@@ -285,12 +307,13 @@ jobs:
               }
           }
           EOF
+          fi
 
-          echo "Kotlin resolution strategy added."
+          echo "Kotlin resolution strategy configured."
 
-      # -----------------------------------------------
+      # ===============================================
       # 16. Configure Gradle properties
-      # -----------------------------------------------
+      # ===============================================
       - name: Configure Gradle properties
         shell: bash
         run: |
@@ -319,10 +342,40 @@ jobs:
           echo "Gradle properties:"
           cat "$GRADLE_PROPERTIES"
 
-      # -----------------------------------------------
-      # 17. Check Kotlin dependencies
-      # -----------------------------------------------
-      - name: Check Kotlin dependencies
+      # ===============================================
+      # 17. Configure Java 21 compile options
+      # ===============================================
+      - name: Configure Java 21 compile options
+        shell: bash
+        run: |
+          set -e
+
+          APP_BUILD_FILE="android/app/build.gradle"
+
+          if [ ! -f "$APP_BUILD_FILE" ]; then
+            echo "ERROR: android/app/build.gradle was not found."
+            exit 1
+          fi
+
+          if ! grep -q "JavaVersion.VERSION_21" "$APP_BUILD_FILE"; then
+            cat >> "$APP_BUILD_FILE" <<'EOF'
+
+          // Java 21 compatibility configuration
+          android {
+              compileOptions {
+                  sourceCompatibility JavaVersion.VERSION_21
+                  targetCompatibility JavaVersion.VERSION_21
+              }
+          }
+          EOF
+          fi
+
+          echo "Java 21 compile options configured."
+
+      # ===============================================
+      # 18. Check Gradle and Kotlin dependencies
+      # ===============================================
+      - name: Check Gradle dependencies
         working-directory: android
         shell: bash
         run: |
@@ -336,9 +389,9 @@ jobs:
             --no-daemon \
             --stacktrace
 
-      # -----------------------------------------------
-      # 18. Clean Android project
-      # -----------------------------------------------
+      # ===============================================
+      # 19. Clean Android project
+      # ===============================================
       - name: Clean Android project
         working-directory: android
         shell: bash
@@ -349,9 +402,9 @@ jobs:
 
           ./gradlew clean --no-daemon
 
-      # -----------------------------------------------
-      # 19. Build Debug APK
-      # -----------------------------------------------
+      # ===============================================
+      # 20. Build Debug APK
+      # ===============================================
       - name: Build Debug APK
         working-directory: android
         shell: bash
@@ -366,9 +419,9 @@ jobs:
             --stacktrace \
             --info
 
-      # -----------------------------------------------
-      # 20. Check generated APK
-      # -----------------------------------------------
+      # ===============================================
+      # 21. Check APK output
+      # ===============================================
       - name: Check APK output
         shell: bash
         run: |
@@ -378,16 +431,19 @@ jobs:
 
           if [ ! -f "$APK_PATH" ]; then
             echo "ERROR: APK file was not generated."
-            find android/app/build -type f 2>/dev/null || true
+
+            find android/app/build \
+              -type f 2>/dev/null || true
+
             exit 1
           fi
 
           echo "APK successfully generated:"
           ls -lh "$APK_PATH"
 
-      # -----------------------------------------------
-      # 21. Upload APK artifact
-      # -----------------------------------------------
+      # ===============================================
+      # 22. Upload APK artifact
+      # ===============================================
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
