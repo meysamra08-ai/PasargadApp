@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<title>
+        ثبت چک جدید - پاسارگاد
+    </title>
+
+<style>
+
+        * {
+            box-sizing: border-box;
+            font-family: "B Titr", "Titr", Tahoma, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background: #d2d2d2;
+            color: #111;
+            font-size: 12px;
+            overflow: hidden;
+        }
+
+        /* نوار عنوان برنامه */
+        .title-bar {
+            height: 30px;
+            background: #1f4e79;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 7px;
+            border: 0;
+        }
+
+        .title-icon {
+            width: 21px;
+            height: 21px;
+            margin-left: 6px;
+            border-radius: 0;
+            background: #2f75a8;
+            border: 1px solid #9db9ce;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .title {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* منوی کلاسیک */
+        .menu-bar {
+            height: 25px;
+            background: #eeeeee;
+            border-bottom: 1px solid #888;
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .menu-item {
+            height: 24px;
+            padding: 3px 13px;
+            border-radius: 0;
+            color: #111;
+        }
+
+        .menu-item:hover {
+            background: #cfe2f3;
+        }
+
+        /* نوار ابزار */
+        .toolbar {
+            height: 39px;
+            padding: 3px 5px;
+            background: #e5e5e5;
+            border-bottom: 1px solid #888;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .toolbar button {
+            height: 31px;
+            min-width: 76px;
+            padding: 0 9px;
+            border: 1px solid #777;
+            border-radius: 1px;
+            background: #eeeeee;
+            color: #111;
+            box-shadow: inset 1px 1px 0 #fff;
+            cursor: pointer;
+        }
+
+        .toolbar button:hover {
+            background: #d7e6f4;
+        }
+
+        /* فضای فرم */
+        .main {
+            height: calc(100vh - 94px);
+            overflow: auto;
+            padding: 5px;
+            background: #d2d2d2;
+
+            /* تمام بخش‌ها زیر هم، هر بخش یک ردیف کامل */
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: max-content;
+            gap: 5px;
+            align-content: start;
+        }
+
+        .fiscal-box {
+            grid-column: 1 / -1;
+            min-height: 31px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 8px;
+            margin: 0;
+            background: #eeeeee;
+            border: 1px solid #858585;
+            border-radius: 0;
+            box-shadow: inset 1px 1px 0 #fff;
+        }
+
+        .fiscal-box strong {
+            color: #173e5f;
+        }
+
+        /* پنل‌های فرم */
+        .form-panel {
+            min-width: 0;
+            background: #eeeeee;
+            border: 1px solid #777;
+            border-radius: 0;
+            margin: 0;
+            overflow: visible;
+            box-shadow: inset 1px 1px 0 #fff;
+        }
+
+        /* هر بخش فرم تمام عرض و در یک ردیف مستقل */
+        .fiscal-box + .form-panel,
+        .fiscal-box + .form-panel ~ .form-panel,
+        .main > .form-panel.description-panel,
+        .bottom {
+            grid-column: 1;
+        }
+
+        .panel-title {
+            height: 25px;
+            padding: 3px 8px;
+            background: #d9e2ea;
+            border-bottom: 1px solid #8a959e;
+            color: #173e5f;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .panel-body {
+            padding: 6px 7px;
+        }
+
+        /* چیدمان داخل هر پنل */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 5px 10px;
+            align-items: center;
+        }
+
+        /* مشخصات چک: چهار ستون */
+        .fiscal-box + .form-panel .form-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 5px 8px;
+        }
+
+        /* صاحب چک: سه فیلد در یک خط */
+        .form-panel:has(#accountOwner) .form-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        /* آورنده: دو فیلد در یک خط */
+        .form-panel:has(#drawerName) .form-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        /* دریافت کننده: سه فیلد در یک خط */
+        .form-panel:has(#receiverName) .form-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        /* توضیحات: یک ردیف کامل */
+        .form-panel.description-panel .panel-body {
+            display: block;
+        }
+
+        .form-panel.description-panel #description {
+            width: 100%;
+            height: 48px;
+            min-height: 48px;
+        }
+
+        .field {
+            display: grid;
+            grid-template-columns: 88px minmax(0, 1fr);
+            align-items: center;
+            column-gap: 5px;
+            min-width: 0;
+        }
+
+        .field label {
+            font-weight: bold;
+            color: #222;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .required {
+            color: #a00000;
+            font-weight: bold;
+            margin-right: 2px;
+        }
+
+        .field-error-message {
+            grid-column: 2;
+        }
+
+        /* هر سه پنل بعد از مشخصات چک، دو ستونه */
+        .fiscal-box + .form-panel ~ .form-panel {
+            min-width: 0;
+        }
+
+        /* کنترل‌ها */
+        input,
+        select,
+        textarea,
+        button {
+            font-family: "B Titr", "Titr", Tahoma, sans-serif;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #858585;
+            border-radius: 0;
+            background: #fff;
+            color: #111;
+            outline: none;
+        }
+
+        input,
+        select {
+            height: 26px;
+            padding: 2px 6px;
+        }
+
+        textarea {
+            height: 58px;
+            min-height: 58px;
+            padding: 4px 6px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #315f87;
+            box-shadow: inset 0 0 0 1px #b8cee1;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #999;
+        }
+
+        .amount-input-wrap {
+            position: relative;
+        }
+
+        #amount {
+            direction: ltr;
+            text-align: right;
+            padding-left: 54px;
+        }
+
+        .amount-unit {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            pointer-events: none;
+            font-size: 13px;
+        }
+
+        #amountInWords {
+            background: #f2f2f2;
+            color: #333;
+        }
+
+        .field-error {
+            border-color: #b00000 !important;
+            background: #fff4f4 !important;
+            box-shadow: none !important;
+        }
+
+        .field-error-message {
+            display: none;
+            color: #a00000;
+            font-size: 10px;
+            line-height: 1.2;
+            font-weight: bold;
+        }
+
+        .field.has-error .field-error-message {
+            display: block;
+        }
+
+        .field.has-error label {
+            color: #a00000;
+        }
+
+        /* توضیحات و دکمه‌ها تمام عرض */
+        .main > .form-panel.description-panel {
+            grid-column: 1 / -1;
+        }
+
+        .bottom {
+            grid-column: 1 / -1;
+            min-height: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .bottom button {
+            min-width: 95px;
+            height: 29px;
+            padding: 0 12px;
+            border: 1px solid #777;
+            border-radius: 1px;
+            background: #eeeeee;
+            color: #111;
+            box-shadow: inset 1px 1px 0 #fff;
+            cursor: pointer;
+        }
+
+        .bottom button:hover {
+            background: #d7e6f4;
+        }
+
+        .save-button {
+            min-width: 120px !important;
+            background: #5b8f5b !important;
+            color: #fff !important;
+            border-color: #426a42 !important;
+            font-weight: bold;
+        }
+
+        .save-button:hover {
+            background: #4d7e4d !important;
+        }
+
+        @media (max-width: 1000px) {
+            .fiscal-box + .form-panel .form-grid,
+            .form-panel:has(#accountOwner) .form-grid,
+            .form-panel:has(#drawerName) .form-grid,
+            .form-panel:has(#receiverName) .form-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .field {
+                grid-template-columns: 95px minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            body {
+                overflow: auto;
+            }
+
+            .main {
+                height: auto;
+                min-height: calc(100vh - 94px);
+                grid-template-columns: 1fr;
+            }
+
+            .fiscal-box,
+            .fiscal-box + .form-panel,
+            .main > .form-panel.description-panel,
+            .bottom {
+                grid-column: 1;
+            }
+
+            .fiscal-box + .form-panel .form-grid,
+            .form-panel:has(#accountOwner) .form-grid,
+            .form-panel:has(#drawerName) .form-grid,
+            .form-panel:has(#receiverName) .form-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .menu-bar,
+            .toolbar {
+                display: none !important;
+            }
+
+            body,
+            .main {
+                background: #fff;
+                overflow: visible;
+                height: auto;
+            }
+
+            .main {
+                display: block;
+                padding: 0;
+            }
+
+            .form-panel,
+            .fiscal-box {
+                margin-bottom: 5px;
+                box-shadow: none;
+            }
+        }
+
+    
+.pasargad-main-menu{display:flex;align-items:stretch;gap:0;}
+.pasargad-main-menu .menu-item{border:0;border-left:1px solid #c7d0d8;background:transparent;padding:0 22px;cursor:pointer;color:#263238;font-size:13px;}
+.pasargad-main-menu .menu-item:hover{background:#e8f0f6;}
+.pasargad-main-menu .menu-item.active{background:#dbeaf5;color:#155b85;font-weight:bold;box-shadow:inset 0 -2px 0 #347aa8;}
+@media(max-width:900px){.pasargad-main-menu .menu-item{padding:0 12px;}}
+
+/* ===== Pasargad Concept Header - header only ===== */
+.title-bar{
+    position:relative !important;
+    height:88px !important;
+    min-height:88px !important;
+    padding:0 22px !important;
+    display:flex !important;
+    align-items:center !important;
+    direction:ltr !important;
+    color:#fff !important;
+    background:
+        linear-gradient(90deg, rgba(5,43,78,.96) 0%, rgba(9,62,101,.82) 42%, rgba(15,71,108,.48) 72%, rgba(7,43,73,.88) 100%),
+        url("assets/header-scenic.jpg") center center/cover no-repeat !important;
+    border-bottom:1px solid #123f62 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.20) !important;
+    overflow:hidden !important;
+}
+.title-bar::after{
+    content:"پاسارگاد\A سیستم مدیریت چک و امور مالی";
+    white-space:pre;
+    position:absolute;
+    right:28px;
+    top:16px;
+    text-align:right;
+    direction:rtl;
+    line-height:1.45;
+    font-family:"B Titr","Titr",Tahoma,sans-serif;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:0;
+    text-shadow:0 1px 3px rgba(0,0,0,.28);
+    pointer-events:none;
+}
+.title-bar::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:2px;
+    background:rgba(255,255,255,.18);
+    pointer-events:none;
+}
+.title-icon{
+    flex:0 0 auto !important;
+    width:58px !important;
+    height:58px !important;
+    margin:0 14px 0 0 !important;
+    border-radius:9px !important;
+    background:rgba(255,255,255,.10) url("assets/logo.png") center/contain no-repeat !important;
+    border:1px solid rgba(255,255,255,.28) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 6px rgba(0,0,0,.18) !important;
+    font-size:0 !important;
+    z-index:2;
+}
+.title{
+    position:relative !important;
+    z-index:2;
+    margin:0 !important;
+    max-width:520px;
+    color:#fff !important;
+    font-family:"B Titr","Titr",Tahoma,sans-serif !important;
+    font-size:19px !important;
+    font-weight:bold !important;
+    text-align:left !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.30);
+}
+.menu-bar{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 8px !important;
+    background:linear-gradient(#f9fbfd,#e7eef4) !important;
+    border-bottom:1px solid #b8c8d5 !important;
+    box-shadow:0 1px 2px rgba(0,0,0,.08) !important;
+}
+.menu-item{
+    height:36px !important;
+    padding:6px 18px !important;
+    margin:2px 1px !important;
+    border:1px solid transparent !important;
+    border-radius:5px !important;
+    color:#173e5d !important;
+    font-weight:bold !important;
+    background:transparent !important;
+}
+.menu-item:hover,.menu-item:focus,.menu-item.active{
+    background:#dbeaf7 !important;
+    border-color:#a9c8df !important;
+    color:#0b4f83 !important;
+    outline:none !important;
+}
+@media(max-width:900px){
+    .title-bar{height:76px !important;min-height:76px !important;padding:0 12px !important;}
+    .title-bar::after{font-size:19px;right:14px;top:14px;}
+    .title-icon{width:48px !important;height:48px !important;margin-right:10px !important;}
+    .title{font-size:16px !important;max-width:42%;}
+}
+
+
+        /* ===== Single-header mode: hide the duplicated inner application header ===== */
+        body > .title-bar,
+        body > .menu-bar.pasargad-main-menu {
+            display: none !important;
+        }
+        body > .toolbar {
+            height: 39px !important;
+            min-height: 39px !important;
+        }
+        body > .main {
+            height: calc(100vh - 39px) !important;
+        }
+        @media (max-width: 700px) {
+            body > .main {
+                min-height: calc(100vh - 39px) !important;
+            }
+        }
+</style>
+</head>
+
+<body>
+<div class="title-bar">
+<div class="title-icon">
+            ✓
+        </div>
+<div class="title">
+            ثبت چک جدید
+        </div>
+</div>
+<div class="menu-bar pasargad-main-menu">
+<button type="button" class="menu-item active" onclick="window.location.href='index.html'">ثبت چک</button>
+<button type="button" class="menu-item" onclick="window.location.href='index.html#contacts'">مدیریت مشتریان</button>
+<button type="button" class="menu-item" onclick="window.location.href='index.html#reports'">گزارشات</button>
+<button type="button" class="menu-item" onclick="window.location.href='index.html#tools'">ابزارها</button>
+<button type="button" class="menu-item" onclick="window.location.href='index.html#help'">راهنما</button>
+</div>
+<div class="toolbar">
+<button onclick="goBack()" type="button">
+            ← بازگشت به گزارش
+        </button>
+</div>
+
+<div class="main">
+    <div class="fiscal-box">
+<span>
+                سال مالی:
+            </span>
+<strong id="selectedFiscalYear">
+                ۱۴۰۵
+            </strong>
+<input id="fiscalYear" type="hidden" value="1405"/>
+</div>
+
+    <div class="form-panel">
+        <div class="panel-title">مشخصات چک</div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="field" id="field-sendDate">
+<label>
+                            تاریخ ارسال
+                            <span class="required">*</span>
+                        </label>
+<input id="sendDate" placeholder="هنگام ثبت به‌صورت خودکار ثبت می‌شود" type="text" readonly/>
+<div class="field-error-message" id="error-sendDate"></div>
+</div>
+                <div class="field" id="field-bank">
+<label>
+                            نام بانک
+                            <span class="required">*</span>
+                        </label>
+<input id="bank" placeholder="نام بانک" type="text"/>
+<div class="field-error-message" id="error-bank"></div>
+</div>
+                <div class="field" id="field-branchName">
+<label>
+                            نام شعبه
+                        </label>
+<input id="branchName" placeholder="نام شعبه" type="text"/>
+<div class="field-error-message" id="error-branchName"></div>
+</div>
+                <div class="field" id="field-chequeNo">
+<label>
+                            شماره چک
+                            <span class="required">*</span>
+                        </label>
+<input id="chequeNo" inputmode="numeric" placeholder="شماره چک" type="text"/>
+<div class="field-error-message" id="error-chequeNo"></div>
+</div>
+                <div class="field" id="field-sayadi">
+<label>
+                            شناسه صیادی
+                        </label>
+<input id="sayadi" inputmode="numeric" maxlength="16" placeholder="۱۶ رقم" type="text"/>
+<div class="field-error-message" id="error-sayadi"></div>
+</div>
+                <div class="field" id="field-dueDate">
+<label>
+                            تاریخ سررسید
+                            <span class="required">*</span>
+                        </label>
+<input id="dueDate" placeholder="۱۴۰۵/۰۷/۰۱" type="text"/>
+<div class="field-error-message" id="error-dueDate"></div>
+</div>
+                <div class="field" id="field-amount">
+<label>
+                            مبلغ
+                            <span class="required">*</span>
+                        </label>
+<div class="amount-input-wrap"><input id="amount" inputmode="numeric" placeholder="مبلغ" type="text"/><span class="amount-unit">ریال</span></div>
+<div class="field-error-message" id="error-amount"></div>
+</div>
+                <div class="field" id="field-amountInWords">
+<label>
+                            مبلغ به حروف
+                            <span class="required">*</span>
+                        </label>
+<input id="amountInWords" placeholder="مبلغ به حروف" readonly="" type="text"/>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <div class="panel-title">مشخصات صاحب حساب</div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="field" id="field-accountOwner">
+<label>
+                            نام صاحب حساب
+                        </label>
+<input id="accountOwner" type="text"/>
+<div class="field-error-message" id="error-accountOwner"></div>
+</div>
+                <div class="field" id="field-accountOwnerNationalCode">
+<label>
+                            کد ملی
+                        </label>
+<input id="accountOwnerNationalCode" inputmode="numeric" maxlength="10" type="text"/>
+<div class="field-error-message" id="error-accountOwnerNationalCode"></div>
+</div>
+                <div class="field" id="field-accountNumber">
+<label>
+                            شماره حساب
+                        </label>
+<input id="accountNumber" inputmode="numeric" type="text"/>
+<div class="field-error-message" id="error-accountNumber"></div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <div class="panel-title">مشخصات آورنده چک</div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="field" id="field-drawerName">
+<label>
+                            نام آورنده
+                            <span class="required">*</span>
+</label>
+<input id="drawerName" placeholder="نام و نام خانوادگی" type="text"/>
+<div class="field-error-message" id="error-drawerName"></div>
+</div>
+                <div class="field" id="field-drawerPhone">
+<label>
+                            تلفن
+                            <span class="required">*</span>
+</label>
+<input id="drawerPhone" inputmode="numeric" maxlength="11" placeholder="09120000000" type="text"/>
+<div class="field-error-message" id="error-drawerPhone"></div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <div class="panel-title">مشخصات دریافت کننده چک</div>
+        <div class="panel-body">
+            <div class="form-grid">
+                <div class="field" id="field-receiverName">
+<label>
+                            واگذار شده به
+                            <span class="required">*</span>
+</label>
+<input id="receiverName" placeholder="نام شخص یا شرکت" type="text"/>
+<div class="field-error-message" id="error-receiverName"></div>
+</div>
+                <div class="field" id="field-receiverRegisteredName">
+<label>
+                            نام ثبت شده
+                            <span class="required">*</span>
+</label>
+<input id="receiverRegisteredName" placeholder="نام ثبت شده" type="text"/>
+<div class="field-error-message" id="error-receiverRegisteredName"></div>
+</div>
+                <div class="field" id="field-receiverNationalCode">
+<label>
+                            کد ملی ثبت شده
+                            <span class="required">*</span>
+</label>
+<input id="receiverNationalCode" inputmode="numeric" maxlength="10" placeholder="۱۰ رقم" type="text"/>
+<div class="field-error-message" id="error-receiverNationalCode"></div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel description-panel">
+        <div class="panel-title">توضیحات</div>
+        <div class="panel-body">
+            <textarea id="description" placeholder="توضیحات مربوط به این چک..."></textarea>
+        </div>
+    </div>
+
+    <div class="bottom">
+<button onclick="goBack()" type="button">
+                انصراف
+            </button>
+<button class="save-button" onclick="saveCheque()" type="button">
+                💾 ثبت چک
+            </button>
+</div>
+</div>
+
+<script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const year =
+                    localStorage.getItem(
+                        "pasargadFiscalYear"
+                    ) || "1405";
+
+
+                const hidden =
+                    document.getElementById(
+                        "fiscalYear"
+                    );
+
+
+                const display =
+                    document.getElementById(
+                        "selectedFiscalYear"
+                    );
+
+
+                if (hidden) {
+
+                    hidden.value =
+                        year;
+                }
+
+
+                if (display) {
+
+                    display.textContent =
+                        String(year).replace(
+                            /\d/g,
+                            function (digit) {
+
+                                return "۰۱۲۳۴۵۶۷۸۹"[
+                                        Number(digit)
+                                    ];
+                            }
+                        );
+                }
+
+            }
+        );
+
+    </script>
+<script src="js/cheque.js"></script>
+<script>
+    // میانبر صفحه‌کلید: Esc برای خروج از فرم و بازگشت
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' || event.keyCode === 27) {
+            event.preventDefault();
+            goBack();
+        }
+    });
+</script>
+</body>
+
+</html>

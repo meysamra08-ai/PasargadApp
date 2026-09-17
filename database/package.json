@@ -1,0 +1,17 @@
+{
+  "name": "pasargad",
+  "version": "1.0.0",
+  "description": "نرم افزار ثبت چک پاسارگاد",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "rebuild": "electron-rebuild"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
+    "electron": "^38.0.0"
+  }
+}

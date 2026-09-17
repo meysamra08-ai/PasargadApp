@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' file: data:; style-src 'self' 'unsafe-inline'; script-src 'self';">
+<title>پاسارگاد</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:"B Titr","Titr",Tahoma,sans-serif;background:#071522}
+.splash{position:relative;width:100%;height:100%;overflow:hidden;background:#071522;color:#fff}
+.splash-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.splash-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,10,18,.78),rgba(3,13,24,.10) 45%,rgba(3,12,20,.25));pointer-events:none}
+.splash-frame{position:absolute;inset:12px;border:1px solid rgba(255,255,255,.38);border-radius:18px;box-shadow:inset 0 0 35px rgba(0,0,0,.24),0 8px 35px rgba(0,0,0,.35);pointer-events:none}
+.loading{position:absolute;left:50%;bottom:38px;transform:translateX(-50%);width:min(650px,78vw);text-align:center;text-shadow:0 2px 7px rgba(0,0,0,.8)}
+.loading-text{font-size:19px;font-weight:600;margin-bottom:13px;letter-spacing:.1px}
+.loading-sub{font-family:Tahoma,sans-serif;font-size:10px;color:rgba(255,255,255,.72);margin-top:8px;min-height:14px}
+.bar-row{display:flex;align-items:center;gap:13px;direction:ltr}
+.bar-shell{position:relative;flex:1;height:18px;padding:3px;border-radius:999px;background:rgba(3,18,28,.72);border:1px solid rgba(255,255,255,.48);box-shadow:0 0 0 1px rgba(17,211,112,.12),0 5px 18px rgba(0,0,0,.38),inset 0 1px 5px rgba(0,0,0,.42);overflow:hidden}
+.bar{position:relative;width:100%;height:100%;border-radius:999px;overflow:hidden;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12))}
+.fill{position:relative;height:100%;width:0;background:linear-gradient(90deg,#0aa85a 0%,#13d76e 48%,#7ff7b2 100%);border-radius:999px;transition:width .22s ease;box-shadow:0 0 12px rgba(23,223,113,.72),0 0 24px rgba(23,223,113,.32)}
+.fill:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.48) 45%,transparent 70%);transform:translateX(-100%);animation:shine 1.6s linear infinite}
+.bar-dots{position:absolute;right:7px;top:50%;transform:translateY(-50%);display:flex;gap:3px;pointer-events:none}.bar-dots i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.85);opacity:.35}.bar-dots i:nth-child(1){animation:pulse 1.2s infinite}.bar-dots i:nth-child(2){animation:pulse 1.2s .2s infinite}.bar-dots i:nth-child(3){animation:pulse 1.2s .4s infinite}
+.percent{font-family:Tahoma,sans-serif;font-size:14px;font-weight:700;min-width:52px;text-align:left;color:#eafff2;background:rgba(4,23,29,.66);border:1px solid rgba(86,231,153,.45);border-radius:10px;padding:5px 8px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.loading-status{display:flex;justify-content:center;gap:8px;margin-top:10px;font-family:Tahoma,sans-serif;font-size:10px;color:rgba(255,255,255,.74)}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#24dc78;box-shadow:0 0 10px rgba(36,220,120,.85);margin-top:2px;animation:statusPulse 1.3s ease-in-out infinite}
+.bottom{position:absolute;left:28px;right:28px;bottom:12px;display:flex;justify-content:space-between;align-items:center;font-family:Tahoma,sans-serif;font-size:11px;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+@keyframes shine{to{transform:translateX(220%)}}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.95}}
+@keyframes statusPulse{0%,100%{transform:scale(.75);opacity:.55}50%{transform:scale(1);opacity:1}}
+@media(max-width:700px){.loading{bottom:45px}.loading-text{font-size:15px}.change-btn{bottom:76px;left:18px}.bottom{font-size:9px}.percent{font-size:12px;min-width:46px}.loading-status{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="splash">
+<img id="splashImage" class="splash-image" src="assets/splash.png" alt="صفحه شروع پاسارگاد">
+<div class="splash-overlay"></div><div class="splash-frame"></div>
+<div class="loading">
+<div class="loading-text" id="loadingText">در حال بارگذاری نرم افزار پاسارگاد...</div>
+<div class="bar-row"><div class="bar-shell"><div class="bar"><div id="fill" class="fill"></div><span class="bar-dots"><i></i><i></i><i></i></span></div></div><div id="percent" class="percent">۰٪</div></div>
+<div class="loading-status"><span class="status-dot"></span><span id="loadingSub">در حال آماده‌سازی محیط نرم‌افزار...</span></div>
+</div>
+<div class="bottom"><span>نسخه 1.0.0</span><span>© 2025 Pasargad | All Rights Reserved</span></div>
+</div>
+<script src="splash.js"></script>
+</body></html>

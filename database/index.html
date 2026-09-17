@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+        نرم افزار مدیریت چک پاسارگاد
+    </title>
+
+
+    <style>
+
+        * {
+
+            box-sizing: border-box;
+
+            font-family:
+                "B Titr",
+                "Titr",
+                sans-serif;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                #e8edf2;
+
+            color:
+                #263238;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =========================================
+           Title
+        ========================================= */
+
+        .title-bar {
+
+            height:
+                64px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17649b,
+                    #0d4169
+                );
+
+            color:
+                white;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            padding:
+                0 24px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.18);
+        }
+
+
+        .title-icon {
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .16
+                );
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-left:
+                10px;
+
+            font-size:
+                24px;
+        }
+
+
+        .title {
+
+            font-size:
+                23px;
+
+            font-weight:
+                bold;
+        }
+
+
+        /* =========================================
+           Menu
+        ========================================= */
+
+        .menu-bar {
+
+            height:
+                36px;
+
+            background:
+                #f8fafc;
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            padding:
+                0 10px;
+        }
+
+
+        .menu-item {
+
+            padding:
+                6px 15px;
+
+            border-radius:
+                4px;
+        }
+
+
+        .menu-item:hover {
+
+            background:
+                #dceaf5;
+        }
+
+
+        /* =========================================
+           Toolbar
+        ========================================= */
+
+        .toolbar {
+
+            background:
+                #edf2f6;
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            padding:
+                8px 12px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .toolbar button {
+
+            height:
+                35px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid #aab6c0;
+
+            border-radius:
+                5px;
+
+            background:
+                linear-gradient(
+                    #ffffff,
+                    #e2e7eb
+                );
+
+            cursor:
+                pointer;
+        }
+
+
+        .toolbar button:hover {
+
+            background:
+                #dceaf5;
+        }
+
+
+        /* =========================================
+           Year
+        ========================================= */
+
+        .year-area {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-right:
+                auto;
+        }
+
+
+        .year-label {
+
+            font-weight:
+                bold;
+
+            color:
+                #174d78;
+        }
+
+
+        #fiscalYear {
+
+            min-width:
+                140px;
+
+            height:
+                35px;
+
+            border:
+                1px solid #aeb9c2;
+
+            border-radius:
+                5px;
+
+            padding:
+                0 8px;
+
+            background:
+                white;
+        }
+
+
+        #addFiscalYear {
+
+            width:
+                38px;
+
+            padding:
+                0;
+
+            font-size:
+                18px;
+        }
+
+
+        /* =========================================
+           Main
+        ========================================= */
+
+        .main {
+
+            padding:
+                15px;
+        }
+
+
+        /* =========================================
+           Filter
+        ========================================= */
+
+        .top-panel {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            padding:
+                13px;
+
+            margin-bottom:
+                12px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.07);
+        }
+
+
+        .panel-title {
+
+            font-size:
+                14px;
+
+            font-weight:
+                bold;
+
+            color:
+                #174d78;
+
+            padding-bottom:
+                8px;
+
+            margin-bottom:
+                10px;
+
+            border-bottom:
+                1px solid #d7dde2;
+        }
+
+
+        .filter-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        input,
+        select,
+        button {
+
+            font-family:
+                "B Titr",
+                "Titr",
+                sans-serif;
+        }
+
+
+        input,
+        select {
+
+            height:
+                34px;
+
+            border:
+                1px solid #b8c2cb;
+
+            border-radius:
+                4px;
+
+            background:
+                white;
+
+            padding:
+                5px 9px;
+
+            outline:
+                none;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color:
+                #4387b9;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    67,
+                    135,
+                    185,
+                    .12
+                );
+        }
+
+
+        .search {
+
+            width:
+                280px;
+        }
+
+
+        .date-filter {
+
+            width:
+                150px;
+        }
+
+
+        .status-filter {
+
+            width:
+                150px;
+        }
+
+
+        .radio-label {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+        }
+
+
+        /* =========================================
+           Summary
+        ========================================= */
+
+        .summary-row {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                12px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .summary-box {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            padding:
+                11px 16px;
+
+            min-width:
+                190px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.07);
+        }
+
+
+        .summary-label {
+
+            color:
+                #66737d;
+
+            font-size:
+                12px;
+        }
+
+
+        .summary-number {
+
+            font-size:
+                23px;
+
+            font-weight:
+                bold;
+
+            margin-top:
+                2px;
+        }
+
+
+        .danger {
+
+            color:
+                #c62828;
+        }
+
+
+        .success {
+
+            color:
+                #2e7d32;
+        }
+
+
+        .blue {
+
+            color:
+                #17649b;
+        }
+
+
+        /* =========================================
+           Table
+        ========================================= */
+
+        .table-panel {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.08);
+        }
+
+
+        .table-header {
+
+            padding:
+                10px 13px;
+
+            background:
+                linear-gradient(
+                    #f9fbfc,
+                    #e5ebf0
+                );
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            color:
+                #174d78;
+
+            font-weight:
+                bold;
+        }
+
+
+        table {
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+        }
+
+
+        th {
+
+            background:
+                #e6ebf0;
+
+            color:
+                #263238;
+
+            font-weight:
+                bold;
+
+            padding:
+                10px 7px;
+
+            border:
+                1px solid #cbd2d8;
+
+            white-space:
+                nowrap;
+        }
+
+
+        td {
+
+            padding:
+                9px 7px;
+
+            border:
+                1px solid #d9dee3;
+
+            text-align:
+                center;
+
+            background:
+                white;
+        }
+
+
+        tbody tr {
+
+            cursor:
+                pointer;
+        }
+
+
+        tbody tr:hover td {
+
+            background:
+                #f1f7fb;
+        }
+
+
+        /* =========================================
+           Status
+        ========================================= */
+
+        .status-box {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .status {
+
+            padding:
+                4px 9px;
+
+            border-radius:
+                4px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .not-registered {
+
+            color:
+                #a51d1d;
+
+            background:
+                #fde7e7;
+
+            border:
+                1px solid #efb2b2;
+        }
+
+
+        .registered {
+
+            color:
+                #246b2a;
+
+            background:
+                #e4f3e5;
+
+            border:
+                1px solid #afd4b1;
+        }
+
+
+        .register-button {
+
+            border:
+                1px solid #5d9461;
+
+            background:
+                linear-gradient(
+                    #62a867,
+                    #418348
+                );
+
+            color:
+                white;
+
+            border-radius:
+                4px;
+
+            padding:
+                4px 8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                11px;
+        }
+
+
+        .register-button:hover {
+
+            background:
+                #34713b;
+        }
+
+
+        .status-box small {
+
+            color:
+                #68747d;
+
+            font-size:
+                10px;
+        }
+
+
+        /* =========================================
+           Empty
+        ========================================= */
+
+        #emptyMessage {
+
+            display:
+                none;
+
+            text-align:
+                center;
+
+            padding:
+                40px;
+
+            color:
+                #707b84;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        .footer {
+
+            margin-top:
+                10px;
+
+            color:
+                #68747d;
+
+            font-size:
+                11px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+        }
+
+
+        /* =========================================
+           Print
+        ========================================= */
+
+        @media print {
+
+            .menu-bar,
+            .toolbar,
+            .top-panel,
+            .summary-row {
+
+                display:
+                    none !important;
+            }
+
+
+            body {
+
+                background:
+                    white;
+            }
+
+
+            .main {
+
+                padding:
+                    0;
+            }
+
+
+            .table-panel {
+
+                border:
+                    none;
+
+                box-shadow:
+                    none;
+            }
+        }
+
+    
+        /* ===== Pasargad header / replaceable logo ===== */
+        .title-bar { height:64px; padding:0 24px; }
+        .title-icon { width:44px; height:44px; margin-left:14px; border-radius:8px; background:rgba(255,255,255,.12) url("assets/logo.png") center/contain no-repeat; }
+        .title { font-size:23px; font-weight:bold; }
+
+        /* ===== Pasargad modular shell ===== */
+        .pasargad-main-menu { display:flex; align-items:stretch; gap:0; }
+        .pasargad-main-menu .menu-item { border:0; border-left:1px solid #c7d0d8; background:transparent; padding:0 22px; cursor:pointer; color:#263238; font-size:13px; }
+        .pasargad-main-menu .menu-item:hover { background:#e8f0f6; }
+        .pasargad-main-menu .menu-item.active { background:#dbeaf5; color:#155b85; font-weight:bold; box-shadow:inset 0 -2px 0 #347aa8; }
+        .module-placeholder { margin:10px 12px; min-height:560px; border:1px solid #b8c4ce; background:#f4f6f8; padding:28px; }
+        .module-placeholder-title { font-size:18px; font-weight:bold; color:#29485d; border-bottom:1px solid #cbd4db; padding-bottom:12px; margin-bottom:18px; }
+        .module-placeholder-text { color:#687780; font-size:13px; }
+        .status-badge { display:inline-block; min-width:70px; padding:3px 8px; border-radius:3px; font-size:12px; }
+        .status-badge.registered { background:#e2f1e3; color:#27652c; border:1px solid #a8cbaa; }
+        .status-badge.not-registered { background:#f8e5e5; color:#8a2d2d; border:1px solid #d8aaaa; }
+.row-actions{white-space:nowrap;text-align:center;}
+.row-actions button{font-family:inherit;font-size:11px;height:25px;padding:0 9px;border:1px solid #aeb9c2;border-radius:3px;cursor:pointer;margin:0 2px;background:#f4f7f9;color:#24475f;}
+.row-actions .row-edit{background:#e7f1f8;border-color:#9bbbd1;color:#15557d;}
+.row-actions .row-delete{background:#fbeaea;border-color:#d8aaaa;color:#9a2f2f;}
+.row-actions .row-register{background:#e7f2e8;border-color:#a8cbaa;color:#27652c;}
+.row-actions .row-register:disabled{opacity:.55;cursor:default;}
+.row-actions button:hover{filter:brightness(.97);}
+
+        @media (max-width: 900px) { .pasargad-main-menu .menu-item { padding:0 12px; } }
+
+.report-actions{display:flex;gap:6px;padding:6px 8px;background:#eef2f5;border-bottom:1px solid #c8d0d7;}
+.report-actions button{font-family:inherit;font-size:12px;height:30px;padding:0 14px;border:1px solid #aeb9c2;background:linear-gradient(#fff,#e7ebee);border-radius:2px;color:#263238;cursor:pointer;}
+.report-actions button:hover{background:#dfeaf2;}
+.report-print-modal{position:fixed;inset:0;background:rgba(20,35,45,.42);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.report-print-modal[hidden]{display:none;}
+.report-print-dialog{width:min(680px,calc(100vw - 40px));background:#f7fafc;border:1px solid #87969e;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.25);direction:rtl;}
+.report-print-head{height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;background:#d4e4eb;border-bottom:1px solid #aeb9c2;font-weight:bold;color:#263238;}
+.report-print-close{width:30px;height:30px;border:1px solid #aeb9c2;background:#fff;border-radius:3px;font-size:20px;line-height:1;cursor:pointer;}
+.report-print-body{padding:18px;}
+.report-print-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.report-print-grid>div{display:flex;flex-direction:column;gap:6px;}
+.report-print-grid label{font-size:12px;font-weight:bold;}
+.report-print-grid select{height:38px;padding:5px 9px;border:1px solid #929292;border-radius:3px;background:#fff;font-family:inherit;font-size:12px;}
+.report-print-message{margin-top:14px;min-height:24px;padding:6px 8px;color:#4b5961;font-size:12px;}
+.report-print-actions{display:flex;justify-content:flex-start;gap:8px;padding:12px 18px;border-top:1px solid #d0d7dc;background:#eef2f5;}
+.report-print-actions button{font-family:inherit;font-size:12px;height:34px;padding:0 16px;border:1px solid #aeb9c2;background:#fff;border-radius:3px;cursor:pointer;}
+.report-print-actions button.primary{background:#dbeaf3;}
+@media (max-width:700px){.report-print-grid{grid-template-columns:1fr;}}
+
+.tools-card{margin-top:12px;background:#f7f9fa;border:1px solid #b9c4cc;border-radius:2px;padding:12px;max-width:none;}
+.tools-card-title{font-weight:bold;border-bottom:1px solid #ccd4da;padding-bottom:8px;margin-bottom:10px;}
+.tools-hint{font-size:11px;color:#68757e;margin-top:8px;}
+.fiscal-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.fiscal-actions button{height:32px;padding:0 14px;border:1px solid #9eabb4;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit}.fiscal-actions button.danger{background:linear-gradient(#fff5f5,#ead8d8);border-color:#b88f8f;color:#8a1f1f}
+.tools-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:10px;margin-top:12px;align-items:stretch;direction:rtl;}
+.tools-sidebar{background:#f4f7f9;border:1px solid #b9c4cc;padding:5px;min-height:360px;}
+.tools-sidebar-title{font-weight:bold;color:#234e70;font-size:14px;padding:9px 10px;border-bottom:1px solid #c8d2d9;margin-bottom:6px;}
+.tools-menu-item{width:100%;min-height:46px;margin:2px 0;padding:6px 7px;text-align:right;border:1px solid transparent;border-radius:2px;background:transparent;cursor:pointer;font-family:inherit;color:#173f61;display:flex;align-items:center;gap:10px;direction:rtl;}
+.tools-menu-item:hover{background:#e6eef5;border-color:#b5c9d9;}
+.tools-menu-item.active{background:linear-gradient(#dceeff,#c7e1f4);border-color:#79a9ca;box-shadow:inset 3px 0 #1f6fa8;}
+.tools-menu-icon{font-size:18px;width:26px;text-align:center;flex:none;}
+.tools-menu-title{display:block;font-size:12px;font-weight:bold;white-space:nowrap;}
+.tools-menu-desc{display:block;margin-top:1px;font-size:9px;color:#667985;line-height:1.35;white-space:nowrap;}
+.tools-content{min-width:0;}
+.tools-content-empty{height:100%;min-height:360px;background:#f8fafb;border:1px solid #b9c4cc;display:flex;align-items:center;justify-content:center;color:#7a8790;font-size:12px;}
+.tools-subpage{margin:0;max-width:none;width:100%;background:#f7f9fa;border:1px solid #b9c4cc;padding:12px;min-height:360px;}
+.tools-subpage-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ccd4da;padding-bottom:10px;margin-bottom:12px;}
+.tools-subpage-title{font-weight:bold;color:#234e70;font-size:15px;}
+.tools-back{height:30px;padding:0 14px;border:1px solid #aeb9c2;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit;}
+/* ===== Module overlay: modules open above the welcome screen ===== */
+.module-view, .module-placeholder {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    overflow: auto;
+    background: #e8edf2;
+}
+.module-placeholder { padding: 10px 12px; }
+#chequeFormOverlay {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    background: #d2d2d2;
+}
+#chequeFormOverlay iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.home-screen{min-height:calc(100vh - 100px);display:flex;align-items:center;justify-content:center;padding:48px 20px;position:relative;overflow:hidden;background:#dfe6ec url("assets/background.jpg") center center/cover no-repeat;}
+.home-screen::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(18,57,82,.22),rgba(255,255,255,.30));pointer-events:none;}
+.home-card{width:min(780px,92%);min-height:410px;background:rgba(250,252,253,.91);border:1px solid rgba(255,255,255,.82);box-shadow:0 18px 45px rgba(25,43,57,.22),0 2px 8px rgba(25,43,57,.10);border-radius:14px;text-align:center;padding:42px 55px;position:relative;z-index:1;backdrop-filter:blur(5px);}
+.home-card::before{content:"";position:absolute;top:0;left:12%;right:12%;height:4px;background:linear-gradient(90deg,#0d4169,#3d8fbe,#0d4169);border-radius:0 0 8px 8px;}
+.home-logo{width:88px;height:88px;margin:0 auto 20px;border-radius:22px;background:linear-gradient(145deg,#1b6e9f,#0b3f65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:bold;box-shadow:0 10px 22px rgba(13,65,105,.24),inset 0 1px 0 rgba(255,255,255,.25);transform:rotate(0deg);}
+.home-title{font-size:26px;color:#123f61;font-weight:bold;margin-bottom:9px;letter-spacing:.1px;}
+.home-subtitle{font-size:14px;color:#687983;margin-bottom:30px;}
+.home-separator{height:1px;background:linear-gradient(90deg,transparent,#c4d0d8,transparent);margin:0 auto 28px;width:82%;}
+.home-message{font-size:18px;color:#2d4858;font-weight:bold;margin-bottom:24px;}
+.home-hint{font-size:12px;color:#63727b;background:rgba(231,238,243,.82);border:1px solid #d1dbe2;padding:12px 22px;display:inline-block;border-radius:8px;box-shadow:0 2px 6px rgba(30,50,65,.06);}
+.home-footer{position:absolute;bottom:18px;left:0;right:0;font-size:11px;color:#89959c;}
+/* برای تعویض پس‌زمینه فقط فایل assets/background.jpg را با تصویر دلخواه جایگزین کنید. */
+
+
+/* ===== Login screen ===== */
+#loginScreen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#e7edf2 url("assets/background.jpg") center/cover no-repeat;}
+#loginScreen::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,45,70,.45),rgba(255,255,255,.18));}
+.login-card{position:relative;z-index:1;width:min(430px,92vw);padding:34px 38px 30px;background:rgba(250,252,253,.95);border:1px solid rgba(255,255,255,.9);border-radius:12px;box-shadow:0 20px 55px rgba(15,35,50,.30),0 2px 8px rgba(15,35,50,.12);text-align:center;}
+.login-logo{width:70px;height:70px;margin:0 auto 16px;border-radius:18px;background:linear-gradient(145deg,#1b6e9f,#0b3f65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:bold;box-shadow:0 8px 18px rgba(13,65,105,.25);}
+.login-title{font-size:22px;color:#123f61;font-weight:bold;margin-bottom:5px}.login-subtitle{font-size:12px;color:#687983;margin-bottom:25px}.login-form{text-align:right}.login-field{margin-bottom:13px}.login-field label{display:block;font-weight:bold;color:#29485d;margin-bottom:5px}.login-field input{width:100%;height:38px;border:1px solid #aebbc5;border-radius:6px;padding:5px 10px;background:#fff;outline:none;font-family:inherit}.login-field input:focus{border-color:#347aa8;box-shadow:0 0 0 2px rgba(52,122,168,.12)}.login-button{width:100%;height:40px;border:1px solid #275d82;border-radius:6px;background:linear-gradient(#3d8fbe,#17649b);color:#fff;font-family:inherit;font-weight:bold;cursor:pointer;margin-top:5px}.login-button:hover{background:linear-gradient(#4b99c5,#155b8b)}.login-error{min-height:20px;color:#a51d1d;font-size:11px;margin-top:8px}.login-hint{font-size:10px;color:#7b878e;margin-top:12px}
+.login-hidden{display:none!important}
+.login-recovery-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.login-forgot{margin-top:9px;border:0;background:transparent;color:#2f6f96;font-family:inherit;font-size:11px;cursor:pointer;text-decoration:none}.login-forgot:hover{text-decoration:underline}
+.recovery-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;background:rgba(12,28,40,.48);backdrop-filter:blur(2px)}.recovery-card{width:min(390px,92vw);background:#f9fbfc;border:1px solid #c5d0d8;border-radius:12px;box-shadow:0 20px 55px rgba(0,0,0,.28);padding:22px 24px;text-align:right}.recovery-title{font-size:17px;font-weight:bold;color:#173f5d;margin-bottom:7px}.recovery-text{font-size:11px;color:#61727d;line-height:1.9;margin-bottom:14px}.recovery-card label{display:block;font-size:11px;font-weight:bold;color:#29485d;margin:8px 0 5px}.recovery-card input{width:100%;height:38px;border:1px solid #aebbc5;border-radius:6px;padding:5px 10px;font-family:inherit;outline:none}.recovery-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:14px}.recovery-actions button{height:36px;padding:0 16px;border-radius:6px;border:1px solid #aebbc5;background:linear-gradient(#fff,#e8edf0);font-family:inherit;cursor:pointer}.recovery-actions .primary{background:linear-gradient(#3d8fbe,#17649b);border-color:#275d82;color:#fff}.recovery-message{min-height:20px;margin-top:9px;font-size:11px}.recovery-message.err{color:#a51d1d}.recovery-message.ok{color:#28712e}
+
+.password-settings{margin-top:12px;background:#fff;border:1px solid #c3cdd4;padding:14px;max-width:620px}.password-settings-title{font-weight:bold;color:#29485d;border-bottom:1px solid #d6dde2;padding-bottom:8px;margin-bottom:12px}.password-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.password-grid label{display:block;font-size:11px;font-weight:bold;margin-bottom:4px}.password-grid input{width:100%;height:32px}.password-actions{margin-top:10px;display:flex;gap:7px}.password-actions button{height:32px;padding:0 14px;border:1px solid #9eabb4;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit}.password-actions .primary{background:#3f7fa7;color:#fff;border-color:#2f6587}.password-message{font-size:11px;margin-top:8px;min-height:16px}.password-message.ok{color:#28712e}.password-message.err{color:#a51d1d}
+
+/* ===== Pasargad Concept Header - header only ===== */
+.title-bar{
+    position:relative !important;
+    height:88px !important;
+    min-height:88px !important;
+    padding:0 22px !important;
+    display:flex !important;
+    align-items:center !important;
+    direction:ltr !important;
+    color:#fff !important;
+    background:
+        linear-gradient(90deg, rgba(5,43,78,.96) 0%, rgba(9,62,101,.82) 42%, rgba(15,71,108,.48) 72%, rgba(7,43,73,.88) 100%),
+        url("assets/header-scenic.jpg") center center/cover no-repeat !important;
+    border-bottom:1px solid #123f62 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.20) !important;
+    overflow:hidden !important;
+}
+.title-bar::after{
+    content:"پاسارگاد\A سیستم مدیریت چک و امور مالی";
+    white-space:pre;
+    position:absolute;
+    right:28px;
+    top:16px;
+    text-align:right;
+    direction:rtl;
+    line-height:1.45;
+    font-family:"B Titr","Titr",Tahoma,sans-serif;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:0;
+    text-shadow:0 1px 3px rgba(0,0,0,.28);
+    pointer-events:none;
+}
+.title-bar::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:2px;
+    background:rgba(255,255,255,.18);
+    pointer-events:none;
+}
+.title-icon{
+    flex:0 0 auto !important;
+    width:58px !important;
+    height:58px !important;
+    margin:0 14px 0 0 !important;
+    border-radius:9px !important;
+    background:rgba(255,255,255,.10) url("assets/logo.png") center/contain no-repeat !important;
+    border:1px solid rgba(255,255,255,.28) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 6px rgba(0,0,0,.18) !important;
+    font-size:0 !important;
+    z-index:2;
+}
+.title{
+    position:relative !important;
+    z-index:2;
+    margin:0 !important;
+    max-width:520px;
+    color:#fff !important;
+    font-family:"B Titr","Titr",Tahoma,sans-serif !important;
+    font-size:19px !important;
+    font-weight:bold !important;
+    text-align:left !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.30);
+}
+.menu-bar{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 8px !important;
+    background:linear-gradient(#f9fbfd,#e7eef4) !important;
+    border-bottom:1px solid #b8c8d5 !important;
+    box-shadow:0 1px 2px rgba(0,0,0,.08) !important;
+}
+.menu-item{
+    height:36px !important;
+    padding:6px 18px !important;
+    margin:2px 1px !important;
+    border:1px solid transparent !important;
+    border-radius:5px !important;
+    color:#173e5d !important;
+    font-weight:bold !important;
+    background:transparent !important;
+}
+.menu-item:hover,.menu-item:focus,.menu-item.active{
+    background:#dbeaf7 !important;
+    border-color:#a9c8df !important;
+    color:#0b4f83 !important;
+    outline:none !important;
+}
+@media(max-width:900px){
+    .title-bar{height:76px !important;min-height:76px !important;padding:0 12px !important;}
+    .title-bar::after{font-size:19px;right:14px;top:14px;}
+    .title-icon{width:48px !important;height:48px !important;margin-right:10px !important;}
+    .title{font-size:16px !important;max-width:42%;}
+}
+
+
+/* ===== Fixed application header: header and main menu stay visible while scrolling ===== */
+:root{
+    --shell-header-height:88px;
+    --shell-menu-height:40px;
+    --shell-top:128px;
+}
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+}
+body{
+    padding-top:var(--shell-top) !important;
+}
+body > .title-bar{
+    position:fixed !important;
+    top:0 !important;
+    left:0 !important;
+    right:0 !important;
+    z-index:1000 !important;
+}
+body > .menu-bar.pasargad-main-menu{
+    position:fixed !important;
+    top:var(--shell-header-height) !important;
+    left:0 !important;
+    right:0 !important;
+    z-index:999 !important;
+}
+.module-view, .module-placeholder{
+    top:var(--shell-top) !important;
+}
+#chequeFormOverlay{
+    top:var(--shell-top) !important;
+}
+.home-screen{
+    min-height:calc(100vh - var(--shell-top)) !important;
+}
+@media(max-width:900px){
+    :root{
+        --shell-header-height:76px;
+        --shell-menu-height:40px;
+        --shell-top:116px;
+    }
+}
+</style>
+
+
+<style>
+/* ظاهر گرافیکی تنظیمات سال مالی - فقط UI */
+.fiscal-actions-modern{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.fiscal-btn{min-width:150px;height:46px;padding:0 18px;border:1px solid #b7c1c8;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 2px 5px rgba(0,0,0,.08);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+.fiscal-btn:hover{transform:translateY(-1px);box-shadow:0 4px 9px rgba(0,0,0,.12);filter:brightness(.98)}
+.fiscal-btn:active{transform:translateY(0);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.fiscal-btn-icon{font-family:Arial,sans-serif;font-size:19px;line-height:1}
+.fiscal-btn-add{background:linear-gradient(180deg,#f8fcff,#dcecf6);color:#164f70;border-color:#9bbfd2}
+.fiscal-btn-delete{background:linear-gradient(180deg,#fffafa,#f0dddd);color:#8b2929;border-color:#d2a6a6}
+.fiscal-btn-clear{background:linear-gradient(180deg,#fffaf3,#f1e3cd);color:#80571d;border-color:#d7bd93}
+</style>
+
+<style>
+.customer-module{margin:18px auto;padding:0 18px 30px;max-width:1250px}.customer-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px}.customer-subtitle{font-size:11px;color:#6c7b86;margin-top:5px}.customer-primary,.customer-secondary{font-family:inherit;border-radius:5px;padding:9px 16px;cursor:pointer;font-size:12px}.customer-primary{border:1px solid #2c6f9e;background:linear-gradient(#3f8fc5,#276f9f);color:#fff}.customer-secondary{border:1px solid #bdc8d0;background:#fff;color:#345}.customer-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}.customer-toolbar input{width:min(430px,100%);padding:10px 12px;border:1px solid #c7d0d8;border-radius:5px;font-family:inherit;background:#fff}.customer-message{font-size:11px;color:#63727d}.customer-card{background:#fff;border:1px solid #cbd5dc;border-radius:5px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}.customer-table{width:100%;border-collapse:collapse}.customer-table th,.customer-table td{padding:11px 10px;border-bottom:1px solid #e8edf0;text-align:right;font-size:12px}.customer-table th{background:linear-gradient(#f5f8fa,#e9eff3);color:#27455b}.customer-table tr:last-child td{border-bottom:0}.customer-action{border:1px solid #c1ccd4;background:#f7f9fa;border-radius:4px;padding:5px 10px;font-family:inherit;font-size:11px;cursor:pointer;color:#24587d}.customer-empty{text-align:center!important;color:#7a8790;padding:25px!important}.customer-modal{position:fixed;inset:0;background:rgba(20,35,45,.32);z-index:2000;display:flex;align-items:center;justify-content:center}.customer-modal-box{width:min(500px,92vw);background:#fff;border:1px solid #b8c7d1;border-radius:7px;padding:20px;box-shadow:0 10px 35px rgba(0,0,0,.2)}.customer-modal-title{font-size:16px;font-weight:bold;color:#234861;margin-bottom:16px}.customer-modal-box label{display:block;font-size:11px;color:#415664;margin:10px 0}.customer-modal-box input,.customer-modal-box textarea{width:100%;margin-top:5px;padding:8px 9px;border:1px solid #c8d1d8;border-radius:4px;font-family:inherit;font-size:12px}.customer-modal-box textarea{min-height:55px;resize:vertical}.customer-modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:16px}
+@media(max-width:700px){.customer-head{align-items:flex-start;flex-direction:column}.customer-toolbar input{width:100%}.customer-toolbar{display:block}.customer-message{display:block;margin-top:7px}.customer-card{overflow-x:auto}.customer-table{min-width:700px}}
+</style>
+</head>
+
+
+<body>
+<div id="recoveryOverlay" class="recovery-overlay" aria-hidden="true">
+  <div class="recovery-card">
+    <div id="recoveryTitle" class="recovery-title">بازیابی رمز عبور</div>
+    <div id="recoveryText" class="recovery-text">برای بازیابی رمز، کد بازیابی را وارد کنید. پس از تأیید، می‌توانید رمز ورود جدید تعیین کنید.</div>
+    <label for="recoveryCode">کد بازیابی</label>
+    <input id="recoveryCode" type="password" autocomplete="off">
+    <div id="recoveryPasswordFields">
+      <label for="recoveryNewPassword">رمز عبور جدید</label>
+      <input id="recoveryNewPassword" type="password" autocomplete="new-password">
+      <label for="recoveryNewPassword2">تکرار رمز عبور جدید</label>
+      <input id="recoveryNewPassword2" type="password" autocomplete="new-password">
+    </div>
+    <div id="recoveryUsernameFields" hidden>
+      <label for="recoveryNewUsername">نام کاربری جدید</label>
+      <input id="recoveryNewUsername" type="text" autocomplete="off">
+    </div>
+    <div id="recoveryMessage" class="recovery-message"></div>
+    <div class="recovery-actions"><button type="button" onclick="closeRecovery()">انصراف</button><button id="recoverySubmitButton" type="button" class="primary" onclick="resetPasswordWithRecovery()">بازیابی رمز</button></div>
+  </div>
+</div>
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">✓</div>
+    <div class="login-title">نرم افزار مدیریت چک پاسارگاد</div>
+    <div class="login-subtitle">ورود به سیستم</div>
+    <form class="login-form" id="loginForm">
+      <div class="login-field"><label for="loginUsername">نام کاربری</label><input id="loginUsername" type="text" autocomplete="username" autofocus></div>
+      <div class="login-field"><label for="loginPassword">رمز عبور</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+      <button class="login-button" type="submit">ورود به نرم افزار</button>
+      <div class="login-recovery-actions"><button class="login-forgot" type="button" onclick="openForgotPassword()">فراموشی رمز عبور</button><button class="login-forgot" type="button" onclick="openForgotUsername()">فراموشی نام کاربری</button></div>
+      <div id="loginError" class="login-error"></div>
+    </form>
+    <div class="login-hint">ورود اولیه: <b>admin</b> / <b>1234</b></div>
+  </div>
+</div>
+
+
+
+    <!-- =========================================
+         عنوان
+    ========================================= -->
+
+    <div class="title-bar">
+
+        <div class="title-icon" aria-label="لوگوی پاسارگاد"></div>
+
+        <div class="title">
+            نرم افزار مدیریت چک پاسارگاد
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         منو
+    ========================================= -->
+
+    <div class="menu-bar pasargad-main-menu">
+
+        <button type="button" class="menu-item" data-module="cheques" onclick="showModule('cheques')">ثبت چک</button>
+        <button type="button" class="menu-item" data-module="contacts" onclick="showModule('contacts')">مدیریت مشتریان</button>
+        <button type="button" class="menu-item" data-module="reports" onclick="showModule('reports')">گزارشات</button>
+        <button type="button" class="menu-item" data-module="tools" onclick="showModule('tools')">ابزارها</button>
+        <button type="button" class="menu-item" data-module="help" onclick="showModule('help')">راهنما</button>
+
+    </div>
+
+
+    <!-- =========================================
+         Toolbar
+    ========================================= -->
+
+
+
+    </div>
+
+
+    <!-- =========================================
+         Main
+    ========================================= -->
+
+    <div id="home" class="home-screen">
+        <div class="home-card">
+            <div class="home-logo">✓</div>
+            <div class="home-title">نرم افزار مدیریت چک پاسارگاد</div>
+            <div class="home-subtitle">سیستم یکپارچه مدیریت و ثبت چک</div>
+            <div class="home-separator"></div>
+            <div class="home-message">به نرم افزار پاسارگاد خوش آمدید</div>
+            <div class="home-hint">برای ورود به هر بخش، از منوی بالای نرم افزار استفاده کنید.</div>
+            <div class="home-footer">سیستم مدیریت چک پاسارگاد</div>
+        </div>
+    </div>
+
+    <div id="contacts" class="customer-module" hidden>
+        <div class="customer-head">
+            <div>
+                <div class="module-placeholder-title">مدیریت مشتریان</div>
+                <div class="customer-subtitle">ثبت و مدیریت ساده اطلاعات مشتریان</div>
+            </div>
+            <button type="button" class="customer-primary" onclick="openCustomerModal()">＋ مشتری جدید</button>
+        </div>
+        <div class="customer-toolbar">
+            <input id="customerSearch" type="search" placeholder="جستجوی نام یا شماره مشتری..." oninput="loadCustomers()">
+            <span id="customerMessage" class="customer-message"></span>
+        </div>
+        <div class="customer-card">
+            <table class="customer-table">
+                <thead><tr><th>ردیف</th><th>نام مشتری</th><th>موبایل</th><th>تلفن</th><th>آخرین تماس</th><th>عملیات</th></tr></thead>
+                <tbody id="customerRows"><tr><td colspan="6" class="customer-empty">در حال بارگذاری...</td></tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="customerModal" class="customer-modal" hidden>
+        <div class="customer-modal-box">
+            <div class="customer-modal-title">ثبت مشتری جدید</div>
+            <label>نام مشتری / شرکت<input id="customerName" type="text"></label>
+            <label>موبایل<input id="customerMobile" type="text"></label>
+            <label>تلفن ثابت<input id="customerPhone" type="text"></label>
+            <label>آدرس<textarea id="customerAddress"></textarea></label>
+            <label>توضیحات<textarea id="customerNotes"></textarea></label>
+            <div class="customer-modal-actions">
+                <button type="button" class="customer-secondary" onclick="closeCustomerModal()">انصراف</button>
+                <button type="button" class="customer-primary" onclick="saveCustomer()">ثبت مشتری</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="reports" class="module-placeholder" hidden>
+        <div class="module-placeholder-title">گزارشات</div>
+        <div class="reports-home">
+            <div class="reports-home-title">گزارش‌های اطلاعات چک</div>
+            <div class="reports-grid">
+                <button type="button" class="report-card" onclick="showModule('cheques')">
+                    <span class="report-card-icon">📋</span>
+                    <span class="report-card-body">
+                        <strong>گزارش چک‌ها</strong>
+                        <small>مشاهده، جستجو، فیلتر، ویرایش و حذف اطلاعات ثبت‌شده</small>
+                    </span>
+                    <span class="report-card-arrow">←</span>
+                </button>
+            </div>
+            <div class="reports-note">اطلاعات گزارش چک‌ها مستقیماً از بانک اطلاعاتی نرم‌افزار خوانده می‌شود.</div>
+        </div>
+    </div>
+
+    <div id="tools" class="module-placeholder" hidden>
+        <div class="module-placeholder-title">ابزارها</div>
+        <div class="module-placeholder-text">تنظیمات و ابزارهای عمومی نرم‌افزار</div>
+
+        <div class="tools-layout">
+            <aside class="tools-sidebar">
+                <div class="tools-sidebar-title">تنظیمات و ابزارها</div>
+                <button type="button" class="tools-menu-item" data-tool-page="fiscal" onclick="openToolPage('fiscal')">
+                    <span class="tools-menu-icon">📅</span>
+                    <span><span class="tools-menu-title">تنظیمات سال مالی</span><span class="tools-menu-desc">مدیریت سال‌های مالی</span></span>
+                </button>
+                <button type="button" class="tools-menu-item" data-tool-page="password" onclick="openToolPage('password')">
+                    <span class="tools-menu-icon">🔐</span>
+                    <span><span class="tools-menu-title">تنظیمات رمز عبور</span><span class="tools-menu-desc">مدیریت اطلاعات ورود</span></span>
+                </button>
+                <button type="button" class="tools-menu-item" data-tool-page="backup" onclick="openToolPage('backup')">
+                    <span class="tools-menu-icon">💾</span>
+                    <span><span class="tools-menu-title">پشتیبان‌گیری</span><span class="tools-menu-desc">تهیه و بازیابی پشتیبان</span></span>
+                </button>
+                <button type="button" class="tools-menu-item" data-tool-page="appearance" onclick="openToolPage('appearance')">
+                    <span class="tools-menu-icon">🎨</span>
+                    <span><span class="tools-menu-title">تنظیمات ظاهری</span><span class="tools-menu-desc">ظاهر و نمایش نرم‌افزار</span></span>
+                </button>
+                <button type="button" class="tools-menu-item" data-tool-page="about" onclick="openToolPage('about')">
+                    <span class="tools-menu-icon">ℹ️</span>
+                    <span><span class="tools-menu-title">درباره ما</span><span class="tools-menu-desc">اطلاعات نرم‌افزار</span></span>
+                </button>
+            </aside>
+
+            <section class="tools-content">
+                <div id="toolsContentEmpty" class="tools-content-empty">یکی از گزینه‌های ابزارها را از سمت راست انتخاب کنید.</div>
+                        <div id="fiscalToolPage" class="tools-subpage" hidden>
+            <div class="tools-subpage-head">
+                <div class="tools-subpage-title">تنظیمات سال مالی</div>
+                <button type="button" class="tools-back" onclick="openToolPage('home')">← بازگشت به ابزارها</button>
+            </div>
+            <div class="tools-card" style="margin-top:0;max-width:none;">
+                <div class="tools-card-title">مدیریت سال‌های مالی</div>
+                <div class="year-area"><span class="year-label">سال مالی فعال:</span><select id="fiscalYear"></select></div>
+                <div class="fiscal-actions fiscal-actions-modern">
+                    <button type="button" id="addFiscalYear" class="fiscal-btn fiscal-btn-add"><span class="fiscal-btn-icon">＋</span><span>ایجاد سال مالی</span></button>
+                    <button type="button" id="deleteFiscalYear" class="fiscal-btn fiscal-btn-delete"><span class="fiscal-btn-icon">🗑</span><span>حذف سال مالی</span></button>
+                    <button type="button" id="clearFiscalYear" class="fiscal-btn fiscal-btn-clear"><span class="fiscal-btn-icon">⌫</span><span>خالی کردن سال مالی</span></button>
+                </div>
+                <div class="tools-hint">ایجاد، حذف و خالی کردن اطلاعات سال مالی از این قسمت انجام می‌شود.</div>
+            </div>
+        </div>
+
+
+                        <div id="backupToolPage" class="tools-subpage" hidden>
+            <div class="tools-subpage-head">
+                <div class="tools-subpage-title">پشتیبان‌گیری</div>
+                <button type="button" class="tools-back" onclick="openToolPage('home')">← بازگشت به ابزارها</button>
+            </div>
+            <div class="tools-card" style="margin-top:0;max-width:none;">
+                <div class="tools-card-title">پشتیبان اطلاعات</div>
+                <p style="margin:0;line-height:2;">از این بخش برای تهیه نسخه پشتیبان از اطلاعات نرم‌افزار استفاده خواهد شد.</p>
+                <div class="fiscal-actions fiscal-actions-modern">
+                    <button type="button" id="createBackupButton" class="fiscal-btn fiscal-btn-add">💾 تهیه نسخه پشتیبان</button>
+                    <button type="button" id="restoreBackupButton" class="fiscal-btn fiscal-btn-clear">↩️ بازیابی اطلاعات</button>
+                    <button type="button" id="chooseSecondBackupButton" class="fiscal-btn fiscal-btn-delete">📁 مسیر پشتیبان دوم</button>
+                </div>
+                <div id="backupSecondPath" class="tools-hint">مسیر پشتیبان دوم: تنظیم نشده</div>
+                <div id="backupMessage" class="tools-hint">بکاپ خودکار هر ۵ دقیقه و پس از تغییرات مهم اطلاعات تهیه می‌شود.</div>
+            </div>
+        </div>
+
+
+                        <div id="appearanceToolPage" class="tools-subpage" hidden>
+            <div class="tools-subpage-head">
+                <div class="tools-subpage-title">تنظیمات ظاهری</div>
+                <button type="button" class="tools-back" onclick="openToolPage('home')">← بازگشت به ابزارها</button>
+            </div>
+            <div class="tools-card" style="margin-top:0;max-width:none;">
+                <div class="tools-card-title">تنظیمات نمایش نرم‌افزار</div>
+                <div class="password-grid">
+                    <div><label for="appearanceCompanyName">نام فروشگاه / شرکت</label><input id="appearanceCompanyName" type="text" placeholder="نرم افزار مدیریت چک پاسارگاد"></div>
+                    <div>
+                        <label>لوگوی اختصاصی مشتری</label>
+                        <button type="button" onclick="chooseAppearanceLogo()">🖼 انتخاب لوگوی مشتری</button>
+                        <div id="appearanceLogoPath" class="tools-hint" style="margin-top:6px">لوگویی انتخاب نشده است.</div>
+                    </div>
+                    <div><label for="appearanceSigner1">نام امضاکننده اول</label><input id="appearanceSigner1" type="text"></div>
+                    <div><label for="appearanceSigner2">نام امضاکننده دوم</label><input id="appearanceSigner2" type="text"></div>
+                </div>
+                <div class="password-actions" style="margin-top:14px"><button type="button" class="primary" onclick="saveAppearance()">💾 ذخیره تنظیمات ظاهری</button></div>
+                <div id="appearanceMessage" class="password-message"></div>
+                <div class="tools-hint">این اطلاعات در سربرگ و پایین گزارش‌های چاپی استفاده می‌شوند. اگر نام شرکت وارد نشود، نام نرم‌افزار نمایش داده می‌شود.</div>
+            </div>
+        </div>
+
+
+                        <div id="aboutToolPage" class="tools-subpage" hidden>
+            <div class="tools-subpage-head">
+                <div class="tools-subpage-title">درباره ما</div>
+                <button type="button" class="tools-back" onclick="openToolPage('home')">← بازگشت به ابزارها</button>
+            </div>
+            <div class="tools-card" style="margin-top:0;max-width:none;">
+                <div class="tools-card-title">نرم افزار مدیریت چک پاسارگاد</div>
+                <div style="display:flex;align-items:center;gap:18px;min-height:120px;">
+                    <img src="assets/logo.png" alt="لوگوی نرم افزار پاسارگاد" style="width:88px;height:88px;object-fit:contain;">
+                    <div style="line-height:2.2;">
+                        <div><strong>نام نرم افزار:</strong> نرم افزار مدیریت چک پاسارگاد</div>
+                        <div><strong>نسخه:</strong> 1.0.0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+                        <div id="passwordToolPage" class="tools-subpage" hidden>
+            <div class="tools-subpage-head">
+                <div class="tools-subpage-title">تنظیمات رمز عبور</div>
+                <button type="button" class="tools-back" onclick="openToolPage('home')">← بازگشت به ابزارها</button>
+            </div>
+            <div class="tools-card" style="margin-top:0;max-width:none;">
+                <div class="tools-card-title">تغییر اطلاعات ورود</div>
+                <div class="password-grid">
+                    <div><label for="settingsUsername">نام کاربری جدید</label><input id="settingsUsername" type="text"></div>
+                    <div><label for="settingsCurrentPassword">رمز عبور فعلی</label><input id="settingsCurrentPassword" type="password"></div>
+                    <div><label for="settingsNewPassword">رمز عبور جدید</label><input id="settingsNewPassword" type="password"></div>
+                    <div><label for="settingsNewPassword2">تکرار رمز عبور جدید</label><input id="settingsNewPassword2" type="password"></div>
+                </div>
+                <div class="password-actions"><button type="button" class="primary" onclick="changeCredentials()">ذخیره تغییرات</button></div>
+                <div id="passwordMessage" class="password-message"></div>
+            </div>
+        </div>
+    </div>
+                </section>
+            </div>
+
+
+            </section>
+        </div>
+    </div>
+
+    <div id="help" class="module-placeholder" hidden>
+        <div class="module-placeholder-title">راهنما</div>
+        <div class="module-placeholder-text">راهنمای استفاده از نرم‌افزار پاسارگاد در این بخش قرار می‌گیرد.</div>
+    </div>
+
+    <div id="cheques" class="module-view">
+
+    <div class="report-actions">
+        <button type="button" onclick="newCheque()">➕ ثبت چک جدید</button>
+        <button type="button" onclick="printChequeReport()">🖨 چاپ گزارش</button>
+    </div>
+
+    <div id="reportPrintModal" class="report-print-modal" hidden>
+        <div class="report-print-dialog" role="dialog" aria-modal="true" aria-labelledby="reportPrintTitle">
+            <div class="report-print-head">
+                <div id="reportPrintTitle">🖨 تنظیمات چاپ گزارش</div>
+                <button type="button" class="report-print-close" onclick="closeReportPrintModal()">×</button>
+            </div>
+            <div class="report-print-body">
+                <div class="report-print-grid">
+                    <div><label for="reportPrintPrinter">پرینتر</label><select id="reportPrintPrinter"><option value="">انتخاب پرینتر</option></select></div>
+                    <div><label for="reportPrintPaper">اندازه کاغذ</label><select id="reportPrintPaper"><option value="A4">A4</option><option value="A5">A5</option><option value="Letter">Letter</option></select></div>
+                    <div><label for="reportPrintOrientation">جهت چاپ</label><select id="reportPrintOrientation"><option value="portrait">عمودی</option><option value="landscape">افقی</option></select></div>
+                    <div><label for="reportPrintMargins">حاشیه صفحه</label><select id="reportPrintMargins"><option value="default">استاندارد</option><option value="minimum">کم</option><option value="maximum">زیاد</option></select></div>
+                    <div><label for="reportPrintCopies">تعداد نسخه</label><select id="reportPrintCopies"><option value="1">۱</option><option value="2">۲</option><option value="3">۳</option><option value="4">۴</option><option value="5">۵</option></select></div>
+                    <div><label for="reportPrintShowDate">نمایش تاریخ و ساعت</label><select id="reportPrintShowDate"><option value="yes">بله</option><option value="no">خیر</option></select></div>
+                </div>
+                <div id="reportPrintMessage" class="report-print-message"></div>
+            </div>
+            <div class="report-print-actions">
+                <button type="button" onclick="closeReportPrintModal()">انصراف</button>
+                <button type="button" onclick="previewReportFromModal()">👁️ پیش‌نمایش</button>
+                <button type="button" class="primary" onclick="confirmReportPrint()">🖨 چاپ گزارش</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+
+
+        <!-- =======================================
+             فیلتر
+        ======================================= -->
+
+        <div class="top-panel">
+
+            <div class="panel-title">
+                فیلتر گزارش
+            </div>
+
+
+            <div class="filter-row">
+
+
+                <input
+                    id="search"
+                    class="search"
+                    type="text"
+                    placeholder="جستجو در آورنده، تلفن، دریافت‌کننده، شماره چک..."
+                    oninput="scheduleReportSearch()"
+                >
+
+
+                <input
+                    id="sendDate"
+                    class="date-filter"
+                    type="text"
+                    placeholder="تاریخ ارسال"
+                    oninput="renderCheques()"
+                >
+
+
+                <select
+                    id="reportStatus"
+                    class="status-filter"
+                    onchange="renderCheques()"
+                >
+
+                    <option value="all">
+                        همه وضعیت‌ها
+                    </option>
+
+                    <option value="notRegistered">
+                        ثبت نشده
+                    </option>
+
+                    <option value="registered">
+                        ثبت شده
+                    </option>
+
+                </select>
+
+
+                <label class="radio-label">
+
+                    <input
+                        type="radio"
+                        name="chequeStatus"
+                        value="all"
+                        checked
+                        onchange="filterStatus()"
+                    >
+
+                    همه
+
+                </label>
+
+
+                <label class="radio-label">
+
+                    <input
+                        type="radio"
+                        name="chequeStatus"
+                        value="notRegistered"
+                        onchange="filterStatus()"
+                    >
+
+                    ثبت نشده
+
+                </label>
+
+
+                <label class="radio-label">
+
+                    <input
+                        type="radio"
+                        name="chequeStatus"
+                        value="registered"
+                        onchange="filterStatus()"
+                    >
+
+                    ثبت شده
+
+                </label>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =======================================
+             خلاصه
+        ======================================= -->
+
+        <div class="summary-row">
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    چک‌های ثبت نشده
+                </div>
+
+
+                <div
+                    id="count"
+                    class="summary-number danger"
+                >
+                    ۰
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    چک‌های ثبت شده
+                </div>
+
+
+                <div
+                    id="registeredCount"
+                    class="summary-number success"
+                >
+                    ۰
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    کل چک‌های سال مالی
+                </div>
+
+
+                <div
+                    id="totalCount"
+                    class="summary-number blue"
+                >
+                    ۰
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    سال مالی فعال
+                </div>
+
+
+                <div
+                    id="currentYearTitle"
+                    class="summary-number"
+                    style="font-size:16px"
+                >
+                    سال مالی ۱۴۰۵
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =======================================
+             جدول
+        ======================================= -->
+
+        <div class="table-panel">
+
+
+            <div class="table-header">
+
+                گزارش چک‌ها
+
+            </div>
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ردیف
+                        </th>
+
+                        <th>
+                            شماره چک
+                        </th>
+
+                        <th>
+                            آورنده چک
+                        </th>
+
+                        <th>
+                            تلفن آورنده
+                        </th>
+
+                        <th>
+                            دریافت‌کننده
+                        </th>
+
+                        <th>
+                            مبلغ
+                        </th>
+
+                        <th>
+                            سررسید
+                        </th>
+
+                        <th>
+                            تاریخ ارسال برای ثبت
+                        </th>
+
+                        <th>
+                            وضعیت
+                        </th>
+
+                        <th>
+                            عملیات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="chequeList">
+
+                </tbody>
+
+
+            </table>
+
+
+            <div id="emptyMessage">
+
+                چکی برای نمایش در این سال مالی وجود ندارد.
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =======================================
+             Footer
+        ======================================= -->
+
+        <div class="footer">
+
+            <span>
+                سیستم مدیریت چک پاسارگاد
+            </span>
+
+
+            <span id="footerYearTitle">
+                سال مالی ۱۴۰۵
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    </div>
+
+
+    <div id="chequeConfirmModal" hidden aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="cheque-confirm-box">
+            <div id="chequeConfirmTitle">تأیید چک</div>
+            <div id="chequeConfirmMessage"></div>
+            <div class="cheque-confirm-actions">
+                <button type="button" id="chequeConfirmYes" class="primary">تایید</button>
+                <button type="button" id="chequeConfirmNo">انصراف</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chequeFormOverlay" aria-hidden="true">
+        <iframe id="chequeFormFrame" title="ثبت چک جدید"></iframe>
+    </div>
+
+    
+<div id="exitBackupOverlay" class="app-modal-overlay" hidden aria-hidden="true">
+  <div class="app-modal-card" role="dialog" aria-modal="true" aria-labelledby="exitBackupTitle">
+    <div class="app-modal-icon">💾</div>
+    <div id="exitBackupTitle" class="app-modal-title">پشتیبان‌گیری قبل از خروج</div>
+    <div id="exitBackupText" class="app-modal-text">برای حفظ اطلاعات، قبل از خروج باید یک نسخه پشتیبان تهیه شود.</div>
+    <div class="app-modal-actions">
+      <button type="button" id="exitBackupButton" class="modal-primary">تهیه پشتیبان و خروج</button>
+      <button type="button" id="exitBackupCancel" class="modal-secondary">انصراف</button>
+    </div>
+  </div>
+</div>
+<script src="js/app.js"></script>
+    <script src="js/customer.js"></script>
+    <script>
+        var isAuthenticated = false;
+        var DEFAULT_USERNAME = 'admin';
+        var DEFAULT_PASSWORD = '1234';
+        async function hashText(text){return String(text);}
+        function getStoredCredentials(){var username=localStorage.getItem('pasargadUsername')||DEFAULT_USERNAME;var password=localStorage.getItem('pasargadPassword');if(password===null){localStorage.removeItem('pasargadPasswordHash');password=DEFAULT_PASSWORD;localStorage.setItem('pasargadPassword',password);}return {username:username,password:password};}
+        // Bridge for cheque.html when it is loaded inside the iframe overlay.
+        // The iframe does not receive Electron preload APIs, so requests are routed
+        // through the authenticated parent window without changing the database API.
+        window.addEventListener('message', async function(event){
+            if(event.origin !== window.location.origin) return;
+            var msg = event.data;
+            if(!msg || msg.type !== 'pasargad-ipc-request') return;
+            var method = String(msg.method || '');
+            var args = Array.isArray(msg.args) ? msg.args : [];
+            try {
+                if(!window.pasargad || typeof window.pasargad[method] !== 'function') {
+                    throw new Error('Electron database bridge is unavailable: ' + method);
+                }
+                var result = await window.pasargad[method].apply(window.pasargad, args);
+                event.source.postMessage({type:'pasargad-ipc-response', id:msg.id, ok:true, result:result}, event.origin);
+            } catch(error) {
+                event.source.postMessage({type:'pasargad-ipc-response', id:msg.id, ok:false, error:error && error.message ? error.message : String(error)}, event.origin);
+            }
+        });
+
+        // تازه‌سازی گزارش پس از ثبت/ویرایش چک، بدون قفل کردن فرم ثبت چک.
+        function refreshChequeReport(){
+            try {
+                if (typeof loadCheques === "function") {
+                    Promise.resolve(loadCheques()).catch(function(err){ console.warn("Report refresh failed:", err); });
+                }
+            } catch(e) {}
+        }
+
+        function openChequeFormOverlay(url){
+            var overlay=document.getElementById("chequeFormOverlay");
+            var frame=document.getElementById("chequeFormFrame");
+            if(!overlay||!frame)return;
+            overlay.style.display="block";
+            overlay.setAttribute("aria-hidden","false");
+            if (url) {
+                frame.setAttribute("src", url);
+            } else {
+                // فرم فقط یک بار ساخته می‌شود؛ برای «ثبت چک جدید» دوباره صفحه را reload نمی‌کنیم.
+                if (!frame.getAttribute("src")) {
+                    frame.setAttribute("src", "cheque.html?new=1");
+                } else {
+                    try { frame.contentWindow.postMessage({type:'pasargad-reset-cheque-form'}, window.location.origin); } catch(e) {}
+                }
+            }
+        }
+        function closeChequeFormOverlay(){
+            var overlay=document.getElementById("chequeFormOverlay");
+            var frame=document.getElementById("chequeFormFrame");
+            if(!overlay)return;
+            overlay.style.display="none";
+            overlay.setAttribute("aria-hidden","true");
+            // بعد از بسته شدن فرم، صفحه قبلی را نگه نمی‌داریم تا حالت disabled/readonly
+            // فرم ثبت قبلی به فرم «ثبت چک جدید» منتقل نشود. فقط src را خالی می‌کنیم؛
+            // هیچ دسترسی سنگین یا reset هم در این لحظه انجام نمی‌شود.
+            if(frame){
+                try{ frame.contentWindow && frame.contentWindow.blur(); }catch(e){}
+                frame.removeAttribute("src");
+            }
+        }
+
+        function openToolPage(page){
+            var ids=['fiscalToolPage','passwordToolPage','backupToolPage','appearanceToolPage','aboutToolPage'];
+            ids.forEach(function(id){var el=document.getElementById(id);if(el)el.hidden=true;});
+            var empty=document.getElementById('toolsContentEmpty');
+            if(empty) empty.hidden = page !== 'home';
+            var targetId={fiscal:'fiscalToolPage',password:'passwordToolPage',backup:'backupToolPage',appearance:'appearanceToolPage',about:'aboutToolPage'}[page];
+            var target=targetId?document.getElementById(targetId):null;
+            if(target)target.hidden=false;
+            document.querySelectorAll('.tools-menu-item[data-tool-page]').forEach(function(item){item.classList.toggle('active',item.dataset.toolPage===page);});
+            if(page==='password') fillCredentialUsername();
+        }
+
+        function showModule(moduleName){if(!isAuthenticated)return;closeChequeFormOverlay();document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});var target=document.getElementById(moduleName);if(target)target.hidden=false;document.querySelectorAll('.pasargad-main-menu .menu-item').forEach(function(item){item.classList.toggle('active',item.dataset.module===moduleName);});if(moduleName==='tools')openToolPage('home');}
+        function fillCredentialUsername(){var el=document.getElementById('settingsUsername');if(el)el.value=getStoredCredentials().username;}
+        var RECOVERY_CODE_HASH = 'eeac7b53b1bd46cf8d8ac0d9e59cfc45ae23aaf2b4405856dd0038f4c4ac7e55';
+        async function hashRecoveryCode(value){var data=new TextEncoder().encode(value);var digest=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(digest)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}
+        var recoveryMode = 'password';
+        function openRecovery(mode){var o=document.getElementById('recoveryOverlay');if(!o)return;recoveryMode=mode==='username'?'username':'password';o.style.display='flex';o.setAttribute('aria-hidden','false');document.getElementById('recoveryCode').value='';document.getElementById('recoveryNewPassword').value='';document.getElementById('recoveryNewPassword2').value='';document.getElementById('recoveryNewUsername').value='';var title=document.getElementById('recoveryTitle'),text=document.getElementById('recoveryText'),button=document.getElementById('recoverySubmitButton'),pf=document.getElementById('recoveryPasswordFields'),uf=document.getElementById('recoveryUsernameFields');if(recoveryMode==='username'){title.textContent='بازیابی نام کاربری';text.textContent='کد بازیابی را وارد کنید. پس از تأیید، می‌توانید نام کاربری جدید تعیین کنید.';pf.hidden=true;uf.hidden=false;button.textContent='تغییر نام کاربری';}else{title.textContent='بازیابی رمز عبور';text.textContent='برای بازیابی رمز، کد بازیابی را وارد کنید. پس از تأیید، می‌توانید رمز ورود جدید تعیین کنید.';pf.hidden=false;uf.hidden=true;button.textContent='بازیابی رمز';}var m=document.getElementById('recoveryMessage');m.className='recovery-message';m.textContent='';setTimeout(function(){document.getElementById('recoveryCode').focus();},0);}
+        function openForgotPassword(){openRecovery('password');}
+        function openForgotUsername(){openRecovery('username');}
+        function closeRecovery(){var o=document.getElementById('recoveryOverlay');if(!o)return;o.style.display='none';o.setAttribute('aria-hidden','true');}
+        function closeForgotPassword(){closeRecovery();}
+        async function resetPasswordWithRecovery(){var code=document.getElementById('recoveryCode').value,m=document.getElementById('recoveryMessage');m.className='recovery-message';m.textContent='';if(!code){m.classList.add('err');m.textContent='کد بازیابی را وارد کنید.';return;}try{var hash=await hashRecoveryCode(code);if(hash!==RECOVERY_CODE_HASH){m.classList.add('err');m.textContent='کد بازیابی صحیح نیست.';document.getElementById('recoveryCode').select();return;}if(recoveryMode==='username'){var newUser=document.getElementById('recoveryNewUsername').value.trim();if(!newUser){m.classList.add('err');m.textContent='نام کاربری جدید را وارد کنید.';return;}localStorage.setItem('pasargadUsername',newUser);m.classList.add('ok');m.textContent='نام کاربری با موفقیت تغییر کرد.';setTimeout(function(){closeRecovery();document.getElementById('loginUsername').value='';document.getElementById('loginPassword').value='';document.getElementById('loginUsername').focus();},700);return;}var newPass=document.getElementById('recoveryNewPassword').value,newPass2=document.getElementById('recoveryNewPassword2').value;if(!newPass){m.classList.add('err');m.textContent='رمز جدید را وارد کنید.';return;}if(newPass.length<4){m.classList.add('err');m.textContent='رمز جدید باید حداقل ۴ کاراکتر باشد.';return;}if(newPass!==newPass2){m.classList.add('err');m.textContent='تکرار رمز عبور یکسان نیست.';return;}localStorage.setItem('pasargadPassword',newPass);localStorage.removeItem('pasargadPasswordHash');m.classList.add('ok');m.textContent='رمز عبور با موفقیت بازیابی شد.';setTimeout(function(){closeRecovery();document.getElementById('loginPassword').value='';document.getElementById('loginPassword').focus();},700);}catch(err){console.error(err);m.classList.add('err');m.textContent='خطا در بازیابی اطلاعات.';}}
+        async function login(event){event.preventDefault();var u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value,c=getStoredCredentials(),e=document.getElementById('loginError');e.textContent='';try{if(u===c.username&&p===c.password){isAuthenticated=true;document.getElementById('loginScreen').classList.add('login-hidden');var h=(window.location.hash||'').replace('#','');showModule(h&&document.getElementById(h)?h:'home');document.getElementById('loginPassword').value='';}else{e.textContent='نام کاربری یا رمز عبور اشتباه است.';document.getElementById('loginPassword').select();}}catch(err){console.error(err);e.textContent='خطا در بررسی رمز عبور. لطفاً برنامه را دوباره اجرا کنید.';}}
+        async function changeCredentials(){var current=document.getElementById('settingsCurrentPassword').value,newUser=document.getElementById('settingsUsername').value.trim(),newPass=document.getElementById('settingsNewPassword').value,newPass2=document.getElementById('settingsNewPassword2').value,msg=document.getElementById('passwordMessage'),c=getStoredCredentials();msg.className='password-message';if(!newUser||!newPass){msg.classList.add('err');msg.textContent='نام کاربری و رمز عبور جدید را وارد کنید.';return;}if(current!==c.password){msg.classList.add('err');msg.textContent='رمز عبور فعلی صحیح نیست.';return;}if(newPass.length<4){msg.classList.add('err');msg.textContent='رمز عبور جدید باید حداقل ۴ کاراکتر باشد.';return;}if(newPass!==newPass2){msg.classList.add('err');msg.textContent='تکرار رمز عبور با رمز جدید یکسان نیست.';return;}localStorage.setItem('pasargadUsername',newUser);localStorage.setItem('pasargadPassword',newPass);localStorage.removeItem('pasargadPasswordHash');msg.classList.add('ok');msg.textContent='اطلاعات ورود با موفقیت تغییر کرد.';document.getElementById('settingsCurrentPassword').value='';document.getElementById('settingsNewPassword').value='';document.getElementById('settingsNewPassword2').value='';}
+        var backupExitInProgress = false;
+        async function performBackup(showMessage) {
+            try {
+                var result = await window.pasargad.createBackup();
+                if (result && result.success) {
+                    if (showMessage) {
+                        var bm=document.getElementById('backupMessage');
+                        if(bm) bm.textContent='نسخه پشتیبان با موفقیت تهیه شد.';
+                    }
+                    return true;
+                }
+                if (showMessage) { var bm2=document.getElementById('backupMessage'); if(bm2) bm2.textContent='تهیه نسخه پشتیبان انجام نشد. لطفاً دوباره تلاش کنید.'; }
+                return false;
+            } catch (e) {
+                console.error('Backup error:', e);
+                if (showMessage) { var bm3=document.getElementById('backupMessage'); if(bm3) bm3.textContent='خطا در تهیه نسخه پشتیبان.'; }
+                return false;
+            }
+        }
+        async function refreshBackupSettings(){
+            try{
+                var cfg=await window.pasargad.getBackupSettings();
+                var el=document.getElementById('backupSecondPath');
+                if(el) el.textContent='مسیر پشتیبان دوم: '+(cfg&&cfg.secondPath?cfg.secondPath:'تنظیم نشده');
+            }catch(e){}
+        }
+        async function chooseSecondBackupPath(){
+            try{
+                var r=await window.pasargad.chooseBackupSecondPath();
+                if(r&&r.success){
+                    var el=document.getElementById('backupSecondPath'); if(el) el.textContent='مسیر پشتیبان دوم: '+r.path;
+                    var bm=document.getElementById('backupMessage'); if(bm) bm.textContent='مسیر پشتیبان دوم با موفقیت تنظیم شد.';
+                }
+            }catch(e){ console.error(e); }
+        }
+        async function restoreBackupFile(){
+            var input=document.createElement('input');
+            input.type='file'; input.accept='.db,.sqlite,.sqlite3';
+            input.addEventListener('change',async function(){
+                var file=input.files&&input.files[0]; if(!file)return;
+                var box=document.createElement('div');
+                box.className='app-modal-overlay';
+                box.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(15,31,45,.42);';
+                box.innerHTML='<div class="app-modal-card" style="min-width:360px;max-width:520px;text-align:center;"><div class="app-modal-title">تأیید بازیابی اطلاعات</div><div class="app-modal-text">با بازیابی این فایل، اطلاعات فعلی جایگزین می‌شود. آیا ادامه می‌دهید؟</div><div style="display:flex;gap:10px;justify-content:center;margin-top:18px;direction:rtl;"><button type="button" class="modal-secondary" id="restoreCancelTemp">انصراف</button><button type="button" class="modal-primary" id="restoreOkTemp">بازیابی اطلاعات</button></div></div>';
+                document.body.appendChild(box);
+                var cleanup=function(){try{box.remove();}catch(e){}};
+                box.querySelector('#restoreCancelTemp').onclick=cleanup;
+                box.querySelector('#restoreOkTemp').onclick=async function(){
+                    cleanup();
+                    var bm=document.getElementById('backupMessage'); if(bm) bm.textContent='در حال بازیابی اطلاعات...';
+                    try{
+                        var r=await window.pasargad.restoreBackup(file.path);
+                        if(r&&r.success){ if(bm) bm.textContent='بازیابی با موفقیت انجام شد. نرم‌افزار در حال راه‌اندازی مجدد است...'; }
+                        else if(bm) bm.textContent=(r&&r.error)||'بازیابی انجام نشد.';
+                    }catch(e){ if(bm) bm.textContent='خطا در بازیابی اطلاعات: '+(e&&e.message?e.message:String(e)); }
+                };
+            });
+            input.click();
+        }
+
+        function showExitBackupDialog(){
+            var o=document.getElementById('exitBackupOverlay'); if(!o)return;
+            o.hidden=false; o.setAttribute('aria-hidden','false');
+            var b=document.getElementById('exitBackupButton'); if(b){b.disabled=false;b.textContent='تهیه پشتیبان و خروج';setTimeout(function(){b.focus();},0);}
+        }
+        async function handleExitBackup(){
+            if(backupExitInProgress)return; backupExitInProgress=true;
+            var b=document.getElementById('exitBackupButton'), t=document.getElementById('exitBackupText');
+            if(b)b.disabled=true; if(t)t.textContent='در حال تهیه نسخه پشتیبان... لطفاً صبر کنید.';
+            var ok=await performBackup(false);
+            if(ok){ if(t)t.textContent='نسخه پشتیبان با موفقیت تهیه شد. در حال خروج...'; if(window.pasargad.finishBackupBeforeExit)window.pasargad.finishBackupBeforeExit(true); }
+            else { backupExitInProgress=false; if(b)b.disabled=false; if(t)t.textContent='تهیه نسخه پشتیبان انجام نشد. تا تهیه موفق پشتیبان، خروج از برنامه امکان‌پذیر نیست.'; }
+        }
+        function cancelExitBackup(){ if(backupExitInProgress)return; var o=document.getElementById('exitBackupOverlay');if(o){o.hidden=true;o.setAttribute('aria-hidden','true');} }
+        function showHome(){if(!isAuthenticated)return;closeChequeFormOverlay();document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});var home=document.getElementById('home');if(home)home.hidden=false;document.querySelectorAll('.pasargad-main-menu .menu-item').forEach(function(item){item.classList.remove('active');});}
+        document.addEventListener('DOMContentLoaded',function(){if(!localStorage.getItem('pasargadPassword')){localStorage.removeItem('pasargadPasswordHash');localStorage.setItem('pasargadPassword',DEFAULT_PASSWORD);}document.getElementById('loginForm').addEventListener('submit',login);document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});document.getElementById('loginUsername').focus();
+            var bb=document.getElementById('createBackupButton'); if(bb) bb.addEventListener('click', function(){performBackup(true);});
+            var rb=document.getElementById('restoreBackupButton'); if(rb) rb.addEventListener('click', restoreBackupFile);
+            var sb=document.getElementById('chooseSecondBackupButton'); if(sb) sb.addEventListener('click', chooseSecondBackupPath);
+            refreshBackupSettings();
+            var eb=document.getElementById('exitBackupButton'); if(eb) eb.addEventListener('click', handleExitBackup);
+            var ec=document.getElementById('exitBackupCancel'); if(ec) ec.addEventListener('click', cancelExitBackup);
+            if(window.pasargad && window.pasargad.onBackupBeforeExit) window.pasargad.onBackupBeforeExit(showExitBackupDialog);
+        });
+        // فرم ثبت چک از همان ابتدای ورود به نرم افزار در پس زمینه بارگذاری می شود.
+        document.addEventListener('DOMContentLoaded', function(){
+            var frame=document.getElementById('chequeFormFrame');
+            if(frame && !frame.getAttribute('src')) frame.setAttribute('src','cheque.html?new=1');
+        });
+        document.addEventListener('keydown',function(event){if(event.key==='Escape'||event.keyCode===27){if(!isAuthenticated)return;event.preventDefault();var overlay=document.getElementById('chequeFormOverlay');if(overlay&&overlay.style.display!=='none'){closeChequeFormOverlay();return;}showHome();}});
+    </script>
+
+<style>
+.reports-home{margin:14px 18px;background:#f7f9fb;border:1px solid #c7d2dc;padding:16px;min-height:220px;}
+.reports-home-title{font-size:16px;font-weight:bold;color:#173f69;border-bottom:1px solid #d4dde5;padding-bottom:10px;margin-bottom:12px;}
+.reports-grid{display:flex;flex-direction:column;gap:8px;max-width:620px;}
+.report-card{display:flex;align-items:center;direction:rtl;text-align:right;width:100%;min-height:70px;padding:8px 12px;border:1px solid #b8c6d2;border-radius:2px;background:linear-gradient(#fff,#edf3f8);cursor:pointer;color:#172b3d;font-family:inherit;}
+.report-card:hover{background:#e5f0fa;border-color:#7da6c8;}
+.report-card-icon{font-size:27px;width:44px;text-align:center;}
+.report-card-body{display:flex;flex-direction:column;gap:4px;flex:1;}
+.report-card-body strong{font-size:13px;color:#164b7d;}
+.report-card-body small{font-size:11px;color:#647585;font-weight:normal;}
+.report-card-arrow{font-size:18px;color:#35688e;padding:0 5px;}
+.reports-note{margin-top:18px;padding:9px 12px;background:#fff8d9;border:1px solid #e3d7a4;color:#625b37;font-size:11px;max-width:620px;}
+</style>
+
+<div id="fiscalActionModal" class="fiscal-action-modal" hidden>
+  <div class="fiscal-action-box" role="dialog" aria-modal="true" aria-labelledby="fiscalActionTitle">
+    <div class="fiscal-action-icon">⚙</div>
+    <div id="fiscalActionTitle" class="fiscal-action-title">پیام</div>
+    <div id="fiscalActionMessage" class="fiscal-action-message"></div>
+    <div id="fiscalActionInputWrap" class="fiscal-action-input-wrap" hidden>
+      <input id="fiscalActionInput" type="text" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="fiscal-action-buttons">
+      <button type="button" id="fiscalActionCancel" class="fiscal-action-cancel">انصراف</button>
+      <button type="button" id="fiscalActionOk" class="fiscal-action-ok">تأیید</button>
+    </div>
+  </div>
+</div>
+<style>
+.fiscal-action-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:rgba(20,35,48,.28);backdrop-filter:blur(1px)}
+.fiscal-action-modal[hidden]{display:none}
+.fiscal-action-box{width:min(430px,92vw);background:linear-gradient(180deg,#fff,#f5f8fa);border:1px solid #aab9c4;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.22);padding:22px;text-align:right;direction:rtl}
+.fiscal-action-icon{width:42px;height:42px;border-radius:10px;background:#e7f0f6;border:1px solid #b7ccd9;color:#275d7e;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:10px}
+.fiscal-action-title{font-size:16px;font-weight:bold;color:#214d6d;margin-bottom:8px}
+.fiscal-action-message{font-size:12px;line-height:2;color:#52636e;white-space:pre-line;min-height:24px}
+.fiscal-action-input-wrap{margin-top:13px}.fiscal-action-input-wrap[hidden]{display:none}
+.fiscal-action-input-wrap input{width:100%;height:42px;border:1px solid #aabac5;border-radius:7px;padding:5px 12px;font-family:inherit;font-size:15px;direction:ltr;text-align:center;outline:none;background:#fff}
+.fiscal-action-input-wrap input:focus{border-color:#4b88ad;box-shadow:0 0 0 3px rgba(75,136,173,.12)}
+.fiscal-action-buttons{display:flex;justify-content:flex-start;gap:9px;margin-top:18px}
+.fiscal-action-buttons button{min-width:105px;height:38px;border-radius:7px;font-family:inherit;font-size:12px;font-weight:bold;cursor:pointer}
+.fiscal-action-cancel{border:1px solid #b7c2c9;background:#fff;color:#52636e}.fiscal-action-ok{border:1px solid #356d90;background:linear-gradient(#4d8fb6,#2e6f96);color:#fff;box-shadow:0 2px 5px rgba(35,82,108,.2)}
+.fiscal-action-ok:hover{filter:brightness(1.04)}.fiscal-action-cancel:hover{background:#f1f4f6}
+</style>
+
+
+<style>
+.app-modal-overlay{position:fixed;inset:0;background:rgba(15,32,48,.42);display:flex;align-items:center;justify-content:center;z-index:99999;backdrop-filter:blur(2px)}
+.app-modal-overlay[hidden]{display:none}
+.app-modal-card{width:min(460px,calc(100vw - 40px));background:#fff;border:1px solid #b9c8d5;border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,.25);padding:28px;text-align:center;direction:rtl}
+.app-modal-icon{font-size:42px;margin-bottom:8px}.app-modal-title{font-size:18px;font-weight:bold;color:#173f69;margin-bottom:10px}.app-modal-text{font-size:13px;line-height:2;color:#526574;white-space:pre-line}.app-modal-actions{display:flex;gap:10px;justify-content:center;margin-top:22px}.app-modal-actions button{border:0;border-radius:9px;padding:10px 18px;font-family:inherit;font-size:13px;cursor:pointer}.modal-primary{background:#17649b;color:#fff}.modal-secondary{background:#edf2f6;color:#29445b}.app-modal-actions button:disabled{opacity:.55;cursor:wait}
+</style>
+</body>
+
+</html><style>
+/* Tools: keep the selected settings inside the empty area opposite the menu */
+.tools-layout{
+  position:relative !important;
+  display:block !important;
+  min-height:390px !important;
+  direction:rtl !important;
+}
+.tools-sidebar{
+  position:absolute !important;
+  top:0 !important;
+  right:0 !important;
+  width:190px !important;
+  min-height:390px !important;
+  margin:0 !important;
+}
+.tools-content{
+  display:block !important;
+  margin-right:200px !important;
+  min-height:390px !important;
+  width:auto !important;
+}
+.tools-content-empty{
+  width:100% !important;
+  min-height:390px !important;
+  height:390px !important;
+}
+.tools-subpage{
+  width:100% !important;
+  min-height:390px !important;
+  margin:0 !important;
+}
+.tools-subpage[hidden], .tools-content-empty[hidden]{
+  display:none !important;
+}
+
+#chequeConfirmModal{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);}
+#chequeConfirmModal[hidden]{display:none;}
+.cheque-confirm-box{width:min(390px,90vw);background:#fff;border:1px solid #aebbc5;border-radius:7px;box-shadow:0 12px 35px rgba(0,0,0,.22);padding:18px;text-align:right;}
+#chequeConfirmTitle{font-weight:bold;color:#234e70;font-size:15px;margin-bottom:10px;}
+#chequeConfirmMessage{color:#4b5b65;font-size:12px;line-height:1.8;white-space:pre-line;}
+.cheque-confirm-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:16px;}
+.cheque-confirm-actions button{min-width:80px;height:32px;border:1px solid #9eabb4;border-radius:4px;background:linear-gradient(#fff,#e6eaed);font-family:inherit;cursor:pointer;}
+.cheque-confirm-actions .primary{background:#3f7fa7;color:#fff;border-color:#2f6587;}
+</style>

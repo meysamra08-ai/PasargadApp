@@ -1,0 +1,3246 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<title>
+        نرم افزار مدیریت چک پاسارگاد
+    </title>
+<style>
+
+        * {
+
+            box-sizing: border-box;
+
+            font-family:
+                "B Titr",
+                "Titr",
+                sans-serif;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                #e8edf2;
+
+            color:
+                #263238;
+
+            font-size:
+                13px;
+        }
+
+
+        /* =========================================
+           Title
+        ========================================= */
+
+        .title-bar {
+
+            height:
+                64px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #17649b,
+                    #0d4169
+                );
+
+            color:
+                white;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            padding:
+                0 24px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.18);
+        }
+
+
+        .title-icon {
+
+            width:
+                44px;
+
+            height:
+                44px;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .16
+                );
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-left:
+                10px;
+
+            font-size:
+                24px;
+        }
+
+
+        .title {
+
+            font-size:
+                23px;
+
+            font-weight:
+                bold;
+        }
+
+
+        /* =========================================
+           Menu
+        ========================================= */
+
+        .menu-bar {
+
+            height:
+                36px;
+
+            background:
+                #f8fafc;
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            padding:
+                0 10px;
+        }
+
+
+        .menu-item {
+
+            padding:
+                6px 15px;
+
+            border-radius:
+                4px;
+        }
+
+
+        .menu-item:hover {
+
+            background:
+                #dceaf5;
+        }
+
+
+        /* =========================================
+           Toolbar
+        ========================================= */
+
+        .toolbar {
+
+            background:
+                #edf2f6;
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            padding:
+                8px 12px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .toolbar button {
+
+            height:
+                35px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid #aab6c0;
+
+            border-radius:
+                5px;
+
+            background:
+                linear-gradient(
+                    #ffffff,
+                    #e2e7eb
+                );
+
+            cursor:
+                pointer;
+        }
+
+
+        .toolbar button:hover {
+
+            background:
+                #dceaf5;
+        }
+
+
+        /* =========================================
+           Year
+        ========================================= */
+
+        .year-area {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-right:
+                auto;
+        }
+
+
+        .year-label {
+
+            font-weight:
+                bold;
+
+            color:
+                #174d78;
+        }
+
+
+        #fiscalYear {
+
+            min-width:
+                140px;
+
+            height:
+                35px;
+
+            border:
+                1px solid #aeb9c2;
+
+            border-radius:
+                5px;
+
+            padding:
+                0 8px;
+
+            background:
+                white;
+        }
+
+
+        #addFiscalYear {
+
+            width:
+                38px;
+
+            padding:
+                0;
+
+            font-size:
+                18px;
+        }
+
+
+        /* =========================================
+           Main
+        ========================================= */
+
+        .main {
+
+            padding:
+                15px;
+        }
+
+
+        /* =========================================
+           Filter
+        ========================================= */
+
+        .top-panel {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            padding:
+                13px;
+
+            margin-bottom:
+                12px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.07);
+        }
+
+
+        .panel-title {
+
+            font-size:
+                14px;
+
+            font-weight:
+                bold;
+
+            color:
+                #174d78;
+
+            padding-bottom:
+                8px;
+
+            margin-bottom:
+                10px;
+
+            border-bottom:
+                1px solid #d7dde2;
+        }
+
+
+        .filter-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        input,
+        select,
+        button {
+
+            font-family:
+                "B Titr",
+                "Titr",
+                sans-serif;
+        }
+
+
+        input,
+        select {
+
+            height:
+                34px;
+
+            border:
+                1px solid #b8c2cb;
+
+            border-radius:
+                4px;
+
+            background:
+                white;
+
+            padding:
+                5px 9px;
+
+            outline:
+                none;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color:
+                #4387b9;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    67,
+                    135,
+                    185,
+                    .12
+                );
+        }
+
+
+        .search {
+
+            width:
+                280px;
+        }
+
+
+        .date-filter {
+
+            width:
+                150px;
+        }
+
+
+        .status-filter {
+
+            width:
+                150px;
+        }
+
+
+        .radio-label {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+        }
+
+
+        /* =========================================
+           Summary
+        ========================================= */
+
+        .summary-row {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                12px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .summary-box {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            padding:
+                11px 16px;
+
+            min-width:
+                190px;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.07);
+        }
+
+
+        .summary-label {
+
+            color:
+                #66737d;
+
+            font-size:
+                12px;
+        }
+
+
+        .summary-number {
+
+            font-size:
+                23px;
+
+            font-weight:
+                bold;
+
+            margin-top:
+                2px;
+        }
+
+
+        .danger {
+
+            color:
+                #c62828;
+        }
+
+
+        .success {
+
+            color:
+                #2e7d32;
+        }
+
+
+        .blue {
+
+            color:
+                #17649b;
+        }
+
+
+        /* =========================================
+           Table
+        ========================================= */
+
+        .table-panel {
+
+            background:
+                white;
+
+            border:
+                1px solid #c5cdd5;
+
+            border-radius:
+                7px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 2px 6px
+                rgba(0,0,0,.08);
+        }
+
+
+        .table-header {
+
+            padding:
+                10px 13px;
+
+            background:
+                linear-gradient(
+                    #f9fbfc,
+                    #e5ebf0
+                );
+
+            border-bottom:
+                1px solid #c7d0d8;
+
+            color:
+                #174d78;
+
+            font-weight:
+                bold;
+        }
+
+
+        table {
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+        }
+
+
+        th {
+
+            background:
+                #e6ebf0;
+
+            color:
+                #263238;
+
+            font-weight:
+                bold;
+
+            padding:
+                10px 7px;
+
+            border:
+                1px solid #cbd2d8;
+
+            white-space:
+                nowrap;
+        }
+
+
+        td {
+
+            padding:
+                9px 7px;
+
+            border:
+                1px solid #d9dee3;
+
+            text-align:
+                center;
+
+            background:
+                white;
+        }
+
+
+        tbody tr {
+
+            cursor:
+                pointer;
+        }
+
+
+        tbody tr:hover td {
+
+            background:
+                #f1f7fb;
+        }
+
+
+        /* =========================================
+           Status
+        ========================================= */
+
+        .status-box {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .status {
+
+            padding:
+                4px 9px;
+
+            border-radius:
+                4px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                bold;
+        }
+
+
+        .not-registered {
+
+            color:
+                #a51d1d;
+
+            background:
+                #fde7e7;
+
+            border:
+                1px solid #efb2b2;
+        }
+
+
+        .registered {
+
+            color:
+                #246b2a;
+
+            background:
+                #e4f3e5;
+
+            border:
+                1px solid #afd4b1;
+        }
+
+
+        .register-button {
+
+            border:
+                1px solid #5d9461;
+
+            background:
+                linear-gradient(
+                    #62a867,
+                    #418348
+                );
+
+            color:
+                white;
+
+            border-radius:
+                4px;
+
+            padding:
+                4px 8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                11px;
+        }
+
+
+        .register-button:hover {
+
+            background:
+                #34713b;
+        }
+
+
+        .status-box small {
+
+            color:
+                #68747d;
+
+            font-size:
+                10px;
+        }
+
+
+        /* =========================================
+           Empty
+        ========================================= */
+
+        #emptyMessage {
+
+            display:
+                none;
+
+            text-align:
+                center;
+
+            padding:
+                40px;
+
+            color:
+                #707b84;
+        }
+
+
+        /* =========================================
+           Footer
+        ========================================= */
+
+        .footer {
+
+            margin-top:
+                10px;
+
+            color:
+                #68747d;
+
+            font-size:
+                11px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+        }
+
+
+        /* =========================================
+           Print
+        ========================================= */
+
+        @media print {
+
+            .menu-bar,
+            .toolbar,
+            .top-panel,
+            .summary-row {
+
+                display:
+                    none !important;
+            }
+
+
+            body {
+
+                background:
+                    white;
+            }
+
+
+            .main {
+
+                padding:
+                    0;
+            }
+
+
+            .table-panel {
+
+                border:
+                    none;
+
+                box-shadow:
+                    none;
+            }
+        }
+
+    
+        /* ===== Pasargad header / replaceable logo ===== */
+        .title-bar { height:64px; padding:0 24px; }
+        .title-icon { width:44px; height:44px; margin-left:14px; border-radius:8px; background:rgba(255,255,255,.12) url("assets/logo.png") center/contain no-repeat; }
+        .title { font-size:23px; font-weight:bold; }
+
+        /* ===== Pasargad modular shell ===== */
+        .pasargad-main-menu { display:flex; align-items:stretch; gap:0; }
+        .pasargad-main-menu .menu-item { border:0; border-left:1px solid #c7d0d8; background:transparent; padding:0 22px; cursor:pointer; color:#263238; font-size:13px; }
+        .pasargad-main-menu .menu-item:hover { background:#e8f0f6; }
+        .pasargad-main-menu .menu-item.active { background:#dbeaf5; color:#155b85; font-weight:bold; box-shadow:inset 0 -2px 0 #347aa8; }
+        .module-placeholder { margin:10px 12px; min-height:560px; border:1px solid #b8c4ce; background:#f4f6f8; padding:28px; }
+        .module-placeholder-title { font-size:18px; font-weight:bold; color:#29485d; border-bottom:1px solid #cbd4db; padding-bottom:12px; margin-bottom:18px; }
+        .module-placeholder-text { color:#687780; font-size:13px; }
+        .status-badge { display:inline-block; min-width:70px; padding:3px 8px; border-radius:3px; font-size:12px; }
+        .status-badge.registered { background:#e2f1e3; color:#27652c; border:1px solid #a8cbaa; }
+        .status-badge.not-registered { background:#f8e5e5; color:#8a2d2d; border:1px solid #d8aaaa; }
+.row-actions{white-space:nowrap;text-align:center;}
+.row-actions button{font-family:inherit;font-size:11px;height:25px;padding:0 9px;border:1px solid #aeb9c2;border-radius:3px;cursor:pointer;margin:0 2px;background:#f4f7f9;color:#24475f;}
+.row-actions .row-edit{background:#e7f1f8;border-color:#9bbbd1;color:#15557d;}
+.row-actions .row-delete{background:#fbeaea;border-color:#d8aaaa;color:#9a2f2f;}
+.row-actions .row-register{background:#e7f2e8;border-color:#a8cbaa;color:#27652c;}
+.row-actions .row-register:disabled{opacity:.55;cursor:default;}
+.row-actions button:hover{filter:brightness(.97);}
+
+        @media (max-width: 900px) { .pasargad-main-menu .menu-item { padding:0 12px; } }
+
+.report-actions{display:flex;gap:6px;padding:6px 8px;background:#eef2f5;border-bottom:1px solid #c8d0d7;}
+.report-actions button{font-family:inherit;font-size:12px;height:30px;padding:0 14px;border:1px solid #aeb9c2;background:linear-gradient(#fff,#e7ebee);border-radius:2px;color:#263238;cursor:pointer;}
+.report-actions button:hover{background:#dfeaf2;}
+.report-print-modal{position:fixed;inset:0;background:rgba(20,35,45,.42);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.report-print-modal[hidden]{display:none;}
+.report-print-dialog{width:min(680px,calc(100vw - 40px));background:#f7fafc;border:1px solid #87969e;border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.25);direction:rtl;}
+.report-print-head{height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;background:#d4e4eb;border-bottom:1px solid #aeb9c2;font-weight:bold;color:#263238;}
+.report-print-close{width:30px;height:30px;border:1px solid #aeb9c2;background:#fff;border-radius:3px;font-size:20px;line-height:1;cursor:pointer;}
+.report-print-body{padding:18px;}
+.report-print-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.report-print-grid>div{display:flex;flex-direction:column;gap:6px;}
+.report-print-grid label{font-size:12px;font-weight:bold;}
+.report-print-grid select{height:38px;padding:5px 9px;border:1px solid #929292;border-radius:3px;background:#fff;font-family:inherit;font-size:12px;}
+.report-print-message{margin-top:14px;min-height:24px;padding:6px 8px;color:#4b5961;font-size:12px;}
+.report-print-actions{display:flex;justify-content:flex-start;gap:8px;padding:12px 18px;border-top:1px solid #d0d7dc;background:#eef2f5;}
+.report-print-actions button{font-family:inherit;font-size:12px;height:34px;padding:0 16px;border:1px solid #aeb9c2;background:#fff;border-radius:3px;cursor:pointer;}
+.report-print-actions button.primary{background:#dbeaf3;}
+@media (max-width:700px){.report-print-grid{grid-template-columns:1fr;}}
+
+.tools-card{margin-top:12px;background:#f7f9fa;border:1px solid #b9c4cc;border-radius:2px;padding:12px;max-width:none;}
+.tools-card-title{font-weight:bold;border-bottom:1px solid #ccd4da;padding-bottom:8px;margin-bottom:10px;}
+.tools-hint{font-size:11px;color:#68757e;margin-top:8px;}
+.fiscal-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.fiscal-actions button{height:32px;padding:0 14px;border:1px solid #9eabb4;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit}.fiscal-actions button.danger{background:linear-gradient(#fff5f5,#ead8d8);border-color:#b88f8f;color:#8a1f1f}
+.tools-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:10px;margin-top:12px;align-items:stretch;direction:rtl;}
+.tools-sidebar{background:#f4f7f9;border:1px solid #b9c4cc;padding:5px;min-height:360px;}
+.tools-sidebar-title{font-weight:bold;color:#234e70;font-size:14px;padding:9px 10px;border-bottom:1px solid #c8d2d9;margin-bottom:6px;}
+.tools-menu-item{width:100%;min-height:46px;margin:2px 0;padding:6px 7px;text-align:right;border:1px solid transparent;border-radius:2px;background:transparent;cursor:pointer;font-family:inherit;color:#173f61;display:flex;align-items:center;gap:10px;direction:rtl;}
+.tools-menu-item:hover{background:#e6eef5;border-color:#b5c9d9;}
+.tools-menu-item.active{background:linear-gradient(#dceeff,#c7e1f4);border-color:#79a9ca;box-shadow:inset 3px 0 #1f6fa8;}
+.tools-menu-icon{font-size:18px;width:26px;text-align:center;flex:none;}
+.tools-menu-title{display:block;font-size:12px;font-weight:bold;white-space:nowrap;}
+.tools-menu-desc{display:block;margin-top:1px;font-size:9px;color:#667985;line-height:1.35;white-space:nowrap;}
+.tools-content{min-width:0;}
+.tools-content-empty{height:100%;min-height:360px;background:#f8fafb;border:1px solid #b9c4cc;display:flex;align-items:center;justify-content:center;color:#7a8790;font-size:12px;}
+.tools-subpage{margin:0;max-width:none;width:100%;background:#f7f9fa;border:1px solid #b9c4cc;padding:12px;min-height:360px;}
+.tools-subpage-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ccd4da;padding-bottom:10px;margin-bottom:12px;}
+.tools-subpage-title{font-weight:bold;color:#234e70;font-size:15px;}
+.tools-back{height:30px;padding:0 14px;border:1px solid #aeb9c2;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit;}
+/* ===== Module overlay: modules open above the welcome screen ===== */
+.module-view, .module-placeholder {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    overflow: auto;
+    background: #e8edf2;
+}
+.module-placeholder { padding: 10px 12px; }
+#chequeFormOverlay {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    background: #d2d2d2;
+}
+#chequeFormOverlay iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.home-screen{min-height:calc(100vh - 100px);display:flex;align-items:center;justify-content:center;padding:48px 20px;position:relative;overflow:hidden;background:#dfe6ec url("assets/background.jpg") center center/cover no-repeat;}
+.home-screen::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(18,57,82,.22),rgba(255,255,255,.30));pointer-events:none;}
+.home-card{width:min(780px,92%);min-height:410px;background:rgba(250,252,253,.91);border:1px solid rgba(255,255,255,.82);box-shadow:0 18px 45px rgba(25,43,57,.22),0 2px 8px rgba(25,43,57,.10);border-radius:14px;text-align:center;padding:42px 55px;position:relative;z-index:1;backdrop-filter:blur(5px);}
+.home-card::before{content:"";position:absolute;top:0;left:12%;right:12%;height:4px;background:linear-gradient(90deg,#0d4169,#3d8fbe,#0d4169);border-radius:0 0 8px 8px;}
+.home-logo{width:88px;height:88px;margin:0 auto 20px;border-radius:22px;background:linear-gradient(145deg,#1b6e9f,#0b3f65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:bold;box-shadow:0 10px 22px rgba(13,65,105,.24),inset 0 1px 0 rgba(255,255,255,.25);transform:rotate(0deg);}
+.home-title{font-size:26px;color:#123f61;font-weight:bold;margin-bottom:9px;letter-spacing:.1px;}
+.home-subtitle{font-size:14px;color:#687983;margin-bottom:30px;}
+.home-separator{height:1px;background:linear-gradient(90deg,transparent,#c4d0d8,transparent);margin:0 auto 28px;width:82%;}
+.home-message{font-size:18px;color:#2d4858;font-weight:bold;margin-bottom:24px;}
+.home-hint{font-size:12px;color:#63727b;background:rgba(231,238,243,.82);border:1px solid #d1dbe2;padding:12px 22px;display:inline-block;border-radius:8px;box-shadow:0 2px 6px rgba(30,50,65,.06);}
+.home-footer{position:absolute;bottom:18px;left:0;right:0;font-size:11px;color:#89959c;}
+/* برای تعویض پس‌زمینه فقط فایل assets/background.jpg را با تصویر دلخواه جایگزین کنید. */
+
+
+/* جلوگیری از اسکرول صفحه ورود */
+html:has(#loginScreen:not(.login-hidden)), body:has(#loginScreen:not(.login-hidden)){overflow:hidden!important;height:100%!important;}
+/* ===== Glass Login ===== */
+#loginScreen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#071321 url("assets/background.jpg") center/cover no-repeat;overflow:hidden;}
+#loginScreen::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(3,14,28,.18),rgba(3,22,40,.10));}
+.login-card{position:relative;z-index:1;width:min(520px,92vw);padding:40px 46px 26px;background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(255,255,255,.10));border:1px solid rgba(255,255,255,.42);border-radius:30px;box-shadow:0 30px 80px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.30);backdrop-filter:blur(22px) saturate(125%);-webkit-backdrop-filter:blur(22px) saturate(125%);text-align:center;}
+.login-logo{width:92px;height:92px;margin:0 auto 18px;border-radius:24px;background:rgba(5,25,50,.78);border:1px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.30),inset 0 0 20px rgba(255,255,255,.08);overflow:hidden;}
+.login-logo img{width:78%;height:78%;object-fit:contain;}
+.login-title{font-size:27px;color:#fff;font-weight:bold;margin-bottom:8px;text-shadow:0 3px 12px rgba(0,0,0,.38);}
+.login-subtitle{font-size:15px;color:rgba(255,255,255,.78);margin-bottom:32px;}
+.login-form{text-align:right}.login-field{margin-bottom:18px}.login-field label{display:block;font-weight:bold;color:rgba(255,255,255,.93);margin:0 10px 7px;font-size:14px;}
+.login-field input{width:100%;height:58px;border:1px solid rgba(255,255,255,.42);border-radius:17px;padding:5px 16px;background:rgba(255,255,255,.13);color:#fff;outline:none;font-family:inherit;font-size:16px;box-shadow:inset 0 1px 8px rgba(0,0,0,.10);transition:.2s;}
+.login-field input:focus{border-color:rgba(255,255,255,.82);background:rgba(255,255,255,.18);box-shadow:0 0 0 4px rgba(66,165,245,.15),0 8px 25px rgba(0,0,0,.14);}
+.login-field input::placeholder{color:rgba(255,255,255,.58)}
+.login-button{width:100%;height:60px;border:1px solid rgba(255,255,255,.45);border-radius:17px;background:linear-gradient(135deg,#28a9f3,#1455bd);color:#fff;font-family:inherit;font-size:18px;font-weight:bold;cursor:pointer;margin-top:6px;box-shadow:0 12px 28px rgba(0,70,170,.35),inset 0 1px 0 rgba(255,255,255,.30);transition:.16s;}
+.login-button:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 16px 32px rgba(0,70,170,.42),inset 0 1px 0 rgba(255,255,255,.35);}
+.login-error{min-height:20px;color:#ffd5d5;font-size:11px;margin-top:8px}.login-hint{font-size:10px;color:rgba(255,255,255,.72);margin-top:12px}
+.login-hidden{display:none!important}.login-recovery-actions{display:flex;gap:22px;justify-content:center;flex-wrap:wrap}.login-forgot{margin-top:12px;border:0;background:transparent;color:rgba(255,255,255,.92);font-family:inherit;font-size:12px;cursor:pointer;text-decoration:none}.login-forgot:hover{text-decoration:underline}
+@media(max-width:600px){.login-card{padding:30px 24px 24px;border-radius:24px}.login-title{font-size:23px}}
+.recovery-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;background:rgba(12,28,40,.48);backdrop-filter:blur(2px)}.recovery-card{width:min(390px,92vw);background:#f9fbfc;border:1px solid #c5d0d8;border-radius:12px;box-shadow:0 20px 55px rgba(0,0,0,.28);padding:22px 24px;text-align:right}.recovery-title{font-size:17px;font-weight:bold;color:#173f5d;margin-bottom:7px}.recovery-text{font-size:11px;color:#61727d;line-height:1.9;margin-bottom:14px}.recovery-card label{display:block;font-size:11px;font-weight:bold;color:#29485d;margin:8px 0 5px}.recovery-card input{width:100%;height:38px;border:1px solid #aebbc5;border-radius:6px;padding:5px 10px;font-family:inherit;outline:none}.recovery-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:14px}.recovery-actions button{height:36px;padding:0 16px;border-radius:6px;border:1px solid #aebbc5;background:linear-gradient(#fff,#e8edf0);font-family:inherit;cursor:pointer}.recovery-actions .primary{background:linear-gradient(#3d8fbe,#17649b);border-color:#275d82;color:#fff}.recovery-message{min-height:20px;margin-top:9px;font-size:11px}.recovery-message.err{color:#a51d1d}.recovery-message.ok{color:#28712e}
+
+.password-settings{margin-top:12px;background:#fff;border:1px solid #c3cdd4;padding:14px;max-width:620px}.password-settings-title{font-weight:bold;color:#29485d;border-bottom:1px solid #d6dde2;padding-bottom:8px;margin-bottom:12px}.password-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.password-grid label{display:block;font-size:11px;font-weight:bold;margin-bottom:4px}.password-grid input{width:100%;height:32px}.password-actions{margin-top:10px;display:flex;gap:7px}.password-actions button{height:32px;padding:0 14px;border:1px solid #9eabb4;background:linear-gradient(#fff,#e6eaed);border-radius:3px;cursor:pointer;font-family:inherit}.password-actions .primary{background:#3f7fa7;color:#fff;border-color:#2f6587}.password-message{font-size:11px;margin-top:8px;min-height:16px}.password-message.ok{color:#28712e}.password-message.err{color:#a51d1d}
+
+/* ===== Pasargad Concept Header - header only ===== */
+.title-bar{
+    position:relative !important;
+    height:88px !important;
+    min-height:88px !important;
+    padding:0 22px !important;
+    display:flex !important;
+    align-items:center !important;
+    direction:ltr !important;
+    color:#fff !important;
+    background:
+        linear-gradient(90deg, rgba(5,43,78,.96) 0%, rgba(9,62,101,.82) 42%, rgba(15,71,108,.48) 72%, rgba(7,43,73,.88) 100%),
+        url("assets/background.jpg") center center/cover no-repeat !important;
+    border-bottom:1px solid #123f62 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.20) !important;
+    overflow:hidden !important;
+}
+.title-bar::after{
+    content:"پاسارگاد\A سیستم مدیریت چک و امور مالی";
+    white-space:pre;
+    position:absolute;
+    right:28px;
+    top:16px;
+    text-align:right;
+    direction:rtl;
+    line-height:1.45;
+    font-family:"B Titr","Titr",Tahoma,sans-serif;
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:0;
+    text-shadow:0 1px 3px rgba(0,0,0,.28);
+    pointer-events:none;
+}
+.title-bar::before{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:2px;
+    background:rgba(255,255,255,.18);
+    pointer-events:none;
+}
+.title-icon{
+    flex:0 0 auto !important;
+    width:58px !important;
+    height:58px !important;
+    margin:0 14px 0 0 !important;
+    border-radius:9px !important;
+    background:rgba(255,255,255,.10) url("assets/logo.png") center/contain no-repeat !important;
+    border:1px solid rgba(255,255,255,.28) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 2px 6px rgba(0,0,0,.18) !important;
+    font-size:0 !important;
+    z-index:2;
+}
+.title{
+    position:relative !important;
+    z-index:2;
+    margin:0 !important;
+    max-width:520px;
+    color:#fff !important;
+    font-family:"B Titr","Titr",Tahoma,sans-serif !important;
+    font-size:19px !important;
+    font-weight:bold !important;
+    text-align:left !important;
+    text-shadow:0 1px 2px rgba(0,0,0,.30);
+}
+.menu-bar{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 8px !important;
+    background:linear-gradient(#f9fbfd,#e7eef4) !important;
+    border-bottom:1px solid #b8c8d5 !important;
+    box-shadow:0 1px 2px rgba(0,0,0,.08) !important;
+}
+.menu-item{
+    height:36px !important;
+    padding:6px 18px !important;
+    margin:2px 1px !important;
+    border:1px solid transparent !important;
+    border-radius:5px !important;
+    color:#173e5d !important;
+    font-weight:bold !important;
+    background:transparent !important;
+}
+.menu-item:hover,.menu-item:focus,.menu-item.active{
+    background:#dbeaf7 !important;
+    border-color:#a9c8df !important;
+    color:#0b4f83 !important;
+    outline:none !important;
+}
+@media(max-width:900px){
+    .title-bar{height:76px !important;min-height:76px !important;padding:0 12px !important;}
+    .title-bar::after{font-size:19px;right:14px;top:14px;}
+    .title-icon{width:48px !important;height:48px !important;margin-right:10px !important;}
+    .title{font-size:16px !important;max-width:42%;}
+}
+
+
+/* ===== Fixed application header: header and main menu stay visible while scrolling ===== */
+:root{
+    --shell-header-height:78px;
+    --shell-menu-height:54px;
+    --shell-top:132px;
+}
+html,body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+}
+body{
+    padding-top:var(--shell-top) !important;
+}
+body > .title-bar{
+    position:fixed !important;
+    top:0 !important;
+    left:0 !important;
+    right:0 !important;
+    z-index:1000 !important;
+}
+body > .menu-bar.pasargad-main-menu{
+    position:fixed !important;
+    top:var(--shell-header-height) !important;
+    left:0 !important;
+    right:0 !important;
+    z-index:999 !important;
+}
+.module-view, .module-placeholder{
+    top:var(--shell-top) !important;
+}
+#chequeFormOverlay{
+    top:var(--shell-top) !important;
+}
+.home-screen{
+    min-height:calc(100vh - var(--shell-top)) !important;
+}
+@media(max-width:900px){
+    :root{
+        --shell-header-height:76px;
+        --shell-menu-height:40px;
+        --shell-top:116px;
+    }
+}
+
+/* =========================================================
+   PASARGAD - UNIFIED GLASS FORMS
+   Applied only to module forms/cards/inputs.
+   Existing layout and functionality remain unchanged.
+   ========================================================= */
+
+/* Shared glass surfaces in:
+   ثبت چک / مدیریت مشتریان / گزارشات / ابزارها / راهنما */
+#cheques .top-panel,
+#cheques .summary-box,
+#cheques .table-panel,
+#contacts .customer-toolbar,
+#contacts .customer-card,
+#contacts .customer-editor,
+#contacts .customer-contact-modal,
+#contacts .customer-profile,
+#contacts .customer-contact-panel,
+#reports .report-card,
+#reports .report-panel,
+#reports .top-panel,
+#tools .tools-card,
+#tools .tools-content,
+#tools .tools-subpage,
+#help.module-placeholder,
+#help .module-placeholder-text,
+#help .module-placeholder-title {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.24),
+            rgba(255,255,255,.11)
+        ) !important;
+
+    border: 1px solid rgba(255,255,255,.42) !important;
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.13),
+        inset 0 1px 0 rgba(255,255,255,.35) !important;
+
+    backdrop-filter: blur(16px) saturate(135%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(135%) !important;
+}
+
+/* فرم‌های مشتری */
+#contacts input:not([type="radio"]):not([type="checkbox"]),
+#contacts select,
+#contacts textarea,
+
+/* فیلترها و ورودی‌های گزارش */
+#cheques input:not([type="radio"]):not([type="checkbox"]),
+#cheques select,
+#cheques textarea,
+
+#reports input:not([type="radio"]):not([type="checkbox"]),
+#reports select,
+#reports textarea,
+
+/* ابزارها و تنظیمات */
+#tools input:not([type="radio"]):not([type="checkbox"]),
+#tools select,
+#tools textarea,
+
+/* راهنما در صورت وجود فرم */
+#help input:not([type="radio"]):not([type="checkbox"]),
+#help select,
+#help textarea {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.58),
+            rgba(255,255,255,.30)
+        ) !important;
+
+    border: 1px solid rgba(255,255,255,.62) !important;
+
+    border-radius: 11px !important;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,.55),
+        0 4px 14px rgba(0,0,0,.08) !important;
+
+    backdrop-filter: blur(9px) !important;
+    -webkit-backdrop-filter: blur(9px) !important;
+
+    transition:
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease !important;
+}
+
+#contacts input:not([type="radio"]):not([type="checkbox"]):focus,
+#contacts select:focus,
+#contacts textarea:focus,
+#cheques input:not([type="radio"]):not([type="checkbox"]):focus,
+#cheques select:focus,
+#cheques textarea:focus,
+#reports input:not([type="radio"]):not([type="checkbox"]):focus,
+#reports select:focus,
+#reports textarea:focus,
+#tools input:not([type="radio"]):not([type="checkbox"]):focus,
+#tools select:focus,
+#tools textarea:focus,
+#help input:not([type="radio"]):not([type="checkbox"]):focus,
+#help select:focus,
+#help textarea:focus {
+
+    outline: none !important;
+
+    background:
+        rgba(255,255,255,.72) !important;
+
+    border-color:
+        rgba(73,157,230,.72) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(73,157,230,.13),
+        0 7px 18px rgba(0,0,0,.10) !important;
+}
+
+/* عنوان‌های فرم */
+#contacts .customer-section-title,
+#contacts .customer-editor-title,
+#contacts .customer-profile-title,
+#tools .tools-card-title,
+#tools .tools-subpage-title,
+#help .module-placeholder-title,
+#cheques .panel-title {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.22),
+            rgba(255,255,255,.08)
+        ) !important;
+
+    border-color: rgba(255,255,255,.35) !important;
+
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* دکمه‌های داخل فرم‌ها: ظاهر مشترک */
+#contacts .customer-primary,
+#contacts button:not(.menu-item),
+#reports button:not(.menu-item),
+#tools button:not(.menu-item),
+#help button:not(.menu-item),
+#cheques .report-actions button {
+
+    border: 1px solid rgba(255,255,255,.40) !important;
+
+    border-radius: 11px !important;
+
+    box-shadow:
+        0 5px 14px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.30) !important;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        filter .18s ease !important;
+}
+
+#contacts .customer-primary:hover,
+#contacts button:not(.menu-item):hover,
+#reports button:not(.menu-item):hover,
+#tools button:not(.menu-item):hover,
+#help button:not(.menu-item):hover,
+#cheques .report-actions button:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.15),
+        inset 0 1px 0 rgba(255,255,255,.38) !important;
+}
+
+/* برچسب‌های فرم */
+#contacts label,
+#reports label,
+#tools label,
+#help label {
+
+    font-weight: 700;
+}
+
+/* مودال‌های مشتری نیز همان شیشه */
+#contacts .customer-editor,
+#contacts .customer-contact-modal {
+
+    border-radius: 18px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.38),
+            rgba(255,255,255,.18)
+        ) !important;
+
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+}
+
+</style>
+<style>
+/* ظاهر گرافیکی تنظیمات سال مالی - فقط UI */
+.fiscal-actions-modern{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.fiscal-btn{min-width:150px;height:46px;padding:0 18px;border:1px solid #b7c1c8;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 2px 5px rgba(0,0,0,.08);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+.fiscal-btn:hover{transform:translateY(-1px);box-shadow:0 4px 9px rgba(0,0,0,.12);filter:brightness(.98)}
+.fiscal-btn:active{transform:translateY(0);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.fiscal-btn-icon{font-family:Arial,sans-serif;font-size:19px;line-height:1}
+.fiscal-btn-add{background:linear-gradient(180deg,#f8fcff,#dcecf6);color:#164f70;border-color:#9bbfd2}
+.fiscal-btn-delete{background:linear-gradient(180deg,#fffafa,#f0dddd);color:#8b2929;border-color:#d2a6a6}
+.fiscal-btn-clear{background:linear-gradient(180deg,#fffaf3,#f1e3cd);color:#80571d;border-color:#d7bd93}
+</style>
+<style>
+.customer-module{padding:18px 20px 30px;max-width:1250px;margin:auto}.customer-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:14px}.customer-subtitle{font-size:11px;color:#6c7b86;margin-top:5px}.customer-primary,.customer-secondary,.customer-danger,.customer-action{font-family:inherit;border-radius:5px;cursor:pointer;font-size:12px}.customer-primary{border:1px solid #2c6f9e;background:linear-gradient(#3f8fc5,#276f9f);color:#fff;padding:9px 16px}.customer-secondary{border:1px solid #bdc8d0;background:#fff;color:#345;padding:8px 14px}.customer-danger{border:1px solid #c7a0a0;background:#fff;color:#9a3838;padding:8px 14px}.customer-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}.customer-toolbar input{width:min(430px,100%);padding:10px 12px;border:1px solid #c7d0d8;border-radius:5px;font-family:inherit;background:#fff}.customer-message{font-size:11px;color:#63727d}.customer-card,.customer-profile-card{background:#fff;border:1px solid #cbd5dc;border-radius:5px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}.customer-table{width:100%;border-collapse:collapse}.customer-table th,.customer-table td{padding:11px 10px;border-bottom:1px solid #e8edf0;text-align:right;font-size:12px}.customer-table th{background:linear-gradient(#f5f8fa,#e9eff3);color:#27455b}.customer-table tr:last-child td{border-bottom:0}.customer-action{border:1px solid #c1ccd4;background:#f7f9fa;padding:5px 10px;color:#24587d}.customer-empty{text-align:center!important;color:#7a8790;padding:25px!important}.customer-modal{position:fixed;inset:0;background:rgba(20,35,45,.32);z-index:3000;display:flex;align-items:center;justify-content:center}
+.customer-modal[hidden]{display:none!important}.customer-modal-box{width:min(520px,92vw);background:#fff;border:1px solid #b8c7d1;border-radius:7px;padding:20px;box-shadow:0 10px 35px rgba(0,0,0,.2)}.customer-modal-title{font-size:16px;font-weight:bold;color:#234861;margin-bottom:16px}.customer-modal-box label{display:block;font-size:11px;color:#415664;margin:10px 0}.customer-modal-box input,.customer-modal-box textarea{width:100%;margin-top:5px;padding:8px 9px;border:1px solid #c8d1d8;border-radius:4px;font-family:inherit;font-size:12px}.customer-modal-box textarea{min-height:55px;resize:vertical}.customer-modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:16px}.customer-profile-head{display:flex;justify-content:flex-start;gap:7px;margin-bottom:10px;direction:rtl}.customer-head-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:84px;height:34px;padding:6px 11px;font-size:11px;border-radius:5px;box-shadow:0 1px 1px rgba(0,0,0,.04)}.customer-head-btn .customer-btn-icon{font-size:14px;line-height:1}.customer-profile-card{padding:12px 14px;margin-bottom:12px}.customer-profile-title{font-size:15px;font-weight:bold;color:#234861;margin-bottom:9px;padding-bottom:8px;border-bottom:1px solid #e2e8ec}.customer-info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px 14px;font-size:11px;line-height:1.8}.customer-info-grid>div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.customer-profile-actions{display:flex;gap:7px;margin-top:10px}.customer-profile-actions button{font-size:11px;padding:6px 11px}.customer-section{margin-bottom:16px}.customer-section-title{padding:12px 14px;border-bottom:1px solid #e8edf0;font-weight:bold;color:#27455b}.customer-radio-row{display:flex;gap:25px;font-size:12px;margin-bottom:10px}.customer-follow-report{margin-bottom:12px}.customer-follow-title{font-size:13px;font-weight:bold;color:#27455b;border-top:1px solid #e8edf0;padding-top:15px;margin-top:14px}.customer-follow-title small{font-weight:normal;color:#7a8790}.customer-follow-status{display:inline-block;padding:4px 8px;border-radius:4px;font-size:11px}.customer-follow-status.pending{background:#fff4d6;color:#8a6115}.customer-follow-status.done{background:#dcefdc;color:#2f6a35}.customer-follow-done{font-family:inherit;font-size:11px;border:1px solid #b8c7d1;background:#f7fafb;color:#24587d;border-radius:4px;padding:4px 8px;cursor:pointer;margin-right:6px}.customer-follow-done:hover{background:#fff}@media(max-width:700px){.customer-head,.customer-profile-head{align-items:flex-start;flex-direction:column}.customer-toolbar{display:block}.customer-toolbar input{width:100%}.customer-message{display:block;margin-top:7px}.customer-card{overflow-x:auto}.customer-table{min-width:700px}.customer-info-grid{grid-template-columns:1fr 1fr}.customer-head-btn{min-width:110px}}
+</style>
+<style id="pasargad-glass-ui-stage">
+/* ===== Glass UI refinement: welcome page + main toolbar ===== */
+.home-screen{
+  background:#081a2d url("assets/background.jpg") center center/cover no-repeat !important;
+}
+.home-screen::before{
+  background:linear-gradient(135deg,rgba(5,18,34,.08),rgba(8,39,64,.04)) !important;
+}
+.home-card{
+  width:min(780px,92%);
+  min-height:410px;
+  padding:42px 55px;
+  background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.07)) !important;
+  border:1px solid rgba(255,255,255,.38) !important;
+  border-radius:28px !important;
+  box-shadow:0 28px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.34) !important;
+  backdrop-filter:blur(18px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%) !important;
+}
+.home-card::before{background:linear-gradient(90deg,transparent,rgba(255,255,255,.62),transparent) !important;height:2px !important;}
+.home-logo{
+  background:rgba(5,31,57,.62) !important;
+  border:1px solid rgba(255,255,255,.34) !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+.home-logo img{
+  width:78%;
+  height:78%;
+  object-fit:contain;
+  display:block;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.35));
+}
+.home-title{color:#fff !important;text-shadow:0 3px 14px rgba(0,0,0,.35) !important;}
+.home-subtitle,.home-message{color:rgba(255,255,255,.86) !important;text-shadow:0 2px 8px rgba(0,0,0,.24);}
+.home-separator{background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent) !important;}
+.home-hint{
+  color:rgba(255,255,255,.92) !important;
+  background:rgba(255,255,255,.10) !important;
+  border:1px solid rgba(255,255,255,.28) !important;
+  border-radius:14px !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.16),0 8px 20px rgba(0,0,0,.10) !important;
+  backdrop-filter:blur(10px) !important;
+}
+.home-footer{color:rgba(255,255,255,.62) !important;}
+
+.title-bar{
+  height:78px !important;
+  min-height:78px !important;
+  padding:0 24px !important;
+  background:
+    linear-gradient(90deg,rgba(4,28,51,.72),rgba(8,57,91,.46),rgba(5,28,50,.70)),
+    url("assets/background.jpg") center/cover no-repeat !important;
+  border-bottom:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:0 8px 26px rgba(0,0,0,.18) !important;
+  backdrop-filter:blur(12px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(125%) !important;
+}
+.title-bar::after{
+  right:25px !important;
+  top:11px !important;
+  font-size:22px !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.35) !important;
+}
+.title-icon{
+  width:52px !important;height:52px !important;margin-right:12px !important;
+  border-radius:14px !important;
+  background:rgba(255,255,255,.11) url("assets/logo.png") center/contain no-repeat !important;
+  border:1px solid rgba(255,255,255,.30) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.25),0 6px 16px rgba(0,0,0,.20) !important;
+}
+.title{font-size:17px !important;text-shadow:0 2px 8px rgba(0,0,0,.28) !important;}
+.menu-bar{
+  height:54px !important;
+  min-height:54px !important;
+  padding:7px 14px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:7px !important;
+  background:rgba(5,25,45,.64) !important;
+  border-bottom:1px solid rgba(255,255,255,.20) !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.14) !important;
+  backdrop-filter:blur(14px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(125%) !important;
+}
+.menu-item{
+  height:40px !important;
+  padding:6px 18px !important;
+  margin:0 !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  border-radius:13px !important;
+  color:rgba(255,255,255,.94) !important;
+  font-weight:bold !important;
+  background:rgba(255,255,255,.08) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.12),0 4px 12px rgba(0,0,0,.10) !important;
+  transition:transform .16s ease,background .16s ease,border-color .16s ease !important;
+}
+.menu-item:hover,.menu-item:focus,.menu-item.active{
+  background:rgba(255,255,255,.17) !important;
+  border-color:rgba(255,255,255,.36) !important;
+  color:#fff !important;
+  transform:translateY(-1px) !important;
+  outline:none !important;
+}
+@media(max-width:900px){
+  .title-bar{height:70px !important;min-height:70px !important;}
+  .title-bar::after{font-size:18px !important;right:12px !important;top:10px !important;}
+  .title-icon{width:44px !important;height:44px !important;}
+  .menu-bar{height:auto !important;min-height:50px !important;overflow-x:auto !important;}
+  .menu-item{white-space:nowrap !important;}
+}
+</style>
+
+<style id="pasargad-glass-menu-final">
+/* =========================================================
+   FINAL GLASS MENU - ONLY THE BAR UNDER THE HEADER
+   هیچ بخش دیگری از ظاهر پروژه تغییر نمی‌کند
+   ========================================================= */
+body > .menu-bar.pasargad-main-menu{
+    position:fixed !important;
+    top:var(--shell-header-height) !important;
+    left:0 !important;
+    right:0 !important;
+    height:54px !important;
+    min-height:54px !important;
+    padding:6px 12px !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    overflow:hidden !important;
+    isolation:isolate !important;
+
+    /* شیشه واقعی: نیمه شفاف + مات */
+    background:rgba(18,38,58,.38) !important;
+    border-top:1px solid rgba(255,255,255,.24) !important;
+    border-bottom:1px solid rgba(255,255,255,.42) !important;
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.24) !important;
+    backdrop-filter:blur(22px) saturate(145%) !important;
+    -webkit-backdrop-filter:blur(22px) saturate(145%) !important;
+}
+
+/* چون صفحه‌های داخلی زمینه روشن دارند، این لایه فقط خود نوار را
+   شیشه‌ای و واضح می‌کند؛ به هیچ قسمت دیگری دست نمی‌زند. */
+body > .menu-bar.pasargad-main-menu::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:0 !important;
+    z-index:-1 !important;
+    pointer-events:none !important;
+    background:
+        linear-gradient(110deg,rgba(255,255,255,.18),rgba(255,255,255,.07) 45%,rgba(8,28,48,.42)),
+        url("assets/background.jpg") center center/cover no-repeat !important;
+    filter:blur(12px) saturate(125%) !important;
+    transform:scale(1.06) !important;
+}
+
+body > .menu-bar.pasargad-main-menu::after{
+    content:"" !important;
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    height:1px !important;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent) !important;
+    pointer-events:none !important;
+    z-index:1 !important;
+}
+
+/* دکمه‌های همین نوار */
+body > .menu-bar.pasargad-main-menu .menu-item{
+    position:relative !important;
+    z-index:2 !important;
+    height:42px !important;
+    margin:0 !important;
+    padding:5px 18px !important;
+    border:1px solid rgba(255,255,255,.30) !important;
+    border-radius:13px !important;
+    background:rgba(255,255,255,.12) !important;
+    color:#fff !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        0 4px 14px rgba(0,0,0,.14) !important;
+    backdrop-filter:blur(12px) !important;
+    -webkit-backdrop-filter:blur(12px) !important;
+    transition:all .18s ease !important;
+}
+
+body > .menu-bar.pasargad-main-menu .menu-item:hover,
+body > .menu-bar.pasargad-main-menu .menu-item:focus{
+    background:rgba(255,255,255,.22) !important;
+    border-color:rgba(255,255,255,.52) !important;
+    color:#fff !important;
+    transform:translateY(-1px) !important;
+    outline:none !important;
+}
+
+body > .menu-bar.pasargad-main-menu .menu-item.active{
+    background:linear-gradient(135deg,rgba(35,135,245,.78),rgba(20,78,170,.58)) !important;
+    border-color:rgba(150,220,255,.82) !important;
+    color:#fff !important;
+    box-shadow:0 5px 18px rgba(20,110,225,.34),inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+</style>
+<style>
+/* =========================================================
+   کنترل ارسال - ثبت مشتری + داشبورد وضعیت
+   فقط ظاهر و امکانات ماژول کنترل ارسال
+   ========================================================= */
+#sendControl .send-control-toolbar{align-items:center!important}
+#sendControl .send-control-toolbar-subtitle{margin-top:4px;font-size:10px;color:#72818b}
+#sendControl .send-control-toolbar-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#sendControl .send-control-create-customer,#sendControl .send-control-create-type,#sendControl .send-control-filter,#sendControl .send-control-refresh,#sendControl .send-account-btn,#sendControl .send-control-print{
+ height:34px!important;padding:0 13px!important;border:1px solid #b9cbd7!important;border-radius:7px!important;
+ background:linear-gradient(135deg,#ffffff,#eef5f8)!important;color:#24556f!important;font-family:inherit!important;font-size:11px!important;font-weight:700;cursor:pointer;
+ box-shadow:0 2px 8px rgba(40,80,100,.08)!important;transition:.2s ease;
+}
+#sendControl .send-control-create-customer:hover,#sendControl .send-control-create-type:hover,#sendControl .send-control-filter:hover,#sendControl .send-control-refresh:hover,#sendControl .send-account-btn:hover,#sendControl .send-control-print:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(30,90,120,.14)!important}
+#sendControl .send-control-registration-card,#sendControl .send-control-dashboard-section{border-radius:10px!important;overflow:visible!important}
+#sendControl .send-control-table-title{background:linear-gradient(135deg,#f8fbfd,#e8f0f4)!important}
+#sendControl .send-customer-picker{position:relative;min-width:150px}
+#sendControl .send-customer-search{min-width:150px!important;cursor:text!important}
+#sendControl .send-customer-dropdown{display:none;position:absolute;top:calc(100% + 4px);right:0;left:0;min-width:220px;max-height:220px;overflow:auto;z-index:5000;padding:5px;border:1px solid #b9cbd6;border-radius:8px;background:rgba(255,255,255,.97);box-shadow:0 12px 28px rgba(20,55,75,.20);backdrop-filter:blur(10px)}
+#sendControl .send-customer-picker.open .send-customer-dropdown{display:block}
+#sendControl .send-customer-option{padding:8px 9px;border-radius:6px;color:#294d61;font-size:11px;text-align:right;cursor:pointer;white-space:nowrap}
+#sendControl .send-customer-option:hover{background:#e8f4fb;color:#155b82}
+#sendControl .send-customer-option small{color:#84949e;margin-right:5px}
+#sendControl .send-customer-empty{padding:10px;color:#89959d;font-size:10px;text-align:center}
+#sendControl .send-control-input,#sendControl .send-customer-search{background:rgba(255,255,255,.94)!important;border:1px solid #c5d3db!important;border-radius:6px!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.03)!important}
+#sendControl .send-control-input:focus,#sendControl .send-customer-search:focus{border-color:#6ca9c9!important;box-shadow:0 0 0 2px rgba(65,145,190,.12)!important;outline:none!important}
+#sendControl .send-status.sent{background:#e3f5e8!important;border-color:#a7d5b3!important;color:#2e7540!important}
+#sendControl .send-dashboard-section{margin-top:14px}
+#sendControl .send-control-dashboard-title{padding:0 2px 9px;color:#244d66;font-size:13px;font-weight:800}
+#sendControl .send-control-dashboard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#sendControl .send-dashboard-card{min-height:78px;padding:12px 14px;border:1px solid rgba(255,255,255,.62);border-radius:12px;display:flex;align-items:center;gap:11px;box-shadow:0 5px 18px rgba(30,60,80,.10),inset 0 1px 0 rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#sendControl .send-dashboard-card small{display:block;font-size:10px;color:#5b6f7b;margin-bottom:4px}
+#sendControl .send-dashboard-card strong{display:block;font-size:22px;color:#24485d}
+#sendControl .send-dashboard-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.55)}
+#sendControl .send-dashboard-total{background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(222,237,246,.62))}
+#sendControl .send-dashboard-sent{background:linear-gradient(135deg,rgba(218,249,229,.84),rgba(185,231,202,.60))}
+#sendControl .send-dashboard-pending{background:linear-gradient(135deg,rgba(255,244,215,.88),rgba(250,224,166,.58))}
+#sendControl .send-dashboard-year{background:linear-gradient(135deg,rgba(218,235,255,.88),rgba(184,211,245,.60))}
+@media(max-width:900px){#sendControl .send-control-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){#sendControl .send-control-dashboard{grid-template-columns:1fr}#sendControl .send-control-toolbar{align-items:flex-start!important;flex-direction:column}.send-control-toolbar-actions{width:100%}}
+</style>
+<style>
+/* کنترل ارسال: داشبورد پویا بر اساس مشتری */
+#sendControl .send-control-dashboard{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))!important;gap:12px!important;align-items:stretch!important}
+#sendControl .send-dashboard-customer-card{min-height:112px;padding:12px 14px;border:1px solid rgba(255,255,255,.62);border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(222,237,246,.60));box-shadow:0 6px 20px rgba(30,60,80,.10),inset 0 1px 0 rgba(255,255,255,.65);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#sendControl .send-dashboard-customer-head{display:flex;align-items:center;gap:10px;min-width:0}
+#sendControl .send-dashboard-customer-head strong{display:block;color:#24485d;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sendControl .send-dashboard-customer-head small{display:block;color:#6c7e88;font-size:9px;margin-bottom:3px}
+#sendControl .send-dashboard-customer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+#sendControl .send-dashboard-customer-stats span{display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:9px;background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.48)}
+#sendControl .send-dashboard-customer-stats b{font-size:17px;color:#24485d}
+#sendControl .send-dashboard-customer-stats small{font-size:9px;color:#647984;margin-top:2px}
+#sendControl .send-dashboard-customer-stats .is-sent b{color:#2e7540}
+#sendControl .send-dashboard-customer-stats .is-pending b{color:#9a6b16}
+#sendControl .send-dashboard-empty{grid-column:1/-1;text-align:center;padding:22px;color:#7b8b94;border:1px dashed rgba(90,120,135,.30);border-radius:12px;background:rgba(255,255,255,.16)}
+</style>
+<style>
+/* کنترل ارسال: داشبورد پویا بر اساس هر مشتری */
+#sendControl .send-control-dashboard{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))!important;gap:12px!important;align-items:stretch!important}
+#sendControl .send-dashboard-customer-card{min-height:112px;padding:12px 14px;border:1px solid rgba(255,255,255,.62);border-radius:14px;background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(222,237,246,.60));box-shadow:0 6px 20px rgba(30,60,80,.10),inset 0 1px 0 rgba(255,255,255,.65);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+#sendControl .send-dashboard-customer-head{display:flex;align-items:center;gap:10px;min-width:0}
+#sendControl .send-dashboard-customer-head strong{display:block;color:#24485d;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sendControl .send-dashboard-customer-head small{display:block;color:#6c7e88;font-size:9px;margin-bottom:3px}
+#sendControl .send-dashboard-customer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+#sendControl .send-dashboard-customer-stats span{display:flex;flex-direction:column;align-items:center;padding:6px 4px;border-radius:9px;background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.48)}
+#sendControl .send-dashboard-customer-stats b{font-size:17px;color:#24485d}
+#sendControl .send-dashboard-customer-stats small{font-size:9px;color:#647984;margin-top:2px}
+#sendControl .send-dashboard-customer-stats .is-sent b{color:#2e7540}
+#sendControl .send-dashboard-customer-stats .is-pending b{color:#9a6b16}
+#sendControl .send-dashboard-empty{grid-column:1/-1;text-align:center;padding:22px;color:#7b8b94;border:1px dashed rgba(90,120,135,.30);border-radius:12px;background:rgba(255,255,255,.16)}
+</style>
+
+<style>
+#sendControl .send-report-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#sendControl .send-report-search{height:30px;width:245px;padding:0 10px;border:1px solid #c4d0d8;border-radius:7px;background:#fff;color:#34566d;font-family:inherit;font-size:10px;outline:none;box-sizing:border-box}
+#sendControl .send-report-search:focus{border-color:#6ca9c9;box-shadow:0 0 0 2px rgba(65,145,190,.10)}
+#sendControl .send-control-print{height:30px;padding:0 11px;border:1px solid #b9cbd7;border-radius:7px;background:linear-gradient(135deg,#fff,#eef5f8);color:#24556f;font-family:inherit;font-size:10px;font-weight:700;cursor:pointer;box-shadow:0 2px 7px rgba(40,80,100,.08)}
+#sendControl .send-control-print:hover{transform:translateY(-1px);box-shadow:0 4px 11px rgba(30,90,120,.14)}
+@media(max-width:700px){#sendControl .send-report-tools{width:100%}#sendControl .send-report-search{width:100%}}
+</style>
+<style>
+#sendControl .send-report-tools{align-items:center}
+#sendControl .send-account-btn{height:30px;padding:0 11px;border:1px solid #b9cbd7;border-radius:7px;background:linear-gradient(135deg,#fff,#eef5f8);color:#24556f;font-family:inherit;font-size:10px;font-weight:700;cursor:pointer}
+#sendControl .send-account-page{margin-top:0}
+#sendControl .send-account-header{display:flex;align-items:center;gap:14px;padding:12px 14px;margin-bottom:10px;border:1px solid rgba(255,255,255,.65);border-radius:12px;background:rgba(255,255,255,.72);box-shadow:0 5px 18px rgba(30,60,80,.08)}
+#sendControl .send-account-back{border:1px solid #b9cbd7;border-radius:7px;background:#fff;padding:7px 12px;color:#24556f;font-family:inherit;cursor:pointer}
+#sendControl .send-account-title{font-size:15px;font-weight:800;color:#244d66}
+#sendControl .send-account-subtitle{font-size:11px;color:#6b7e89;margin-top:3px}
+.send-account-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:10px}
+.send-account-summary>div{padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.7);border:1px solid rgba(210,225,233,.8);text-align:center}
+.send-account-summary span{display:block;font-size:10px;color:#6b7e89}
+.send-account-summary strong{display:block;font-size:20px;color:#244d66;margin-top:2px}
+</style>
+<style>
+.send-account-modal{position:fixed;inset:0;z-index:15000;display:flex;align-items:center;justify-content:center;background:rgba(18,38,52,.28);backdrop-filter:blur(2px);}
+.send-account-modal[hidden]{display:none!important;}
+.send-account-modal-box{width:min(1000px,96vw);max-width:1000px;max-height:82vh;overflow-x:hidden;overflow-y:auto;background:rgba(255,255,255,.97);border:1px solid #c7d5dd;border-radius:12px;box-shadow:0 18px 50px rgba(20,50,70,.24);padding:14px;direction:rtl;box-sizing:border-box;}
+.send-account-table-wrap{width:100%;overflow-x:hidden;min-width:0;}
+.send-account-table-wrap .send-control-table{width:100%;min-width:0;max-width:100%;table-layout:fixed;}
+.send-account-table-wrap .send-control-table th,.send-account-table-wrap .send-control-table td{white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+.send-account-modal-head{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;padding:6px 42px 12px;border-bottom:1px solid #e1e8ec;}
+.send-account-modal-title{position:absolute;right:42px;top:7px;font-size:12px;font-weight:700;color:#244d66;}
+.send-account-modal-customer{width:100%;text-align:center;font-size:22px;font-weight:900;color:#244d66;margin:0;line-height:1.5;}
+.send-account-modal-close{position:absolute;left:0;top:2px;width:30px;height:30px;border:1px solid #c4d2da;border-radius:7px;background:#fff;color:#617681;font-size:20px;line-height:1;cursor:pointer;}
+.send-account-picker{position:relative;margin-bottom:8px;}
+.send-account-customer-dropdown{display:none;position:absolute;right:0;left:0;top:calc(100% + 4px);z-index:16000;max-height:190px;overflow:auto;padding:5px;background:#fff;border:1px solid #b9cbd6;border-radius:9px;box-shadow:0 12px 25px rgba(20,55,75,.18);}
+.send-account-picker.open .send-account-customer-dropdown{display:block;}
+.send-account-customer-option{padding:8px 9px;border-radius:6px;color:#294d61;font-size:11px;cursor:pointer;}
+.send-account-customer-option:hover{background:#e8f4fb;}
+.send-account-customer-option small{color:#84949e;margin-right:5px;}
+.send-account-customer-info{padding:8px 10px;border:1px solid #e0e8ed;border-radius:8px;background:#f7fafb;color:#5e737f;font-size:10px;min-height:16px;margin-bottom:9px;}
+.send-account-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.send-account-summary>div{padding:8px 10px;border:1px solid #dce6eb;border-radius:8px;background:#f8fbfc;text-align:center;}
+.send-account-summary span{display:block;font-size:9px;color:#6b7e89;}
+.send-account-summary strong{display:block;font-size:18px;color:#244d66;margin-top:2px;}
+.send-account-report-title{font-size:11px;font-weight:800;color:#34586c;margin-bottom:6px;}
+.send-account-table-wrap{overflow:auto;max-height:310px;border:1px solid #e0e7eb;border-radius:7px;}
+#sendControl #sendControlRows tr[data-customer-id]{cursor:pointer;}
+#sendControl #sendControlRows tr[data-customer-id]{cursor:pointer;}#sendControlRows tr[data-customer-id]:hover{background:#eef7fb;}
+@media(max-width:650px){.send-account-modal-box{width:94vw;padding:10px;}.send-account-summary{grid-template-columns:1fr;} }
+</style>
+<style>
+/* پنل مدیریت - نمای یکپارچه و مدیریتی */
+.management-module{background:#eef3f0!important;border-color:#c8d6cd!important;padding:18px!important;}
+.management-page{max-width:1180px;margin:0 auto;}
+.management-head{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(135deg,#f8fcf9,#e3eee7);border:1px solid #c6d8cc;border-radius:16px;padding:18px 22px;box-shadow:0 5px 16px rgba(39,91,62,.08);}
+.management-title{font-size:24px;font-weight:800;color:#234f37;}
+.management-subtitle{font-size:13px;color:#60766a;margin-top:5px;}
+.management-year{background:#dcebe2;color:#356049;border:1px solid #bfd4c5;border-radius:10px;padding:8px 13px;font-size:12px;white-space:nowrap;}
+.management-year strong{font-size:15px;}
+.management-section-title{font-size:16px;font-weight:800;color:#315b44;margin:20px 3px 10px;}
+.management-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.management-card{border:1px solid #c5d6cb;background:#f8fbf9;border-radius:14px;padding:15px;text-align:right;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;min-height:112px;cursor:pointer;box-shadow:0 4px 12px rgba(35,79,55,.06);color:#315844;transition:.18s;}
+.management-card:hover{transform:translateY(-2px);border-color:#8fb79d;box-shadow:0 7px 17px rgba(35,79,55,.11);}
+.management-card-icon{grid-row:span 3;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#3aa56a,#2f8f5b);color:#fff;font-size:19px;font-weight:800;}
+.management-card-label{font-size:13px;font-weight:700;}
+.management-card strong{font-size:25px;color:#23633f;line-height:1.05;}
+.management-card small{font-size:10px;color:#74857b;}
+.management-card-static{cursor:default;}
+.management-card-static:hover{transform:none;}
+.management-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.management-panel{background:#f9fcfa;border:1px solid #c8d8ce;border-radius:14px;padding:14px;box-shadow:0 3px 11px rgba(35,79,55,.05);}
+.management-panel-wide{min-height:180px;}
+.management-panel-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d9e4dd;padding-bottom:10px;margin-bottom:9px;font-size:14px;font-weight:800;color:#315a44;}
+.management-panel-head button{border:1px solid #2c8152;background:linear-gradient(135deg,#3aa56a,#2f8f5b);color:#fff;border-radius:8px;padding:6px 10px;font-family:inherit;font-size:10px;cursor:pointer;box-shadow:0 2px 6px rgba(39,116,72,.15);}
+.management-stat-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.management-stat-list div{display:flex;align-items:center;justify-content:space-between;background:#e8efeb;border:1px solid #d0ddd5;border-radius:9px;padding:9px 10px;color:#53675b;font-size:11px;}
+.management-stat-list strong{font-size:15px;color:#286342;}
+.management-list{display:flex;flex-direction:column;gap:7px;}
+.management-list-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#e8efeb;border:1px solid #d0ddd5;border-radius:9px;padding:8px 10px;font-size:11px;color:#425b4c;}
+.management-list-row strong{color:#286342;font-size:12px;}
+.management-list-row small{color:#74857b;font-size:10px;}
+.management-empty{color:#78877e;text-align:center;padding:20px;font-size:11px;}
+@media(max-width:900px){.management-cards{grid-template-columns:1fr 1fr}.management-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.management-cards{grid-template-columns:1fr}.management-head{align-items:flex-start;flex-direction:column}}
+</style>
+<style>
+.base-info-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}.base-info-toolbar input{min-width:280px;flex:1}.base-info-count{font-size:13px;font-weight:700;color:#355047;margin-bottom:10px}.base-info-table-wrap{overflow:auto;border:1px solid #c9d8d1;border-radius:12px}.base-info-table-wrap .customer-table{margin:0}.base-info-table-wrap th{background:#dcefe4}.base-info-table-wrap td,.base-info-table-wrap th{padding:10px}.base-info-action{border:0;border-radius:8px;padding:7px 11px;cursor:pointer;font-family:inherit;background:#e3f3e9;color:#166b3a;border:1px solid #a8d2b7;margin:0 3px}.base-info-action.danger{background:#fde9e9;color:#9b2c2c;border-color:#e0b1b1}.base-info-action:hover{filter:brightness(.97);transform:translateY(-1px)}
+</style>
+<style>
+.daily-tasks-module{background:#eef3f0!important;border-color:#c8d6cd!important;}
+.daily-tasks-module .module-placeholder-title{color:#234f37;font-size:24px;font-weight:800;}
+.daily-tasks-module .module-placeholder-text{color:#60766a;font-size:14px;}
+</style>
+
+<style>
+/* امور روزمره - فرم ورود اطلاعات و گزارش */
+.daily-tasks-module{padding:22px!important;background:linear-gradient(180deg,#f4f8f5 0%,#eaf2ed 100%)!important;border:1px solid #c8d9ce!important;border-radius:14px;box-sizing:border-box;}
+.daily-affairs-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:4px 2px 16px;border-bottom:1px solid #d2e0d7;margin-bottom:16px;}
+.daily-affairs-head .module-placeholder-title{margin:0;font-size:19px!important;color:#214e35!important;}
+.daily-affairs-subtitle{display:none;}
+.daily-affairs-counter{background:#e0eee5;border:1px solid #c1d8c9;border-radius:12px;padding:10px 16px;color:#416652;font-size:12px;white-space:nowrap;}
+.daily-affairs-counter strong{font-size:18px;color:#23633f;margin-right:4px;}
+.daily-affairs-summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.daily-affairs-stat{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #c9d9cf;border-radius:10px;padding:9px 12px;color:#526c5c;font-size:11px;font-weight:800;white-space:nowrap;}
+.daily-affairs-stat strong{font-size:16px;}
+.daily-affairs-stat.done strong{color:#2d8d55;}
+.daily-affairs-stat.pending strong{color:#b17a25;}
+.daily-affairs-form{display:grid;grid-template-columns:145px 125px minmax(240px,1.8fr) 155px auto;align-items:end;gap:12px;background:#fff;border:1px solid #cfddd4;border-radius:15px;padding:17px;box-shadow:0 5px 18px rgba(39,91,62,.07);direction:rtl;}
+.daily-field{min-width:0;display:flex;flex-direction:column;gap:7px;}
+.daily-field label{font-size:11px;font-weight:800;color:#42624f;padding-right:3px;}
+.daily-field input{width:100%;height:39px;box-sizing:border-box;border:1px solid #cbdad0;border-radius:9px;background:#f8fbf9;color:#294c39;padding:0 11px;font-family:inherit;font-size:12px;outline:none;transition:border-color .15s,box-shadow .15s;}
+.daily-field input:focus{border-color:#58a879;box-shadow:0 0 0 3px rgba(88,168,121,.13);background:#fff;}
+.daily-field input[readonly]{background:#edf5ef;color:#52725f;font-weight:700;cursor:default;}
+.daily-description-field{min-width:0;}
+.daily-description-field input{font-weight:500;}.daily-date-entry{display:flex;align-items:center;gap:6px;width:100%;}.daily-date-entry input{flex:1;min-width:0;text-align:center;direction:ltr;letter-spacing:.2px;}.daily-today-button{height:39px;padding:0 10px;border:1px solid #b9d5c2;border-radius:9px;background:#edf7f0;color:#2f7549;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;}.daily-today-button:hover{background:#dcefe2;}.daily-field-hint{display:block;color:#84958a;font-size:10px;line-height:1.5;margin-top:2px;}
+.daily-form-actions{display:flex;align-items:center;justify-content:flex-start;gap:7px;flex-wrap:wrap;min-height:39px;}
+.daily-form-actions button,.daily-actions button,.daily-actions select{font-family:inherit;font-size:11px;border-radius:8px;cursor:pointer;transition:filter .15s,transform .15s;}
+.daily-form-actions button{height:39px;padding:0 13px;border:1px solid #2f8a55;background:linear-gradient(135deg,#43a96e,#2d8d55);color:#fff;font-weight:800;white-space:nowrap;box-shadow:0 3px 8px rgba(45,141,85,.15);}
+.daily-form-actions button.secondary{background:#eef4f0;color:#42634f;border-color:#c7d9cd;box-shadow:none;}
+.daily-form-actions button:hover,.daily-actions button:hover{filter:brightness(.97);transform:translateY(-1px);}
+.daily-affairs-table-wrap{margin-top:17px;border:1px solid #c9d9cf;border-radius:14px;overflow:auto;background:#fff;box-shadow:0 4px 15px rgba(39,91,62,.05);max-height:calc(100vh - 390px);min-height:120px;overscroll-behavior:contain;}
+.daily-affairs-table{width:100%;min-width:850px;border-collapse:separate;border-spacing:0;table-layout:fixed;direction:rtl;font-size:11px;color:#385545;}
+.daily-affairs-table thead th{position:sticky;top:0;z-index:3;background:#dcebe2;color:#315a43;font-weight:800;padding:12px 9px;border-bottom:1px solid #c6d9cc;text-align:center;white-space:nowrap;}
+.daily-affairs-table thead th:first-child{border-top-right-radius:12px;}
+.daily-affairs-table thead th:last-child{border-top-left-radius:12px;}
+.daily-affairs-table tbody td{padding:11px 9px;border-bottom:1px solid #e4ece7;text-align:center;vertical-align:middle;background:#fff;overflow-wrap:anywhere;}
+.daily-affairs-table tbody tr:nth-child(even) td{background:#fbfdfb;}
+.daily-affairs-table tbody tr:hover td{background:#f0f8f3;}
+.daily-affairs-table tbody tr:last-child td{border-bottom:0;}
+.daily-affairs-table .daily-description-cell{text-align:right;line-height:1.8;font-weight:600;color:#2e5140;}
+.daily-status-cell{white-space:nowrap;padding-left:5px!important;padding-right:5px!important;}.daily-actions{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:nowrap;white-space:nowrap;direction:rtl;}
+.daily-status-pill.pending{display:inline-block;padding:5px 8px;border-radius:8px;background:#fff4df;border:1px solid #efd39d;color:#9a6a1e;font-weight:800;white-space:nowrap;}
+.daily-actions select{height:31px;padding:0 7px;border:1px solid #bdd4c4;background:#edf7f0;color:#2f6845;font-weight:700;min-width:92px;}
+.daily-actions button{height:31px;padding:0 7px;min-width:0;border:1px solid #b9d5c2;background:#eef7f0;color:#2f7549;font-weight:700;}
+.daily-actions button[data-delete]{background:#fff1f1;border-color:#edc5c5;color:#a33d3d;}
+.daily-empty{padding:26px!important;color:#87968d!important;font-size:12px!important;}
+.daily-affairs-summary{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;}.daily-affairs-stat{min-width:108px;justify-content:center;box-sizing:border-box;height:42px;padding:8px 12px;}.daily-affairs-stat.total{background:#e0eee5;border-color:#c1d8c9;color:#416652;}.daily-affairs-stat.total strong{color:#23633f;}.daily-filter-label{font-size:11px;font-weight:800;color:#42624f;white-space:nowrap;margin-right:4px;}.daily-status-filter{height:42px;border:1px solid #c9d9cf;border-radius:10px;background:#fff;color:#42634f;font-family:inherit;font-size:11px;font-weight:800;padding:0 10px;min-width:125px;outline:none;}.daily-status-filter:focus{border-color:#58a879;box-shadow:0 0 0 3px rgba(88,168,121,.13);}.daily-status-pill.done{display:inline-block;padding:5px 8px;border-radius:8px;background:#e7f6eb;border:1px solid #b9dfc4;color:#2d8d55;font-weight:800;white-space:nowrap;}
+@media(max-width:1100px){.daily-affairs-form{grid-template-columns:1fr 1fr 2fr 1fr;}.daily-form-actions{grid-column:1/-1;justify-content:flex-start;}}
+@media(max-width:650px){.daily-tasks-module{padding:12px!important;}.daily-affairs-head{align-items:flex-start;flex-direction:column;}.daily-affairs-form{grid-template-columns:1fr 1fr;gap:10px;padding:13px;}.daily-description-field{grid-column:1/-1;}.daily-form-actions{grid-column:1/-1;}.daily-form-actions button{flex:1;}.daily-affairs-table{min-width:780px;}}
+</style>
+<style>
+/* Tools: keep the selected settings inside the empty area opposite the menu */
+.tools-layout{
+  position:relative !important;
+  display:block !important;
+  min-height:390px !important;
+  direction:rtl !important;
+}
+.tools-sidebar{
+  position:absolute !important;
+  top:0 !important;
+  right:0 !important;
+  width:190px !important;
+  min-height:390px !important;
+  margin:0 !important;
+}
+.tools-content{
+  display:block !important;
+  margin-right:200px !important;
+  min-height:390px !important;
+  width:auto !important;
+}
+.tools-content-empty{
+  width:100% !important;
+  min-height:390px !important;
+  height:390px !important;
+}
+.tools-subpage{
+  width:100% !important;
+  min-height:390px !important;
+  margin:0 !important;
+}
+.tools-subpage[hidden], .tools-content-empty[hidden]{
+  display:none !important;
+}
+
+#chequeConfirmModal{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.28);}
+#chequeConfirmModal[hidden]{display:none;}
+.cheque-confirm-box{width:min(390px,90vw);background:#fff;border:1px solid #aebbc5;border-radius:7px;box-shadow:0 12px 35px rgba(0,0,0,.22);padding:18px;text-align:right;}
+#chequeConfirmTitle{font-weight:bold;color:#234e70;font-size:15px;margin-bottom:10px;}
+#chequeConfirmMessage{color:#4b5b65;font-size:12px;line-height:1.8;white-space:pre-line;}
+.cheque-confirm-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:16px;}
+.cheque-confirm-actions button{min-width:80px;height:32px;border:1px solid #9eabb4;border-radius:4px;background:linear-gradient(#fff,#e6eaed);font-family:inherit;cursor:pointer;}
+.cheque-confirm-actions .primary{background:#3f7fa7;color:#fff;border-color:#2f6587;}
+
+
+/* =========================================================
+   PASARGAD - SEND CONTROL MODULE
+   فقط ظاهر ماژول «کنترل ارسال»
+   ========================================================= */
+
+#sendControl .send-control-page {
+    padding: 18px;
+    direction: rtl;
+}
+
+#sendControl .send-control-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 130px;
+    padding: 24px 28px;
+
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.42);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.24),
+            rgba(255,255,255,.10)
+        );
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.34);
+
+    backdrop-filter: blur(16px) saturate(135%);
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+}
+
+#sendControl .send-control-icon {
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.45);
+
+    background: rgba(30,130,225,.30);
+    color: #fff;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.30),
+        0 6px 18px rgba(0,0,0,.14);
+}
+
+#sendControl .send-control-title {
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+#sendControl .send-control-text {
+    color: rgba(255,255,255,.84);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* ===== کنترل ارسال: جدول پایه مطابق نمونه اکسل ===== */
+#sendControl .send-control-page{padding:14px 16px 28px;direction:rtl}
+#sendControl .send-control-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+#sendControl .send-control-toolbar-title{font-size:15px;font-weight:800;color:#24465e}
+#sendControl .send-control-toolbar-actions{display:flex;gap:7px}
+#sendControl .send-control-filter,#sendControl .send-control-refresh{height:32px;padding:0 12px;border:1px solid #c4d0d8;border-radius:5px;background:#fff;color:#34566d;font-family:inherit;font-size:11px;cursor:pointer}
+#sendControl .send-control-table-card{background:#fff;border:1px solid #cbd5dc;border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+#sendControl .send-control-table-title{padding:11px 14px;background:linear-gradient(#f6f9fb,#eaf0f4);border-bottom:1px solid #d5dde2;color:#27485e;font-size:13px;font-weight:800}
+#sendControl .send-control-table-wrap{overflow:auto}
+#sendControl .send-control-table{width:100%;min-width:900px;border-collapse:collapse}
+#sendControl .send-control-table th{padding:9px 8px;background:#e5ebef;color:#263f50;border-bottom:1px solid #cbd5dc;font-size:11px;font-weight:800;white-space:nowrap;text-align:center}
+#sendControl .send-control-table td{height:34px;padding:6px 8px;border-bottom:1px solid #e7ecef;color:#465c69;font-size:11px;text-align:center;white-space:nowrap}
+#sendControl .send-control-table tr:last-child td{border-bottom:0}
+#sendControl .send-control-table tbody tr:hover{background:#f7fafc}
+#sendControl .send-status{display:inline-block;padding:4px 7px;border-radius:3px;border:1px solid #e0bcbc;background:#fff1f1;color:#a64b4b;font-size:10px}
+#sendControl .send-status-btn{display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:28px;border:1px solid #8ea9ba;background:linear-gradient(180deg,#ffffff 0%,#e8f3f8 100%);color:#245a7b;border-radius:6px;padding:0 10px;font-family:inherit;font-size:10px;font-weight:800;cursor:pointer;box-shadow:0 2px 5px rgba(39,79,99,.12);transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
+#sendControl .send-status-btn:hover{background:linear-gradient(180deg,#f8fcfe 0%,#dceef7 100%);border-color:#6f9eb7;box-shadow:0 3px 7px rgba(39,79,99,.18);transform:translateY(-1px)}
+#sendControl .send-status-btn:active{transform:translateY(0);box-shadow:0 1px 3px rgba(39,79,99,.14)}
+#sendControl .send-control-filter:hover,#sendControl .send-control-refresh:hover{background:#e2f0f8;border-color:#78a8c4}
+
+/* =========================================================
+   کنترل ارسال - فرم‌های قابل ویرایش
+   ========================================================= */
+#sendControl .send-control-table th,
+#sendControl .send-control-table td{vertical-align:middle}
+#sendControl .send-control-table td{padding:5px 6px}
+#sendControl .send-control-input,
+#sendControl .send-control-select{
+    width:100%;min-width:105px;height:30px;padding:3px 7px;
+    border:1px solid #c7d3db;border-radius:4px;background:#fff;
+    color:#334f62;font-family:inherit;font-size:10px;text-align:center;
+    outline:none;box-sizing:border-box;
+}
+#sendControl .send-control-select{min-width:150px;cursor:pointer}
+#sendControl .send-control-input:focus,
+#sendControl .send-control-select:focus{border-color:#6da5c3;box-shadow:0 0 0 2px rgba(70,145,190,.12)}
+#sendControl .send-status.sent{border-color:#b8d9c1;background:#effaf1;color:#2c7a43}
+#sendControl .send-status.not-sent{border-color:#e0bcbc;background:#fff1f1;color:#a64b4b}
+#sendControl .send-control-table .send-row-number{font-weight:700;color:#34566d}
+#sendControl .send-control-table .send-status-btn{white-space:nowrap}
+#sendControl .send-status-actions{display:flex;align-items:center;justify-content:flex-start;gap:5px;direction:ltr}
+#sendControl .send-status-undo-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:28px;border:1px solid #c9b3d8;background:linear-gradient(180deg,#fff 0%,#f4edf8 100%);color:#76508c;border-radius:6px;padding:0;font-family:inherit;font-size:18px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 5px rgba(90,55,110,.12);transition:transform .12s ease,box-shadow .12s ease,background .12s ease}
+#sendControl .send-status-undo-btn:hover:not(:disabled){background:linear-gradient(180deg,#fff 0%,#eadff0 100%);border-color:#ad8abd;box-shadow:0 3px 7px rgba(90,55,110,.18);transform:translateY(-1px)}
+#sendControl .send-status-undo-btn:active:not(:disabled){transform:translateY(0);box-shadow:0 1px 3px rgba(90,55,110,.14)}
+#sendControl .send-status-undo-btn:disabled{opacity:.38;cursor:default;box-shadow:none}
+#sendControl .send-control-table th:last-child,#sendControl .send-control-table td:last-child{width:92px;min-width:92px;max-width:92px;text-align:left;padding-left:4px;padding-right:4px}
+#sendControl .send-date-time{display:inline-flex;align-items:center;justify-content:center;gap:8px;direction:ltr;white-space:nowrap}
+#sendControl .send-date-time-date{order:1}
+#sendControl .send-date-time-clock{order:2}
+</style>
+<style>
+/* Send Control Step 3: dashboard first, single customer field, registration form, report list */
+#sendControl .send-control-page{max-width:1250px;margin:0 auto;padding:14px 18px 30px;}
+#sendControl .send-control-dashboard-top{margin-top:10px;margin-bottom:14px;}
+#sendControl .send-control-registration-card,#sendControl .send-control-report-card{border-radius:14px;overflow:visible;}
+#sendControl .send-registration-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;direction:rtl;}
+#sendControl .send-customer-edit-tools{display:flex;align-items:center;gap:6px;direction:ltr;}
+#sendControl .send-customer-edit-toggle{height:30px;padding:0 10px;border:1px solid #b8cbd6;border-radius:7px;background:linear-gradient(135deg,#fff,#edf5f8);color:#28566e;font-family:inherit;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap;}
+#sendControl .send-customer-edit-panel{display:flex;align-items:center;gap:5px;direction:ltr;}
+#sendControl .send-customer-edit-select,#sendControl .send-customer-edit-input{height:30px;border:1px solid #c3d2db;border-radius:7px;background:#fff;color:#29495c;font-family:inherit;font-size:10px;outline:none;}
+#sendControl .send-customer-edit-select{width:150px;padding:0 7px;}
+#sendControl .send-customer-edit-input{width:145px;padding:0 8px;direction:rtl;}
+#sendControl .send-customer-edit-save,#sendControl .send-customer-edit-delete{height:30px;padding:0 8px;border-radius:7px;font-family:inherit;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap;}
+#sendControl .send-customer-edit-save{border:1px solid #9fc5d6;background:#eaf5fa;color:#24556f;}
+#sendControl .send-customer-edit-delete{border:1px solid #dfb0b0;background:#fff3f3;color:#9a3d3d;}
+#sendControl .send-customer-edit-toggle:hover,#sendControl .send-customer-edit-save:hover,#sendControl .send-customer-edit-delete:hover{transform:translateY(-1px);}
+@media(max-width:900px){#sendControl .send-registration-title-row{align-items:flex-start;flex-direction:column;}#sendControl .send-customer-edit-tools{width:100%;flex-wrap:wrap;}#sendControl .send-customer-edit-panel{flex-wrap:wrap;}}
+#sendControl .send-control-entry-form{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.15fr 1fr auto;gap:10px;padding:14px;align-items:end;background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(235,244,249,.62));border:1px solid #c7d7e0;border-radius:12px;}
+#sendControl .send-entry-field{min-width:0;}
+#sendControl .send-entry-field label{display:block;margin-bottom:5px;color:#36586b;font-size:11px;font-weight:800;}
+#sendControl .send-entry-action{display:flex;align-items:end;}
+#sendControl .send-control-input{width:100%;height:40px;background:rgba(255,255,255,.92)!important;border:1px solid #c3d2db!important;border-radius:9px!important;color:#29495c!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.04)!important;}
+#sendControl .send-control-input:focus{outline:none!important;border-color:#62a8cf!important;box-shadow:0 0 0 3px rgba(55,145,200,.12)!important;}
+#sendControl .send-control-input[readonly]{background:rgba(245,249,251,.95)!important;color:#5e7481!important;}
+#sendControl .send-customer-picker{position:relative;}
+#sendControl .send-customer-picker.open .send-customer-dropdown{display:block;}
+#sendControl .send-customer-dropdown{display:none;position:absolute;top:calc(100% + 5px);right:0;left:0;max-height:230px;overflow:auto;z-index:9000;padding:5px;background:#fff;border:1px solid #b8ccd8;border-radius:10px;box-shadow:0 12px 28px rgba(30,60,80,.18);}
+#sendControl .send-customer-option{padding:9px 10px;border-radius:7px;color:#284e63;font-size:11px;cursor:pointer;}
+#sendControl .send-customer-option:hover{background:#e9f5fb;}
+#sendControl .send-customer-option small{color:#82939d;}
+#sendControl .send-customer-empty{padding:10px;text-align:center;color:#8797a0;font-size:10px;}
+#sendControl .send-control-add{height:40px;padding:0 17px;border:1px solid #65b5a0;border-radius:9px;background:linear-gradient(135deg,#39b98a,#20896f);color:#fff;font-family:inherit;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:0 5px 14px rgba(25,125,100,.18);}
+#sendControl .send-control-add:hover{transform:translateY(-1px);box-shadow:0 7px 17px rgba(25,125,100,.23);}
+#sendControl .send-control-report-card{margin-top:14px;}
+#sendControl .send-control-empty{text-align:center!important;padding:28px!important;color:#8998a1!important;font-size:11px;}
+#sendControl .send-status-btn:disabled{opacity:.72;cursor:default;}
+.daily-affairs-summary{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;}.daily-affairs-stat{min-width:108px;justify-content:center;box-sizing:border-box;height:42px;padding:8px 12px;}.daily-affairs-stat.total{background:#e0eee5;border-color:#c1d8c9;color:#416652;}.daily-affairs-stat.total strong{color:#23633f;}.daily-filter-label{font-size:11px;font-weight:800;color:#42624f;white-space:nowrap;margin-right:4px;}.daily-status-filter{height:42px;border:1px solid #c9d9cf;border-radius:10px;background:#fff;color:#42634f;font-family:inherit;font-size:11px;font-weight:800;padding:0 10px;min-width:125px;outline:none;}.daily-status-filter:focus{border-color:#58a879;box-shadow:0 0 0 3px rgba(88,168,121,.13);}.daily-status-pill.done{display:inline-block;padding:5px 8px;border-radius:8px;background:#e7f6eb;border:1px solid #b9dfc4;color:#2d8d55;font-weight:800;white-space:nowrap;}
+@media(max-width:1100px){#sendControl .send-control-entry-form{grid-template-columns:repeat(3,minmax(0,1fr));}#sendControl .send-entry-action{grid-column:auto;}}
+@media(max-width:700px){#sendControl .send-control-entry-form{grid-template-columns:1fr 1fr;}#sendControl .send-entry-customer{grid-column:1/-1;}#sendControl .send-entry-action{grid-column:1/-1;}.send-control-dashboard{grid-template-columns:1fr!important;}}
+</style>
+<style>
+#sendControl .send-report-customer-row td{padding:0!important;border-top:1px solid #cbd9e0!important;background:rgba(235,244,248,.72)!important}
+#sendControl .send-report-customer-head{display:flex;align-items:center;gap:18px;padding:10px 14px;font-size:11px;color:#496574}
+#sendControl .send-report-customer-head strong{font-size:13px;color:#244d66;margin-left:auto}
+#sendControl .send-report-customer-head .is-sent{color:#2e7540;font-weight:700}
+#sendControl .send-report-customer-head .is-pending{color:#9a6b18;font-weight:700}
+</style>
+<style>
+#sendControl .send-control-entry-message{grid-column:1/-1;min-height:18px;margin-top:0;padding:5px 9px;border-radius:7px;font-size:10px;text-align:center;color:#7d4a4a;background:rgba(255,241,241,.75);border:1px solid rgba(210,150,150,.45)}
+#sendControl .send-control-entry-message:empty{display:none}
+#sendControl .send-control-entry-message.ok{color:#2f7042;background:rgba(232,249,237,.82);border-color:rgba(125,190,143,.5)}
+#sendControl .send-control-entry-message.error{color:#8a4a4a}
+</style>
+<style>
+/* داشبورد جمع‌وجور کنترل ارسال — بالای فرم ثبت اطلاعات */
+#sendControl .send-control-mini-dashboard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 10px}
+#sendControl .send-mini-card{height:54px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border:1px solid #d5e0e6;border-radius:8px;background:rgba(255,255,255,.78);box-shadow:0 2px 7px rgba(30,60,80,.07)}
+#sendControl .send-mini-card span{font-size:10px;color:#61737e}
+#sendControl .send-mini-card strong{font-size:20px;color:#24485d}
+#sendControl .send-mini-card.sent{background:rgba(232,248,237,.86)}
+#sendControl .send-mini-card.sent strong{color:#2e7540}
+#sendControl .send-mini-card.pending{background:rgba(255,248,229,.88)}
+#sendControl .send-mini-card.pending strong{color:#9a6b16}
+#sendControl .send-mini-card.customers{background:rgba(232,242,252,.86)}
+@media(max-width:700px){#sendControl .send-control-mini-dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<style>
+#sendControl .send-report-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#sendControl .send-status-filter{height:30px;min-width:125px;padding:0 9px;border:1px solid #c4d0d8;border-radius:7px;background:#fff;color:#34566d;font-family:inherit;font-size:10px;cursor:pointer;outline:none}
+#sendControl .send-status-filter:focus{border-color:#6ca9c9;box-shadow:0 0 0 2px rgba(65,145,190,.10)}
+#sendTypeEditor{z-index:12000}
+#sendTypeEditor .customer-modal-box{max-width:390px}
+#sendTypeEditor input{width:100%;box-sizing:border-box;height:40px;padding:7px 10px;border:1px solid #c7d3db;border-radius:7px;font-family:inherit;font-size:12px;outline:none}
+#sendTypeEditor input:focus{border-color:#62a8cf;box-shadow:0 0 0 3px rgba(55,145,200,.12)}
+</style>
+<style>
+#sendTypeList .send-type-manager-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 9px;border:1px solid #dbe4e9;border-radius:8px;margin-bottom:6px;background:#f8fbfc;color:#34566d;font-size:11px}
+#sendTypeList .send-type-manager-row div{display:flex;gap:5px}
+#sendTypeList button{border:1px solid #c6d5dd;border-radius:6px;background:#fff;padding:4px 8px;font-family:inherit;font-size:10px;cursor:pointer}
+#sendTypeList .send-type-delete{color:#a34b4b}
+#sendTypeList .send-type-edit{color:#356d8c}
+#sendTypeList .send-type-empty{text-align:center;padding:12px;color:#8b9aa2;font-size:10px}
+</style>
+<style>
+/* کنترل ارسال - بهبود خوانایی و کاهش سفیدی، فقط ظاهر */
+#sendControl .send-control-registration-card,
+#sendControl .send-control-report-card{
+  background:linear-gradient(180deg,#f7fbfd 0%,#eef5f8 100%)!important;
+  border-color:#c5d5df!important;
+  box-shadow:0 4px 14px rgba(35,75,95,.08)!important;
+}
+#sendControl .send-control-table-title{
+  background:linear-gradient(135deg,#e6f0f5,#d9e8ef)!important;
+  color:#1f4d67!important;
+  font-size:14px!important;
+  padding:12px 15px!important;
+}
+#sendControl .send-entry-field label{
+  font-size:12px!important;
+  font-weight:700!important;
+  color:#31596e!important;
+}
+#sendControl .send-control-input,
+#sendControl .send-customer-search,
+#sendControl .send-control-select{
+  background:#edf5f8!important;
+  border-color:#b8cbd6!important;
+  color:#244b61!important;
+  font-size:12px!important;
+  height:34px!important;
+}
+#sendControl .send-control-input:focus,
+#sendControl .send-customer-search:focus,
+#sendControl .send-control-select:focus{
+  background:#f7fbfd!important;
+  border-color:#6298b2!important;
+}
+#sendControl .send-control-table th{
+  background:#dce9ef!important;
+  color:#25495c!important;
+  font-size:12px!important;
+  padding:10px 8px!important;
+}
+#sendControl .send-control-table td{
+  color:#3b5868!important;
+  font-size:12px!important;
+  height:38px!important;
+}
+#sendControl .send-control-table tbody tr:nth-child(even){background:#f1f7f9!important}
+#sendControl .send-control-table tbody tr:hover{background:#e5f1f6!important}
+#sendControl .send-status{font-size:11px!important}
+#sendControl .send-status-btn{font-size:11px!important}
+#sendControl .send-control-add{font-size:12px!important}
+#sendControl .send-customer-edit-toggle,
+#sendControl .send-control-create-customer,
+#sendControl .send-control-create-type{
+  font-size:11px!important;
+}
+</style>
+<style>
+/* یکدست‌سازی ظاهری کنترل ارسال با تم سبز برنامه */
+#sendControl .send-control-create-customer,
+#sendControl .send-control-create-type,
+#sendControl .send-control-filter,
+#sendControl .send-control-refresh,
+#sendControl .send-account-btn,
+#sendControl .send-control-print,
+#sendControl .send-customer-edit-toggle,
+#sendControl .send-customer-edit-save,
+#sendControl .send-customer-edit-delete,
+#sendControl .send-control-add,
+#sendControl .send-status-btn,
+#sendControl .send-undo-btn {
+    background: linear-gradient(135deg,#3aa56a,#2f8f5b) !important;
+    border-color:#26784a !important;
+    color:#fff !important;
+    box-shadow:0 3px 9px rgba(36,117,72,.18) !important;
+}
+#sendControl .send-control-create-customer:hover,
+#sendControl .send-control-create-type:hover,
+#sendControl .send-control-filter:hover,
+#sendControl .send-control-refresh:hover,
+#sendControl .send-account-btn:hover,
+#sendControl .send-control-print:hover,
+#sendControl .send-customer-edit-toggle:hover,
+#sendControl .send-customer-edit-save:hover,
+#sendControl .send-customer-edit-delete:hover,
+#sendControl .send-control-add:hover,
+#sendControl .send-status-btn:hover,
+#sendControl .send-undo-btn:hover {
+    background:linear-gradient(135deg,#43ad72,#2a8151) !important;
+    transform:translateY(-1px);
+}
+#sendControl .send-control-input,
+#sendControl .send-customer-search,
+#sendControl .send-report-search,
+#sendControl .send-customer-edit-select,
+#sendControl .send-customer-edit-input {
+    background:#e9efec !important;
+    border-color:#b5c7bd !important;
+    color:#29483a !important;
+}
+#sendControl .send-control-input:focus,
+#sendControl .send-customer-search:focus,
+#sendControl .send-report-search:focus,
+#sendControl .send-customer-edit-select:focus,
+#sendControl .send-customer-edit-input:focus {
+    background:#e3ebe6 !important;
+    border-color:#2f8f5b !important;
+    box-shadow:0 0 0 2px rgba(47,143,91,.14) !important;
+}
+
+/* پنل مدیریت: هدر ثابت و اسکرول فقط محتوای خلاصه وضعیت */
+.management-module{
+  overflow:hidden!important;
+  max-height:calc(100vh - 120px)!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+}
+.management-module .management-page{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  height:100%;
+}
+.management-module .management-head{
+  flex:0 0 auto;
+}
+.management-module .management-scroll-area{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:0 3px 14px;
+}
+.management-module .management-section-title{
+  margin-top:16px;
+}
+@media(max-width:900px){
+  .management-module{max-height:calc(100vh - 105px)!important;}
+}
+</style>
+<style>
+/* بازطراحی مستقل پنل مدیریت */
+#management.management-module{
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  height:calc(100vh - 118px)!important;
+  max-height:calc(100vh - 118px)!important;
+  padding:12px 14px!important;
+  background:#edf3ef!important;
+}
+#management .management-page{
+  width:100%!important;
+  max-width:none!important;
+  height:100%!important;
+  min-height:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+}
+#management .management-head{
+  flex:0 0 auto!important;
+  min-height:58px!important;
+  padding:12px 18px!important;
+  border-radius:12px!important;
+  background:linear-gradient(135deg,#f8fbf9,#dcebe2)!important;
+  border:1px solid #c4d8ca!important;
+  box-shadow:0 3px 12px rgba(39,86,59,.08)!important;
+}
+#management .management-title{font-size:20px!important;font-weight:800!important;color:#244c37!important}
+#management .management-year{font-size:12px!important}
+#management .management-scroll-area{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:0 4px 14px!important;
+  scrollbar-width:thin!important;
+}
+#management .management-section-title{
+  margin:0 0 10px!important;
+  font-size:15px!important;
+  font-weight:800!important;
+  color:#2b5c42!important;
+}
+#management .management-cards{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+  margin:0 0 14px!important;
+}
+#management .management-card{
+  min-width:0!important;
+  min-height:112px!important;
+  padding:14px!important;
+  border:1px solid #c8dbce!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  box-shadow:0 3px 10px rgba(40,83,57,.07)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+}
+#management .management-card-label{font-size:13px!important;font-weight:800!important;color:#355b45!important}
+#management .management-card strong{font-size:27px!important;color:#23824f!important}
+#management .management-card small{font-size:10px!important;color:#718277!important}
+#management .management-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+}
+#management .management-panel{
+  min-width:0!important;
+  margin:0!important;
+  padding:14px!important;
+  border:1px solid #c8dbce!important;
+  border-radius:12px!important;
+  background:#fff!important;
+  box-shadow:0 3px 10px rgba(40,83,57,.06)!important;
+}
+#management .management-panel-wide{grid-column:span 1!important}
+#management .management-panel-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+  padding-bottom:10px!important;
+  margin-bottom:10px!important;
+  border-bottom:1px solid #e1ebe4!important;
+  font-size:13px!important;
+  font-weight:800!important;
+  color:#315b43!important;
+}
+#management .management-panel-head button{
+  padding:6px 12px!important;
+  border-radius:7px!important;
+  background:#2f9560!important;
+  color:#fff!important;
+  border:0!important;
+  font-size:11px!important;
+}
+#management .management-stat-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+#management .management-stat-list>div{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  padding:10px!important;
+  border-radius:8px!important;
+  background:#edf5ef!important;
+  color:#587060!important;
+  font-size:11px!important;
+}
+#management .management-stat-list strong{font-size:17px!important;color:#287b4d!important}
+#management .management-list{max-height:180px!important;overflow:auto!important}
+@media(max-width:900px){
+  #management .management-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #management .management-grid{grid-template-columns:1fr!important}
+  #management .management-panel-wide{grid-column:auto!important}
+}
+</style>
+</head>
+<body>
+<div aria-hidden="true" class="recovery-overlay" id="recoveryOverlay">
+<div class="recovery-card">
+<div class="recovery-title" id="recoveryTitle">بازیابی رمز عبور</div>
+<div class="recovery-text" id="recoveryText">برای بازیابی رمز، کد بازیابی را وارد کنید. پس از تأیید، می‌توانید رمز ورود جدید تعیین کنید.</div>
+<label for="recoveryCode">کد بازیابی</label>
+<input autocomplete="off" id="recoveryCode" type="password"/>
+<div id="recoveryPasswordFields">
+<label for="recoveryNewPassword">رمز عبور جدید</label>
+<input autocomplete="new-password" id="recoveryNewPassword" type="password"/>
+<label for="recoveryNewPassword2">تکرار رمز عبور جدید</label>
+<input autocomplete="new-password" id="recoveryNewPassword2" type="password"/>
+</div>
+<div hidden="" id="recoveryUsernameFields">
+<label for="recoveryNewUsername">نام کاربری جدید</label>
+<input autocomplete="off" id="recoveryNewUsername" type="text"/>
+</div>
+<div class="recovery-message" id="recoveryMessage"></div>
+<div class="recovery-actions"><button onclick="closeRecovery()" type="button">انصراف</button><button class="primary" id="recoverySubmitButton" onclick="resetPasswordWithRecovery()" type="button">بازیابی رمز</button></div>
+</div>
+</div>
+<div id="loginScreen">
+<div class="login-card">
+<div class="login-logo"><img src="assets/logo.png" alt="لوگوی پاسارگاد"></div>
+<div class="login-title">نرم افزار مدیریت چک پاسارگاد</div>
+<div class="login-subtitle">راهکاری حرفه‌ای برای مدیریت مطمئن</div>
+<form class="login-form" id="loginForm">
+<div class="login-field"><label for="loginUsername">نام کاربری</label><input autocomplete="username" autofocus="" id="loginUsername" type="text"/></div>
+<div class="login-field"><label for="loginPassword">رمز عبور</label><input autocomplete="current-password" id="loginPassword" type="password"/></div>
+<button class="login-button" type="submit">ورود به نرم افزار ←</button>
+<div class="login-recovery-actions"><button class="login-forgot" onclick="openForgotPassword()" type="button">فراموشی رمز عبور؟</button><button class="login-forgot" onclick="openForgotUsername()" type="button">فراموشی نام کاربری</button></div>
+<div class="login-error" id="loginError"></div>
+</form>
+<div class="login-hint">ورود اولیه: <b>admin</b> / <b>1234</b></div>
+</div>
+</div>
+<!-- =========================================
+         عنوان
+    ========================================= -->
+<div class="title-bar">
+<div aria-label="لوگوی پاسارگاد" class="title-icon" role="button" tabindex="0" onclick="showHome()" onkeydown="if(event.key==='Enter' || event.key===' ') showHome()"></div>
+<div class="title">
+            نرم افزار مدیریت چک پاسارگاد
+        </div>
+</div>
+<!-- =========================================
+         منو
+    ========================================= -->
+<div class="menu-bar pasargad-main-menu">
+<button class="menu-item" data-module="management" onclick="showModule('management')" type="button">پنل مدیریت</button>
+<button class="menu-item" data-module="dailyTasks" onclick="showModule('dailyTasks')" type="button">امور روزمره</button>
+<button class="menu-item" data-module="cheques" onclick="showModule('cheques')" type="button">ثبت چک</button>
+<button class="menu-item" data-module="contacts" onclick="showModule('contacts')" type="button">مدیریت مشتریان</button>
+<button class="menu-item" data-module="sendControl" onclick="showModule('sendControl')" type="button">کنترل ارسال</button>
+<button class="menu-item" data-module="reports" onclick="showModule('reports')" type="button">گزارشات</button>
+<button class="menu-item" data-module="tools" onclick="showModule('tools')" type="button">ابزارها</button>
+<button class="menu-item" data-module="help" onclick="showModule('help')" type="button">راهنما</button>
+</div>
+<!-- =========================================
+         Toolbar
+    ========================================= -->
+
+<!-- =========================================
+         Main
+    ========================================= -->
+<div class="home-screen" id="home">
+<div class="home-card">
+<div class="home-logo"><img src="assets/logo.png" alt="لوگوی پاسارگاد"></div>
+<div class="home-title">نرم افزار مدیریت چک پاسارگاد</div>
+<div class="home-subtitle">سیستم یکپارچه مدیریت و ثبت چک</div>
+<div class="home-separator"></div>
+<div class="home-message">به نرم افزار پاسارگاد خوش آمدید</div>
+<div class="home-hint">برای ورود به هر بخش، از منوی بالای نرم افزار استفاده کنید.</div>
+<div class="home-footer">سیستم مدیریت چک پاسارگاد</div>
+</div>
+</div>
+<div class="module-placeholder management-module" hidden id="management">
+  <div class="management-page">
+    <div class="management-head">
+      <div>
+        <div class="management-title">پنل مدیریت</div>
+        
+      </div>
+      <div class="management-year">سال مالی <strong id="managementFiscalYear">—</strong></div>
+    </div>
+    <div class="management-scroll-area">
+
+    <div class="management-section-title">خلاصه وضعیت</div>
+    <div class="management-cards">
+      <button class="management-card" type="button" onclick="showModule('cheques')">
+        <span class="management-card-icon">✓</span><span class="management-card-label">چک‌ها</span><strong id="managementChequeTotal">۰</strong><small id="managementChequeMeta">در حال بارگذاری...</small>
+      </button>
+      <button class="management-card" type="button" onclick="showModule('contacts')">
+        <span class="management-card-icon">👥</span><span class="management-card-label">مشتریان</span><strong id="managementCustomerTotal">۰</strong><small id="managementCustomerMeta">در حال بارگذاری...</small>
+      </button>
+      <button class="management-card" type="button" onclick="showModule('sendControl')">
+        <span class="management-card-icon">↗</span><span class="management-card-label">کنترل ارسال</span><strong id="managementSendTotal">۰</strong><small id="managementSendMeta">در حال بارگذاری...</small>
+      </button>
+      <button class="management-card" type="button" onclick="showModule('dailyTasks')">
+        <span class="management-card-icon">!</span><span class="management-card-label">نیازمند پیگیری</span><strong id="managementFollowTotal">۰</strong><small>امور روزمره انجام نشده</small>
+      </button>
+    </div>
+
+    <div class="management-grid">
+      <div class="management-panel">
+        <div class="management-panel-head"><span>وضعیت چک‌ها</span><button type="button" onclick="showModule('cheques')">مشاهده</button></div>
+        <div class="management-stat-list">
+          <div><span>کل چک‌ها</span><strong id="managementChequeAll">۰</strong></div>
+          <div><span>ثبت شده</span><strong id="managementChequeRegistered">۰</strong></div>
+          <div><span>ثبت نشده</span><strong id="managementChequeUnregistered">۰</strong></div>
+          <div><span>عودت شده</span><strong id="managementChequeReturned">۰</strong></div>
+        </div>
+      </div>
+      <div class="management-panel">
+        <div class="management-panel-head"><span>وضعیت کنترل ارسال</span><button type="button" onclick="showModule('sendControl')">مشاهده</button></div>
+        <div class="management-stat-list">
+          <div><span>کل اطلاعات</span><strong id="managementSendAll">۰</strong></div>
+          <div><span>ارسال شده</span><strong id="managementSendSent">۰</strong></div>
+          <div><span>ارسال نشده</span><strong id="managementSendPending">۰</strong></div>
+          <div><span>مشتریان دارای رکورد</span><strong id="managementSendCustomers">۰</strong></div>
+        </div>
+      </div>
+      <div class="management-panel management-panel-wide">
+        <div class="management-panel-head"><span>آخرین مشتریان</span><button type="button" onclick="showModule('contacts')">مدیریت مشتریان</button></div>
+        <div class="management-list" id="managementCustomersList"><div class="management-empty">در حال بارگذاری...</div></div>
+      </div>
+      <div class="management-panel management-panel-wide">
+        <div class="management-panel-head"><span>آخرین وضعیت کنترل ارسال</span><button type="button" onclick="showModule('sendControl')">مشاهده</button></div>
+        <div class="management-list" id="managementSendList"><div class="management-empty">در حال بارگذاری...</div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="module-placeholder customer-module" hidden="" id="contacts">
+<div class="customer-head"><div></div></div>
+<div id="customerListPanel">
+<div class="customer-toolbar">
+<input id="customerSearch" oninput="customerLoadList()" placeholder="جستجوی نام یا شماره مشتری..." type="search"/>
+<button class="customer-primary" onclick="customerOpenNew()" type="button">＋ مشتری جدید</button>
+<span class="customer-message" id="customerMessage"></span>
+</div>
+<div class="customer-card">
+<div class="customer-section-title">آخرین مشتریان</div>
+<table class="customer-table">
+<thead><tr><th>ردیف</th><th>نام مشتری</th><th>موبایل</th><th>تلفن</th><th>آخرین تماس</th><th>عملیات</th></tr></thead>
+<tbody id="customerRows"><tr><td class="customer-empty" colspan="6">در حال بارگذاری...</td></tr></tbody>
+</table>
+</div>
+<div class="customer-card customer-follow-report">
+<div class="customer-section-title">مشتریانی که در انتظار پیگیری هستند</div>
+<table class="customer-table">
+<thead><tr><th>ردیف</th><th>مشتری</th><th>تاریخ پیگیری</th><th>موضوع پیگیری</th><th>عملیات</th></tr></thead>
+<tbody id="customerFollowReportRows"><tr><td colspan="5" class="customer-empty">در حال بارگذاری...</td></tr></tbody>
+</table>
+</div>
+</div>
+<div hidden="" id="customerProfilePanel">
+<div class="customer-profile-head">
+<button class="customer-secondary customer-head-btn" onclick="customerBackToList()" type="button"><span class="customer-btn-icon">↩</span><span>بازگشت</span></button><button class="customer-secondary customer-head-btn" onclick="customerOpenPrint()" type="button"><span class="customer-btn-icon">🖨</span><span>چاپ</span></button>
+<button class="customer-primary customer-head-btn" onclick="customerOpenContact()" type="button"><span class="customer-btn-icon">☎</span><span>ثبت تماس</span></button>
+</div>
+<div class="customer-profile-card">
+<div class="customer-profile-title" id="customerProfileName">—</div>
+<div class="customer-info-grid">
+<div><b>موبایل:</b> <span id="customerProfileMobile">—</span></div>
+<div><b>تلفن:</b> <span id="customerProfilePhone">—</span></div>
+<div><b>آدرس:</b> <span id="customerProfileAddress">—</span></div>
+<div><b>توضیحات:</b> <span id="customerProfileNotes">—</span></div>
+</div>
+<div class="customer-profile-actions">
+<button class="customer-secondary" onclick="customerOpenEdit()" type="button">ویرایش مشتری</button>
+<button class="customer-danger" onclick="customerDelete()" type="button">حذف مشتری</button>
+</div>
+</div>
+<div class="customer-card customer-section"><div class="customer-section-title">تاریخچه تماس‌ها</div>
+<table class="customer-table"><thead><tr><th>تاریخ</th><th>نوع</th><th>موضوع / نتیجه</th><th>توضیحات</th><th>پیگیری</th></tr></thead><tbody id="customerContactRows"></tbody></table>
+</div>
+<div class="customer-card customer-section"><div class="customer-section-title">پیگیری‌ها</div>
+<table class="customer-table"><thead><tr><th>تاریخ پیگیری</th><th>موضوع</th><th>وضعیت</th></tr></thead><tbody id="customerFollowRows"></tbody></table>
+</div>
+</div>
+</div>
+<div class="customer-modal" hidden="" id="customerEditor">
+<div class="customer-modal-box">
+<div class="customer-modal-title" id="customerEditorTitle">ثبت مشتری جدید</div>
+<label>نام مشتری / شرکت<input id="customerName" type="text"/></label>
+<label>موبایل<input id="customerMobile" type="text"/></label>
+<label>تلفن ثابت<input id="customerPhone" type="text"/></label>
+<label>آدرس<textarea id="customerAddress"></textarea></label>
+<label>توضیحات<textarea id="customerNotes"></textarea></label>
+<div class="customer-modal-actions"><button class="customer-secondary" onclick="customerCloseEditor()" type="button">انصراف</button><button class="customer-primary" onclick="customerSave()" type="button">ذخیره</button></div>
+</div>
+</div>
+<div class="customer-modal" hidden="" id="customerContactModal">
+<div class="customer-modal-box">
+<div class="customer-modal-title">ثبت تماس</div>
+<div class="customer-radio-row"><label><input name="customerContactType" type="radio" value="ورودی"/> ورودی</label><label><input checked="" name="customerContactType" type="radio" value="خروجی"/> خروجی</label></div>
+<label>تاریخ تماس<input id="customerContactDate" inputmode="numeric" maxlength="10" placeholder="۱۴۰۵/۰۶/۲۵" type="text"/></label>
+<label>موضوع / نتیجه<input id="customerContactSubject" type="text"/></label>
+<label>توضیحات<textarea id="customerContactNotes"></textarea></label>
+<div class="customer-follow-title">پیگیری بعدی <small>(اختیاری)</small></div>
+<label>تاریخ پیگیری<input id="customerFollowDate" inputmode="numeric" maxlength="10" placeholder="۱۴۰۵/۰۶/۲۸" type="text"/></label>
+<label>موضوع پیگیری<input id="customerFollowText" type="text"/></label>
+<div class="customer-modal-actions"><button class="customer-secondary" onclick="customerCloseContact()" type="button">انصراف</button><button class="customer-primary" onclick="customerSaveContact()" type="button">ثبت تماس</button></div>
+</div>
+</div>
+<div class="customer-modal" hidden="" id="sendTypeEditor">
+<div class="customer-modal-box">
+<div class="customer-modal-title">مدیریت نوع فاکتور / سند</div>
+<label>نام نوع فاکتور / سند<input id="sendTypeName" type="text" placeholder="مثلاً فاکتور فروش"/></label>
+<div id="sendTypeList" style="margin-top:12px;max-height:220px;overflow:auto"></div>
+<div class="customer-modal-actions"><button class="customer-secondary" onclick="sendControlCloseTypeEditor()" type="button">انصراف</button><button class="customer-primary" onclick="sendControlSaveType()" type="button">＋ ایجاد نوع</button></div>
+</div>
+</div>
+<!-- =========================================
+         کنترل ارسال
+    ========================================= -->
+<div class="module-placeholder" hidden="" id="sendControl">
+<div class="send-control-page">
+  <div class="send-control-toolbar">
+    <div>
+      <div class="send-control-toolbar-title">کنترل ارسال</div>
+      <div class="send-control-toolbar-subtitle">ثبت اطلاعات فاکتور و کنترل وضعیت ارسال</div>
+    </div>
+    <div class="send-control-toolbar-actions">
+      <button type="button" class="send-control-print">🖨 چاپ گزارش</button>
+    </div>
+  </div>
+
+  <!-- داشبورد جمع‌وجور وضعیت ارسال -->
+  <div class="send-control-mini-dashboard" id="sendControlMiniDashboard">
+    <div class="send-mini-card"><span>کل اطلاعات</span><strong id="sendMiniTotal">۰</strong></div>
+    <div class="send-mini-card sent"><span>ارسال شده</span><strong id="sendMiniSent">۰</strong></div>
+    <div class="send-mini-card pending"><span>ارسال نشده</span><strong id="sendMiniPending">۰</strong></div>
+    <div class="send-mini-card customers"><span>تعداد مشتری</span><strong id="sendMiniCustomers">۰</strong></div>
+  </div>
+
+  <!-- ثبت یک مورد ارسال -->
+  <div class="send-control-table-card send-control-registration-card">
+    <div class="send-control-table-title send-registration-title-row">
+      <span>ثبت اطلاعات ارسال</span>
+      <div class="send-customer-edit-tools" id="sendCustomerEditTools">
+        <button type="button" class="send-control-create-type" id="sendCreateTypeBtn">＋ ایجاد نوع فاکتور / سند</button>
+        <button type="button" class="send-control-create-customer">＋ ایجاد مشتری</button>
+        <button type="button" class="send-customer-edit-toggle" id="sendCustomerEditToggle">ویرایش مشتریان</button>
+        <div class="send-customer-edit-panel" id="sendCustomerEditPanel" hidden>
+          <select id="sendCustomerEditSelect" class="send-customer-edit-select"><option value="">انتخاب مشتری</option></select>
+          <input id="sendCustomerEditName" class="send-customer-edit-input" type="text" placeholder="نام جدید مشتری">
+          <button type="button" class="send-customer-edit-save" id="sendCustomerEditSave">ذخیره</button>
+          <button type="button" class="send-customer-edit-delete" id="sendCustomerEditDelete">حذف</button>
+        </div>
+      </div>
+    </div>
+    <div class="send-control-entry-form" id="sendControlEntryForm">
+      <div class="send-entry-field send-entry-customer">
+        <label>نام و نام خانوادگی</label>
+        <div class="send-customer-picker" id="sendCustomerPicker">
+          <input id="sendCustomerSearch" class="send-control-input send-customer-search" type="search" placeholder="جستجوی نام مشتری..." autocomplete="off" onfocus="window.sendControlOpenCustomerSearch && window.sendControlOpenCustomerSearch()">
+          <div class="send-customer-dropdown" id="sendCustomerDropdown"></div>
+        </div>
+      </div>
+      <div class="send-entry-field">
+        <label>تاریخ فاکتور</label>
+        <input id="sendInvoiceDate" class="send-control-input" inputmode="numeric" maxlength="10" readonly placeholder="خودکار">
+      </div>
+      <div class="send-entry-field">
+        <label>شماره فاکتور</label>
+        <input id="sendInvoiceNo" class="send-control-input" type="text" placeholder="شماره فاکتور">
+      </div>
+      <div class="send-entry-field">
+        <label>نوع فاکتور / سند</label>
+        <input id="sendDocumentType" class="send-control-input" type="text" list="sendDocumentTypeList" placeholder="فاکتور / سند">
+          <datalist id="sendDocumentTypeList"></datalist>
+      </div>
+      <div class="send-entry-action">
+        <button type="button" id="sendAddRecord" class="send-control-add">＋ ثبت اطلاعات</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- گزارش موارد ثبت شده -->
+  <div class="send-control-table-card send-control-report-card">
+    <div class="send-control-table-title send-report-title-row"><span>گزارش وضعیت ارسال</span><div class="send-report-tools"><input id="sendReportSearch" class="send-report-search" type="search" placeholder="جستجوی مشتری یا شماره فاکتور..." autocomplete="off"><select id="sendStatusFilter" class="send-status-filter"><option value="all">همه</option><option value="not-sent">ارسال نشده</option><option value="sent">ارسال شده</option></select></div></div>
+    <div class="send-control-table-wrap">
+      <table class="send-control-table">
+        <thead><tr>
+          <th>ردیف</th><th>نام و نام خانوادگی</th><th>تاریخ فاکتور</th><th>شماره فاکتور</th><th>نوع فاکتور / سند</th><th>تاریخ ارسال</th><th>وضعیت</th><th>خروج</th>
+        </tr></thead>
+        <tbody id="sendControlRows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  <!-- کارت حساب: فقط پنجره کوچک داخل ماژول کنترل ارسال -->
+  <div class="send-account-modal" id="sendAccountModal" hidden aria-hidden="true">
+    <div class="send-account-modal-box" role="dialog" aria-modal="true">
+      <div class="send-account-modal-head">
+        <div class="send-account-modal-title" id="sendAccountModalTitle">کارت حساب مشتری</div>
+        <div class="send-account-modal-customer" id="sendAccountCustomerName">—</div>
+        <button type="button" class="send-account-modal-close" id="sendAccountClose">×</button>
+      </div>
+      <div class="send-account-customer-info" id="sendAccountCustomerInfo">مشخصات مشتری</div>
+      <div class="send-account-summary">
+        <div><span>کل فاکتورها</span><strong id="sendAccountTotal">۰</strong></div>
+        <div><span>ارسال شده</span><strong id="sendAccountSent">۰</strong></div>
+        <div><span>ارسال نشده</span><strong id="sendAccountPending">۰</strong></div>
+      </div>
+      <div class="send-account-report-title">گزارش وضعیت ارسال</div>
+      <div class="send-account-table-wrap">
+        <table class="send-control-table">
+          <thead><tr><th>ردیف</th><th>تاریخ فاکتور</th><th>شماره فاکتور</th><th>نوع فاکتور / سند</th><th>تاریخ ارسال</th><th>وضعیت</th></tr></thead>
+          <tbody id="sendAccountRows"><tr><td colspan="6" class="send-control-empty">مشتری را از گزارش انتخاب کنید.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="module-placeholder" hidden="" id="reports">
+<div class="module-placeholder-title">گزارشات</div>
+<div class="reports-home">
+<div class="reports-home-title">گزارش‌های اطلاعات چک</div>
+<div class="reports-grid">
+<button class="report-card" onclick="showModule('cheques')" type="button">
+<span class="report-card-icon">📋</span>
+<span class="report-card-body">
+<strong>گزارش چک‌ها</strong>
+<small>مشاهده، جستجو، فیلتر، ویرایش و حذف اطلاعات ثبت‌شده</small>
+</span>
+<span class="report-card-arrow">←</span>
+</button>
+</div>
+<div class="reports-note">اطلاعات گزارش چک‌ها مستقیماً از بانک اطلاعاتی نرم‌افزار خوانده می‌شود.</div>
+</div>
+</div>
+<div class="module-placeholder" hidden="" id="tools">
+<div class="module-placeholder-title">ابزارها</div>
+<div class="module-placeholder-text">تنظیمات و ابزارهای عمومی نرم‌افزار</div>
+<div class="tools-layout">
+<aside class="tools-sidebar">
+<div class="tools-sidebar-title">تنظیمات و ابزارها</div>
+<button class="tools-menu-item" data-tool-page="baseInfo" onclick="openToolPage('baseInfo')" type="button">
+<span class="tools-menu-icon">🗂️</span>
+<span><span class="tools-menu-title">اطلاعات پایه</span><span class="tools-menu-desc">مرکز اطلاعات مشترک ماژول‌ها</span></span>
+</button>
+<button class="tools-menu-item" data-tool-page="fiscal" onclick="openToolPage('fiscal')" type="button">
+<span class="tools-menu-icon">📅</span>
+<span><span class="tools-menu-title">تنظیمات سال مالی</span><span class="tools-menu-desc">مدیریت سال‌های مالی</span></span>
+</button>
+<button class="tools-menu-item" data-tool-page="password" onclick="openToolPage('password')" type="button">
+<span class="tools-menu-icon">🔐</span>
+<span><span class="tools-menu-title">تنظیمات رمز عبور</span><span class="tools-menu-desc">مدیریت اطلاعات ورود</span></span>
+</button>
+<button class="tools-menu-item" data-tool-page="backup" onclick="openToolPage('backup')" type="button">
+<span class="tools-menu-icon">💾</span>
+<span><span class="tools-menu-title">پشتیبان‌گیری</span><span class="tools-menu-desc">تهیه و بازیابی پشتیبان</span></span>
+</button>
+<button class="tools-menu-item" data-tool-page="appearance" onclick="openToolPage('appearance')" type="button">
+<span class="tools-menu-icon">🎨</span>
+<span><span class="tools-menu-title">تنظیمات ظاهری</span><span class="tools-menu-desc">ظاهر و نمایش نرم‌افزار</span></span>
+</button>
+<button class="tools-menu-item" data-tool-page="about" onclick="openToolPage('about')" type="button">
+<span class="tools-menu-icon">ℹ️</span>
+<span><span class="tools-menu-title">درباره ما</span><span class="tools-menu-desc">اطلاعات نرم‌افزار</span></span>
+</button>
+</aside>
+<section class="tools-content">
+<div class="tools-content-empty" id="toolsContentEmpty">یکی از گزینه‌های ابزارها را از سمت راست انتخاب کنید.</div>
+<div class="tools-subpage" hidden="" id="baseInfoToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">اطلاعات پایه</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">مرکز اطلاعات پایه</div>
+<div class="tools-hint" style="margin-bottom:14px">اطلاعات این بخش مرجع مشترک ماژول‌های مشتریان، کنترل ارسال و پنل مدیریت است. ایجاد مشتری از ماژول‌های قبلی نیز همچنان فعال می‌ماند.</div>
+<div class="base-info-toolbar">
+<button class="primary" type="button" onclick="baseInfoOpenNewCustomer()">＋ ایجاد مشتری</button>
+<input id="baseInfoCustomerSearch" type="search" placeholder="جستجوی نام یا شماره مشتری..." oninput="baseInfoRenderCustomers()">
+</div>
+<div class="base-info-count" id="baseInfoCustomerCount">۰ مشتری</div>
+<div class="base-info-table-wrap">
+<table class="customer-table"><thead><tr><th>ردیف</th><th>نام مشتری / شرکت</th><th>موبایل</th><th>تلفن</th><th>عملیات</th></tr></thead><tbody id="baseInfoCustomerRows"><tr><td colspan="5" class="customer-empty">در حال دریافت اطلاعات...</td></tr></tbody></table>
+</div>
+</div>
+</div>
+<div class="tools-subpage" hidden="" id="fiscalToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">تنظیمات سال مالی</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">مدیریت سال‌های مالی</div>
+<div class="year-area"><span class="year-label">سال مالی فعال:</span><select id="fiscalYear"></select></div>
+<div class="fiscal-actions fiscal-actions-modern">
+<button class="fiscal-btn fiscal-btn-add" id="addFiscalYear" type="button"><span class="fiscal-btn-icon">＋</span><span>ایجاد سال مالی</span></button>
+<button class="fiscal-btn fiscal-btn-delete" id="deleteFiscalYear" type="button"><span class="fiscal-btn-icon">🗑</span><span>حذف سال مالی</span></button>
+<button class="fiscal-btn fiscal-btn-clear" id="clearFiscalYear" type="button"><span class="fiscal-btn-icon">⌫</span><span>خالی کردن سال مالی</span></button>
+</div>
+<div class="tools-hint">ایجاد، حذف و خالی کردن اطلاعات سال مالی از این قسمت انجام می‌شود.</div>
+</div>
+</div>
+<div class="tools-subpage" hidden="" id="backupToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">پشتیبان‌گیری</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">پشتیبان اطلاعات</div>
+<p style="margin:0;line-height:2;">از این بخش برای تهیه نسخه پشتیبان از اطلاعات نرم‌افزار استفاده خواهد شد.</p>
+<div class="fiscal-actions fiscal-actions-modern">
+<button class="fiscal-btn fiscal-btn-add" id="createBackupButton" type="button">💾 تهیه نسخه پشتیبان</button>
+<button class="fiscal-btn fiscal-btn-clear" id="restoreBackupButton" type="button">↩️ بازیابی اطلاعات</button>
+<button class="fiscal-btn fiscal-btn-delete" id="chooseSecondBackupButton" type="button">📁 مسیر پشتیبان دوم</button>
+</div>
+<div class="tools-hint" id="backupSecondPath">مسیر پشتیبان دوم: تنظیم نشده</div>
+<div class="tools-hint" id="backupMessage">بکاپ خودکار هر ۵ دقیقه و پس از تغییرات مهم اطلاعات تهیه می‌شود.</div>
+</div>
+</div>
+<div class="tools-subpage" hidden="" id="appearanceToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">تنظیمات ظاهری</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">تنظیمات نمایش نرم‌افزار</div>
+<div class="password-grid">
+<div><label for="appearanceCompanyName">نام فروشگاه / شرکت</label><input id="appearanceCompanyName" placeholder="نرم افزار مدیریت چک پاسارگاد" type="text"/></div>
+<div>
+<label>لوگوی اختصاصی مشتری</label>
+<button onclick="chooseAppearanceLogo()" type="button">🖼 انتخاب لوگوی مشتری</button>
+<div class="tools-hint" id="appearanceLogoPath" style="margin-top:6px">لوگویی انتخاب نشده است.</div>
+</div>
+<div>
+<label>تصویر صفحه شروع نرم‌افزار</label>
+<button onclick="chooseSplashImage()" type="button">🖼 انتخاب تصویر صفحه شروع</button>
+<div class="tools-hint" id="splashImagePath" style="margin-top:6px">تصویر پیش‌فرض استفاده می‌شود.</div>
+</div>
+<div><label for="appearanceSigner1">نام امضاکننده اول</label><input id="appearanceSigner1" type="text"/></div>
+<div><label for="appearanceSigner2">نام امضاکننده دوم</label><input id="appearanceSigner2" type="text"/></div>
+</div>
+<div class="password-actions" style="margin-top:14px"><button class="primary" onclick="saveAppearance()" type="button">💾 ذخیره تنظیمات ظاهری</button></div>
+<div class="password-message" id="appearanceMessage"></div>
+<div class="tools-hint">این اطلاعات در سربرگ و پایین گزارش‌های چاپی استفاده می‌شوند. اگر نام شرکت وارد نشود، نام نرم‌افزار نمایش داده می‌شود.</div>
+</div>
+</div>
+<div class="tools-subpage" hidden="" id="aboutToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">درباره ما</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">نرم افزار مدیریت چک پاسارگاد</div>
+<div style="display:flex;align-items:center;gap:18px;min-height:120px;">
+<img alt="لوگوی نرم افزار پاسارگاد" src="assets/logo.png" style="width:88px;height:88px;object-fit:contain;"/>
+<div style="line-height:2.2;">
+<div><strong>نام نرم افزار:</strong> نرم افزار مدیریت چک پاسارگاد</div>
+<div><strong>نسخه:</strong> 1.0.0</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tools-subpage" hidden="" id="passwordToolPage">
+<div class="tools-subpage-head">
+<div class="tools-subpage-title">تنظیمات رمز عبور</div>
+<button class="tools-back" onclick="openToolPage('home')" type="button">← بازگشت به ابزارها</button>
+</div>
+<div class="tools-card" style="margin-top:0;max-width:none;">
+<div class="tools-card-title">تغییر اطلاعات ورود</div>
+<div class="password-grid">
+<div><label for="settingsUsername">نام کاربری جدید</label><input id="settingsUsername" type="text"/></div>
+<div><label for="settingsCurrentPassword">رمز عبور فعلی</label><input id="settingsCurrentPassword" type="password"/></div>
+<div><label for="settingsNewPassword">رمز عبور جدید</label><input id="settingsNewPassword" type="password"/></div>
+<div><label for="settingsNewPassword2">تکرار رمز عبور جدید</label><input id="settingsNewPassword2" type="password"/></div>
+</div>
+<div class="password-actions"><button class="primary" onclick="changeCredentials()" type="button">ذخیره تغییرات</button></div>
+<div class="password-message" id="passwordMessage"></div>
+</div>
+</div>
+</section></div>
+
+</div>
+
+
+
+<div class="module-placeholder" hidden="" id="help">
+<div class="module-placeholder-title">راهنما</div>
+<div class="module-placeholder-text">راهنمای استفاده از نرم‌افزار پاسارگاد در این بخش قرار می‌گیرد.</div>
+</div>
+<div class="module-placeholder daily-tasks-module" hidden id="dailyTasks">
+  <div class="daily-affairs-head">
+    <div>
+      <div class="module-placeholder-title">امور روزمره</div>
+      <div class="daily-affairs-subtitle">ثبت و پیگیری کارهای روزمره شرکت</div>
+    </div>
+    <div class="daily-affairs-summary"><div class="daily-affairs-stat total">تعداد موارد: <strong id="dailyCount">۰</strong></div><div class="daily-affairs-stat done">انجام شده: <strong id="dailyDoneCount">۰</strong></div><div class="daily-affairs-stat pending">انجام نشده: <strong id="dailyPendingCount">۰</strong></div><label class="daily-filter-label" for="dailyStatusFilter">نمایش:</label><select id="dailyStatusFilter" class="daily-status-filter"><option value="all">همه موارد</option><option value="pending">انجام نشده</option><option value="done">انجام شده</option></select></div>
+  </div>
+  <div class="daily-affairs-form">
+    <div class="daily-field"><label for="dailyDate">تاریخ ثبت</label><input id="dailyDate" type="text" readonly aria-readonly="true" placeholder="خودکار"></div>
+    <div class="daily-field"><label for="dailyDay">روز</label><input id="dailyDay" type="text" readonly aria-readonly="true" placeholder="خودکار"></div>
+    <div class="daily-field daily-description-field"><label for="dailyDescription">شرح پیگیری</label><input id="dailyDescription" type="text" placeholder="شرح کار یا پیگیری مورد نظر"></div>
+    <div class="daily-field daily-follow-date-field"><label for="dailyFollowDate">تاریخ پیگیری</label><div class="daily-date-entry"><input id="dailyFollowDate" type="text" inputmode="numeric" placeholder="۱۴۰۵/۰۶/۲۶" maxlength="10" autocomplete="off" dir="ltr"><button id="dailyTodayButton" type="button" class="daily-today-button">فردا</button></div></div>
+    <div class="daily-form-actions"><button id="dailySaveButton" type="button">ثبت مورد جدید</button><button id="dailyCancelButton" type="button" hidden>انصراف</button><button id="dailyClearButton" type="button" class="secondary">پاک کردن فرم</button></div>
+  </div>
+  <div class="daily-affairs-table-wrap">
+    <table class="daily-affairs-table">
+      <colgroup><col style="width:7%"><col style="width:13%"><col style="width:10%"><col style="width:30%"><col style="width:13%"><col style="width:10%"><col style="width:17%"></colgroup>
+      <thead><tr><th>ردیف</th><th>تاریخ ثبت</th><th>روز</th><th>شرح پیگیری</th><th>تاریخ پیگیری</th><th>تعیین وضعیت</th><th>عملیات</th></tr></thead>
+      <tbody id="dailyAffairsBody"></tbody>
+    </table>
+  </div>
+</div>
+<div class="module-view" id="cheques">
+<div class="report-actions">
+<button onclick="newCheque()" type="button">➕ ثبت چک جدید</button>
+<button onclick="printChequeReport()" type="button">🖨 چاپ گزارش</button>
+</div>
+
+<div class="main">
+<!-- =======================================
+             فیلتر
+        ======================================= -->
+<div class="top-panel">
+<div class="panel-title">
+                فیلتر گزارش
+            </div>
+<div class="filter-row">
+<input class="search" id="search" oninput="scheduleReportSearch()" placeholder="جستجو در آورنده، تلفن، دریافت‌کننده، شماره چک..." type="text"/>
+<input class="date-filter" id="sendDate" oninput="renderCheques()" placeholder="تاریخ ارسال" type="text"/>
+<select class="status-filter" id="reportStatus" onchange="renderCheques()">
+<option value="all">
+                        همه وضعیت‌ها
+                    </option>
+<option value="notRegistered">
+                        ثبت نشده
+                    </option>
+<option value="registered">
+                        ثبت شده
+                    </option>
+</select>
+<label class="radio-label">
+<input checked="" name="chequeStatus" onchange="filterStatus()" type="radio" value="all"/>
+
+                    همه
+
+                </label>
+<label class="radio-label">
+<input name="chequeStatus" onchange="filterStatus()" type="radio" value="notRegistered"/>
+
+                    ثبت نشده
+
+                </label>
+<label class="radio-label">
+<input name="chequeStatus" onchange="filterStatus()" type="radio" value="registered"/>
+
+                    ثبت شده
+
+                </label>
+</div>
+</div>
+<!-- =======================================
+             خلاصه
+        ======================================= -->
+<div class="summary-row">
+<div class="summary-box">
+<div class="summary-label">
+                    چک‌های ثبت نشده
+                </div>
+<div class="summary-number danger" id="count">
+                    ۰
+                </div>
+</div>
+<div class="summary-box">
+<div class="summary-label">
+                    چک‌های ثبت شده
+                </div>
+<div class="summary-number success" id="registeredCount">
+                    ۰
+                </div>
+</div>
+<div class="summary-box">
+<div class="summary-label">
+                    کل چک‌های سال مالی
+                </div>
+<div class="summary-number blue" id="totalCount">
+                    ۰
+                </div>
+</div>
+<div class="summary-box">
+<div class="summary-label">
+                    سال مالی فعال
+                </div>
+<div class="summary-number" id="currentYearTitle" style="font-size:16px">
+                    سال مالی ۱۴۰۵
+                </div>
+</div>
+</div>
+<!-- =======================================
+             جدول
+        ======================================= -->
+<div class="table-panel">
+<div class="table-header">
+
+                گزارش چک‌ها
+
+            </div>
+<table>
+<thead>
+<tr>
+<th>
+                            ردیف
+                        </th>
+<th>
+                            شماره چک
+                        </th>
+<th>
+                            آورنده چک
+                        </th>
+<th>
+                            تلفن آورنده
+                        </th>
+<th>
+                            دریافت‌کننده
+                        </th>
+<th>
+                            مبلغ
+                        </th>
+<th>
+                            سررسید
+                        </th>
+<th>
+                            تاریخ ارسال برای ثبت
+                        </th>
+<th>
+                            وضعیت
+                        </th>
+<th>
+                            عملیات
+                        </th>
+</tr>
+</thead>
+<tbody id="chequeList">
+</tbody>
+</table>
+<div id="emptyMessage">
+
+                چکی برای نمایش در این سال مالی وجود ندارد.
+
+            </div>
+</div>
+<!-- =======================================
+             Footer
+        ======================================= -->
+<div class="footer">
+<span>
+                سیستم مدیریت چک پاسارگاد
+            </span>
+<span id="footerYearTitle">
+                سال مالی ۱۴۰۵
+            </span>
+</div>
+</div>
+</div>
+<div aria-hidden="true" aria-modal="true" hidden="" id="chequeConfirmModal" role="dialog">
+<div class="cheque-confirm-box">
+<div id="chequeConfirmTitle">تأیید چک</div>
+<div id="chequeConfirmMessage"></div>
+<div class="cheque-confirm-actions">
+<button class="primary" id="chequeConfirmYes" type="button">تایید</button>
+<button id="chequeConfirmNo" type="button">انصراف</button>
+</div>
+</div>
+</div>
+<div aria-hidden="true" id="chequeFormOverlay">
+<iframe id="chequeFormFrame" title="ثبت چک جدید"></iframe>
+</div>
+<div aria-hidden="true" class="app-modal-overlay" hidden="" id="exitBackupOverlay">
+<div aria-labelledby="exitBackupTitle" aria-modal="true" class="app-modal-card" role="dialog">
+<div class="app-modal-icon">💾</div>
+<div class="app-modal-title" id="exitBackupTitle">پشتیبان‌گیری قبل از خروج</div>
+<div class="app-modal-text" id="exitBackupText">برای حفظ اطلاعات، قبل از خروج باید یک نسخه پشتیبان تهیه شود.</div>
+<div class="app-modal-actions">
+<button class="modal-primary" id="exitBackupButton" type="button">تهیه پشتیبان و خروج</button>
+<button class="modal-secondary" id="exitBackupCancel" type="button">انصراف</button>
+</div>
+</div>
+</div>
+<script src="js/web-adapter.js"></script>
+<script src="js/app.js"></script>
+<script src="js/base-info.js"></script>
+<script src="js/management-dashboard.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/send-control.js"></script>
+<script src="js/daily-affairs.js"></script>
+<script>
+        var isAuthenticated = false;
+        var DEFAULT_USERNAME = 'admin';
+        var DEFAULT_PASSWORD = '1234';
+        async function hashText(text){return String(text);}
+        function getStoredCredentials(){var username=localStorage.getItem('pasargadUsername')||DEFAULT_USERNAME;var password=localStorage.getItem('pasargadPassword');if(password===null){localStorage.removeItem('pasargadPasswordHash');password=DEFAULT_PASSWORD;localStorage.setItem('pasargadPassword',password);}return {username:username,password:password};}
+        // Bridge for cheque.html when it is loaded inside the iframe overlay.
+        // The iframe does not receive Electron preload APIs, so requests are routed
+        // through the authenticated parent window without changing the database API.
+        window.addEventListener('message', async function(event){
+            if(event.origin !== window.location.origin) return;
+            var msg = event.data;
+            if(!msg || msg.type !== 'pasargad-ipc-request') return;
+            var method = String(msg.method || '');
+            var args = Array.isArray(msg.args) ? msg.args : [];
+            try {
+                if(!window.pasargad || typeof window.pasargad[method] !== 'function') {
+                    throw new Error('Electron database bridge is unavailable: ' + method);
+                }
+                var result = await window.pasargad[method].apply(window.pasargad, args);
+                event.source.postMessage({type:'pasargad-ipc-response', id:msg.id, ok:true, result:result}, event.origin);
+            } catch(error) {
+                event.source.postMessage({type:'pasargad-ipc-response', id:msg.id, ok:false, error:error && error.message ? error.message : String(error)}, event.origin);
+            }
+        });
+
+        // تازه‌سازی گزارش پس از ثبت/ویرایش چک، بدون قفل کردن فرم ثبت چک.
+        function refreshChequeReport(){
+            try {
+                if (typeof loadCheques === "function") {
+                    Promise.resolve(loadCheques()).catch(function(err){ console.warn("Report refresh failed:", err); });
+                }
+            } catch(e) {}
+        }
+
+        function openChequeFormOverlay(url){
+            var overlay=document.getElementById("chequeFormOverlay");
+            var frame=document.getElementById("chequeFormFrame");
+            if(!overlay||!frame)return;
+            overlay.style.display="block";
+            overlay.setAttribute("aria-hidden","false");
+            if (url) {
+                frame.setAttribute("src", url);
+            } else {
+                // فرم فقط یک بار ساخته می‌شود؛ برای «ثبت چک جدید» دوباره صفحه را reload نمی‌کنیم.
+                if (!frame.getAttribute("src")) {
+                    frame.setAttribute("src", "cheque.html?new=1");
+                } else {
+                    try { frame.contentWindow.postMessage({type:'pasargad-reset-cheque-form'}, window.location.origin); } catch(e) {}
+                }
+            }
+        }
+        function closeChequeFormOverlay(){
+            var overlay=document.getElementById("chequeFormOverlay");
+            var frame=document.getElementById("chequeFormFrame");
+            if(!overlay)return;
+            overlay.style.display="none";
+            overlay.setAttribute("aria-hidden","true");
+            // بعد از بسته شدن فرم، صفحه قبلی را نگه نمی‌داریم تا حالت disabled/readonly
+            // فرم ثبت قبلی به فرم «ثبت چک جدید» منتقل نشود. فقط src را خالی می‌کنیم؛
+            // هیچ دسترسی سنگین یا reset هم در این لحظه انجام نمی‌شود.
+            if(frame){
+                try{ frame.contentWindow && frame.contentWindow.blur(); }catch(e){}
+                frame.removeAttribute("src");
+            }
+        }
+
+        function openToolPage(page){
+            var ids=['baseInfoToolPage','fiscalToolPage','passwordToolPage','backupToolPage','appearanceToolPage','aboutToolPage'];
+            ids.forEach(function(id){var el=document.getElementById(id);if(el)el.hidden=true;});
+            var empty=document.getElementById('toolsContentEmpty');
+            if(empty) empty.hidden = page !== 'home';
+            var targetId={baseInfo:'baseInfoToolPage',fiscal:'fiscalToolPage',password:'passwordToolPage',backup:'backupToolPage',appearance:'appearanceToolPage',about:'aboutToolPage'}[page];
+            var target=targetId?document.getElementById(targetId):null;
+            if(target)target.hidden=false;
+            document.querySelectorAll('.tools-menu-item[data-tool-page]').forEach(function(item){item.classList.toggle('active',item.dataset.toolPage===page);});
+            if(page==='password') fillCredentialUsername();
+        }
+
+        function showModule(moduleName){if(!isAuthenticated)return;closeChequeFormOverlay();document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});var target=document.getElementById(moduleName);if(target)target.hidden=false;document.querySelectorAll('.pasargad-main-menu .menu-item').forEach(function(item){item.classList.toggle('active',item.dataset.module===moduleName);});if(moduleName==='tools')openToolPage('home');if(moduleName==='management'&&window.managementDashboardInit)window.managementDashboardInit();if(moduleName==='contacts'&&window.customerInit)window.customerInit();if(moduleName==='sendControl'&&window.sendControlInit)window.sendControlInit();if(moduleName==='dailyTasks'&&window.dailyAffairsInit)window.dailyAffairsInit();}
+        function fillCredentialUsername(){var el=document.getElementById('settingsUsername');if(el)el.value=getStoredCredentials().username;}
+        var RECOVERY_CODE_HASH = 'eeac7b53b1bd46cf8d8ac0d9e59cfc45ae23aaf2b4405856dd0038f4c4ac7e55';
+        async function hashRecoveryCode(value){var data=new TextEncoder().encode(value);var digest=await crypto.subtle.digest('SHA-256',data);return Array.from(new Uint8Array(digest)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}
+        var recoveryMode = 'password';
+        function openRecovery(mode){var o=document.getElementById('recoveryOverlay');if(!o)return;recoveryMode=mode==='username'?'username':'password';o.style.display='flex';o.setAttribute('aria-hidden','false');document.getElementById('recoveryCode').value='';document.getElementById('recoveryNewPassword').value='';document.getElementById('recoveryNewPassword2').value='';document.getElementById('recoveryNewUsername').value='';var title=document.getElementById('recoveryTitle'),text=document.getElementById('recoveryText'),button=document.getElementById('recoverySubmitButton'),pf=document.getElementById('recoveryPasswordFields'),uf=document.getElementById('recoveryUsernameFields');if(recoveryMode==='username'){title.textContent='بازیابی نام کاربری';text.textContent='کد بازیابی را وارد کنید. پس از تأیید، می‌توانید نام کاربری جدید تعیین کنید.';pf.hidden=true;uf.hidden=false;button.textContent='تغییر نام کاربری';}else{title.textContent='بازیابی رمز عبور';text.textContent='برای بازیابی رمز، کد بازیابی را وارد کنید. پس از تأیید، می‌توانید رمز ورود جدید تعیین کنید.';pf.hidden=false;uf.hidden=true;button.textContent='بازیابی رمز';}var m=document.getElementById('recoveryMessage');m.className='recovery-message';m.textContent='';setTimeout(function(){document.getElementById('recoveryCode').focus();},0);}
+        function openForgotPassword(){openRecovery('password');}
+        function openForgotUsername(){openRecovery('username');}
+        function closeRecovery(){var o=document.getElementById('recoveryOverlay');if(!o)return;o.style.display='none';o.setAttribute('aria-hidden','true');}
+        function closeForgotPassword(){closeRecovery();}
+        async function resetPasswordWithRecovery(){var code=document.getElementById('recoveryCode').value,m=document.getElementById('recoveryMessage');m.className='recovery-message';m.textContent='';if(!code){m.classList.add('err');m.textContent='کد بازیابی را وارد کنید.';return;}try{var hash=await hashRecoveryCode(code);if(hash!==RECOVERY_CODE_HASH){m.classList.add('err');m.textContent='کد بازیابی صحیح نیست.';document.getElementById('recoveryCode').select();return;}if(recoveryMode==='username'){var newUser=document.getElementById('recoveryNewUsername').value.trim();if(!newUser){m.classList.add('err');m.textContent='نام کاربری جدید را وارد کنید.';return;}localStorage.setItem('pasargadUsername',newUser);m.classList.add('ok');m.textContent='نام کاربری با موفقیت تغییر کرد.';setTimeout(function(){closeRecovery();document.getElementById('loginUsername').value='';document.getElementById('loginPassword').value='';document.getElementById('loginUsername').focus();},700);return;}var newPass=document.getElementById('recoveryNewPassword').value,newPass2=document.getElementById('recoveryNewPassword2').value;if(!newPass){m.classList.add('err');m.textContent='رمز جدید را وارد کنید.';return;}if(newPass.length<4){m.classList.add('err');m.textContent='رمز جدید باید حداقل ۴ کاراکتر باشد.';return;}if(newPass!==newPass2){m.classList.add('err');m.textContent='تکرار رمز عبور یکسان نیست.';return;}localStorage.setItem('pasargadPassword',newPass);localStorage.removeItem('pasargadPasswordHash');m.classList.add('ok');m.textContent='رمز عبور با موفقیت بازیابی شد.';setTimeout(function(){closeRecovery();document.getElementById('loginPassword').value='';document.getElementById('loginPassword').focus();},700);}catch(err){console.error(err);m.classList.add('err');m.textContent='خطا در بازیابی اطلاعات.';}}
+        async function login(event){event.preventDefault();var u=document.getElementById('loginUsername').value.trim(),p=document.getElementById('loginPassword').value,c=getStoredCredentials(),e=document.getElementById('loginError');e.textContent='';try{if(u===c.username&&p===c.password){isAuthenticated=true;document.getElementById('loginScreen').classList.add('login-hidden');var h=(window.location.hash||'').replace('#','');showModule(h&&document.getElementById(h)?h:'home');document.getElementById('loginPassword').value='';}else{e.textContent='نام کاربری یا رمز عبور اشتباه است.';document.getElementById('loginPassword').select();}}catch(err){console.error(err);e.textContent='خطا در بررسی رمز عبور. لطفاً برنامه را دوباره اجرا کنید.';}}
+        async function changeCredentials(){var current=document.getElementById('settingsCurrentPassword').value,newUser=document.getElementById('settingsUsername').value.trim(),newPass=document.getElementById('settingsNewPassword').value,newPass2=document.getElementById('settingsNewPassword2').value,msg=document.getElementById('passwordMessage'),c=getStoredCredentials();msg.className='password-message';if(!newUser||!newPass){msg.classList.add('err');msg.textContent='نام کاربری و رمز عبور جدید را وارد کنید.';return;}if(current!==c.password){msg.classList.add('err');msg.textContent='رمز عبور فعلی صحیح نیست.';return;}if(newPass.length<4){msg.classList.add('err');msg.textContent='رمز عبور جدید باید حداقل ۴ کاراکتر باشد.';return;}if(newPass!==newPass2){msg.classList.add('err');msg.textContent='تکرار رمز عبور با رمز جدید یکسان نیست.';return;}localStorage.setItem('pasargadUsername',newUser);localStorage.setItem('pasargadPassword',newPass);localStorage.removeItem('pasargadPasswordHash');msg.classList.add('ok');msg.textContent='اطلاعات ورود با موفقیت تغییر کرد.';document.getElementById('settingsCurrentPassword').value='';document.getElementById('settingsNewPassword').value='';document.getElementById('settingsNewPassword2').value='';}
+        var backupExitInProgress = false;
+        async function performBackup(showMessage) {
+            try {
+                var result = await window.pasargad.createBackup();
+                if (result && result.success) {
+                    if (showMessage) {
+                        var bm=document.getElementById('backupMessage');
+                        if(bm) bm.textContent='نسخه پشتیبان با موفقیت تهیه شد.';
+                    }
+                    return true;
+                }
+                if (showMessage) { var bm2=document.getElementById('backupMessage'); if(bm2) bm2.textContent='تهیه نسخه پشتیبان انجام نشد. لطفاً دوباره تلاش کنید.'; }
+                return false;
+            } catch (e) {
+                console.error('Backup error:', e);
+                if (showMessage) { var bm3=document.getElementById('backupMessage'); if(bm3) bm3.textContent='خطا در تهیه نسخه پشتیبان.'; }
+                return false;
+            }
+        }
+        async function refreshBackupSettings(){
+            try{
+                var cfg=await window.pasargad.getBackupSettings();
+                var el=document.getElementById('backupSecondPath');
+                if(el) el.textContent='مسیر پشتیبان دوم: '+(cfg&&cfg.secondPath?cfg.secondPath:'تنظیم نشده');
+            }catch(e){}
+        }
+        async function chooseSecondBackupPath(){
+            try{
+                var r=await window.pasargad.chooseBackupSecondPath();
+                if(r&&r.success){
+                    var el=document.getElementById('backupSecondPath'); if(el) el.textContent='مسیر پشتیبان دوم: '+r.path;
+                    var bm=document.getElementById('backupMessage'); if(bm) bm.textContent='مسیر پشتیبان دوم با موفقیت تنظیم شد.';
+                }
+            }catch(e){ console.error(e); }
+        }
+        async function restoreBackupFile(){
+            var input=document.createElement('input');
+            input.type='file'; input.accept='.db,.sqlite,.sqlite3';
+            input.addEventListener('change',async function(){
+                var file=input.files&&input.files[0]; if(!file)return;
+                var box=document.createElement('div');
+                box.className='app-modal-overlay';
+                box.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(15,31,45,.42);';
+                box.innerHTML='<div class="app-modal-card" style="min-width:360px;max-width:520px;text-align:center;"><div class="app-modal-title">تأیید بازیابی اطلاعات</div><div class="app-modal-text">با بازیابی این فایل، اطلاعات فعلی جایگزین می‌شود. آیا ادامه می‌دهید؟</div><div style="display:flex;gap:10px;justify-content:center;margin-top:18px;direction:rtl;"><button type="button" class="modal-secondary" id="restoreCancelTemp">انصراف</button><button type="button" class="modal-primary" id="restoreOkTemp">بازیابی اطلاعات</button></div></div>';
+                document.body.appendChild(box);
+                var cleanup=function(){try{box.remove();}catch(e){}};
+                box.querySelector('#restoreCancelTemp').onclick=cleanup;
+                box.querySelector('#restoreOkTemp').onclick=async function(){
+                    cleanup();
+                    var bm=document.getElementById('backupMessage'); if(bm) bm.textContent='در حال بازیابی اطلاعات...';
+                    try{
+                        var r=await window.pasargad.restoreBackup(file.path);
+                        if(r&&r.success){ if(bm) bm.textContent='بازیابی با موفقیت انجام شد. نرم‌افزار در حال راه‌اندازی مجدد است...'; }
+                        else if(bm) bm.textContent=(r&&r.error)||'بازیابی انجام نشد.';
+                    }catch(e){ if(bm) bm.textContent='خطا در بازیابی اطلاعات: '+(e&&e.message?e.message:String(e)); }
+                };
+            });
+            input.click();
+        }
+
+        function showExitBackupDialog(){
+            var o=document.getElementById('exitBackupOverlay'); if(!o)return;
+            o.hidden=false; o.setAttribute('aria-hidden','false');
+            var b=document.getElementById('exitBackupButton'); if(b){b.disabled=false;b.textContent='تهیه پشتیبان و خروج';setTimeout(function(){b.focus();},0);}
+        }
+        async function handleExitBackup(){
+            if(backupExitInProgress)return; backupExitInProgress=true;
+            var b=document.getElementById('exitBackupButton'), t=document.getElementById('exitBackupText');
+            if(b)b.disabled=true; if(t)t.textContent='در حال تهیه نسخه پشتیبان... لطفاً صبر کنید.';
+            var ok=await performBackup(false);
+            if(ok){ if(t)t.textContent='نسخه پشتیبان با موفقیت تهیه شد. در حال خروج...'; if(window.pasargad.finishBackupBeforeExit)window.pasargad.finishBackupBeforeExit(true); }
+            else { backupExitInProgress=false; if(b)b.disabled=false; if(t)t.textContent='تهیه نسخه پشتیبان انجام نشد. تا تهیه موفق پشتیبان، خروج از برنامه امکان‌پذیر نیست.'; }
+        }
+        function cancelExitBackup(){ if(backupExitInProgress)return; var o=document.getElementById('exitBackupOverlay');if(o){o.hidden=true;o.setAttribute('aria-hidden','true');} }
+        function showHome(){if(!isAuthenticated)return;closeChequeFormOverlay();document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});var home=document.getElementById('home');if(home)home.hidden=false;document.querySelectorAll('.pasargad-main-menu .menu-item').forEach(function(item){item.classList.remove('active');});}
+        document.addEventListener('DOMContentLoaded',function(){if(!localStorage.getItem('pasargadPassword')){localStorage.removeItem('pasargadPasswordHash');localStorage.setItem('pasargadPassword',DEFAULT_PASSWORD);}document.getElementById('loginForm').addEventListener('submit',login);document.querySelectorAll('.home-screen,.module-view,.module-placeholder').forEach(function(el){el.hidden=true;});document.getElementById('loginUsername').focus();
+            var bb=document.getElementById('createBackupButton'); if(bb) bb.addEventListener('click', function(){performBackup(true);});
+            var rb=document.getElementById('restoreBackupButton'); if(rb) rb.addEventListener('click', restoreBackupFile);
+            var sb=document.getElementById('chooseSecondBackupButton'); if(sb) sb.addEventListener('click', chooseSecondBackupPath);
+            refreshBackupSettings();
+            var eb=document.getElementById('exitBackupButton'); if(eb) eb.addEventListener('click', handleExitBackup);
+            var ec=document.getElementById('exitBackupCancel'); if(ec) ec.addEventListener('click', cancelExitBackup);
+            if(window.pasargad && window.pasargad.onBackupBeforeExit) window.pasargad.onBackupBeforeExit(showExitBackupDialog);
+        });
+        // فرم ثبت چک از همان ابتدای ورود به نرم افزار در پس زمینه بارگذاری می شود.
+        document.addEventListener('DOMContentLoaded', function(){
+            var frame=document.getElementById('chequeFormFrame');
+            if(frame && !frame.getAttribute('src')) frame.setAttribute('src','cheque.html?new=1');
+        });
+        document.addEventListener('keydown',function(event){if(event.key==='Escape'||event.keyCode===27){if(!isAuthenticated)return;event.preventDefault();var overlay=document.getElementById('chequeFormOverlay');if(overlay&&overlay.style.display!=='none'){closeChequeFormOverlay();return;}showHome();}});
+    </script>
+<style>
+.reports-home{margin:14px 18px;background:#f7f9fb;border:1px solid #c7d2dc;padding:16px;min-height:220px;}
+.reports-home-title{font-size:16px;font-weight:bold;color:#173f69;border-bottom:1px solid #d4dde5;padding-bottom:10px;margin-bottom:12px;}
+.reports-grid{display:flex;flex-direction:column;gap:8px;max-width:620px;}
+.report-card{display:flex;align-items:center;direction:rtl;text-align:right;width:100%;min-height:70px;padding:8px 12px;border:1px solid #b8c6d2;border-radius:2px;background:linear-gradient(#fff,#edf3f8);cursor:pointer;color:#172b3d;font-family:inherit;}
+.report-card:hover{background:#e5f0fa;border-color:#7da6c8;}
+.report-card-icon{font-size:27px;width:44px;text-align:center;}
+.report-card-body{display:flex;flex-direction:column;gap:4px;flex:1;}
+.report-card-body strong{font-size:13px;color:#164b7d;}
+.report-card-body small{font-size:11px;color:#647585;font-weight:normal;}
+.report-card-arrow{font-size:18px;color:#35688e;padding:0 5px;}
+.reports-note{margin-top:18px;padding:9px 12px;background:#fff8d9;border:1px solid #e3d7a4;color:#625b37;font-size:11px;max-width:620px;}
+</style>
+<div class="fiscal-action-modal" hidden="" id="fiscalActionModal">
+<div aria-labelledby="fiscalActionTitle" aria-modal="true" class="fiscal-action-box" role="dialog">
+<div class="fiscal-action-icon">⚙</div>
+<div class="fiscal-action-title" id="fiscalActionTitle">پیام</div>
+<div class="fiscal-action-message" id="fiscalActionMessage"></div>
+<div class="fiscal-action-input-wrap" hidden="" id="fiscalActionInputWrap">
+<input autocomplete="off" id="fiscalActionInput" inputmode="numeric" type="text"/>
+</div>
+<div class="fiscal-action-buttons">
+<button class="fiscal-action-cancel" id="fiscalActionCancel" type="button">انصراف</button>
+<button class="fiscal-action-ok" id="fiscalActionOk" type="button">تأیید</button>
+</div>
+</div>
+</div>
+<style>
+.fiscal-action-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:rgba(20,35,48,.28);backdrop-filter:blur(1px)}
+.fiscal-action-modal[hidden]{display:none}
+.fiscal-action-box{width:min(430px,92vw);background:linear-gradient(180deg,#fff,#f5f8fa);border:1px solid #aab9c4;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.22);padding:22px;text-align:right;direction:rtl}
+.fiscal-action-icon{width:42px;height:42px;border-radius:10px;background:#e7f0f6;border:1px solid #b7ccd9;color:#275d7e;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:10px}
+.fiscal-action-title{font-size:16px;font-weight:bold;color:#214d6d;margin-bottom:8px}
+.fiscal-action-message{font-size:12px;line-height:2;color:#52636e;white-space:pre-line;min-height:24px}
+.fiscal-action-input-wrap{margin-top:13px}.fiscal-action-input-wrap[hidden]{display:none}
+.fiscal-action-input-wrap input{width:100%;height:42px;border:1px solid #aabac5;border-radius:7px;padding:5px 12px;font-family:inherit;font-size:15px;direction:ltr;text-align:center;outline:none;background:#fff}
+.fiscal-action-input-wrap input:focus{border-color:#4b88ad;box-shadow:0 0 0 3px rgba(75,136,173,.12)}
+.fiscal-action-buttons{display:flex;justify-content:flex-start;gap:9px;margin-top:18px}
+.fiscal-action-buttons button{min-width:105px;height:38px;border-radius:7px;font-family:inherit;font-size:12px;font-weight:bold;cursor:pointer}
+.fiscal-action-cancel{border:1px solid #b7c2c9;background:#fff;color:#52636e}.fiscal-action-ok{border:1px solid #356d90;background:linear-gradient(#4d8fb6,#2e6f96);color:#fff;box-shadow:0 2px 5px rgba(35,82,108,.2)}
+.fiscal-action-ok:hover{filter:brightness(1.04)}.fiscal-action-cancel:hover{background:#f1f4f6}
+</style>
+<style>
+.app-modal-overlay{position:fixed;inset:0;background:rgba(15,32,48,.42);display:flex;align-items:center;justify-content:center;z-index:99999;backdrop-filter:blur(2px)}
+.app-modal-overlay[hidden]{display:none}
+.app-modal-card{width:min(460px,calc(100vw - 40px));background:#fff;border:1px solid #b9c8d5;border-radius:14px;box-shadow:0 18px 55px rgba(0,0,0,.25);padding:28px;text-align:center;direction:rtl}
+.app-modal-icon{font-size:42px;margin-bottom:8px}.app-modal-title{font-size:18px;font-weight:bold;color:#173f69;margin-bottom:10px}.app-modal-text{font-size:13px;line-height:2;color:#526574;white-space:pre-line}.app-modal-actions{display:flex;gap:10px;justify-content:center;margin-top:22px}.app-modal-actions button{border:0;border-radius:9px;padding:10px 18px;font-family:inherit;font-size:13px;cursor:pointer}.modal-primary{background:#17649b;color:#fff}.modal-secondary{background:#edf2f6;color:#29445b}.app-modal-actions button:disabled{opacity:.55;cursor:wait}
+</style>
+<div class="report-print-modal" hidden="" id="reportPrintModal">
+<div aria-labelledby="reportPrintTitle" aria-modal="true" class="report-print-dialog" role="dialog">
+<div class="report-print-head">
+<div id="reportPrintTitle">🖨 تنظیمات چاپ گزارش</div>
+<button class="report-print-close" onclick="closeReportPrintModal()" type="button">×</button>
+</div>
+<div class="report-print-body">
+<div class="report-print-grid">
+<div><label for="reportPrintPrinter">پرینتر</label><select id="reportPrintPrinter"><option value="">انتخاب پرینتر</option></select></div>
+<div><label for="reportPrintPaper">اندازه کاغذ</label><select id="reportPrintPaper"><option value="A4">A4</option><option value="A5">A5</option><option value="Letter">Letter</option></select></div>
+<div><label for="reportPrintOrientation">جهت چاپ</label><select id="reportPrintOrientation"><option value="portrait">عمودی</option><option value="landscape">افقی</option></select></div>
+<div><label for="reportPrintMargins">حاشیه صفحه</label><select id="reportPrintMargins"><option value="default">استاندارد</option><option value="minimum">کم</option><option value="maximum">زیاد</option></select></div>
+<div><label for="reportPrintCopies">تعداد نسخه</label><select id="reportPrintCopies"><option value="1">۱</option><option value="2">۲</option><option value="3">۳</option><option value="4">۴</option><option value="5">۵</option></select></div>
+<div><label for="reportPrintShowDate">نمایش تاریخ و ساعت</label><select id="reportPrintShowDate"><option value="yes">بله</option><option value="no">خیر</option></select></div>
+</div>
+<div class="report-print-message" id="reportPrintMessage"></div>
+</div>
+<div class="report-print-actions">
+<button onclick="closeReportPrintModal()" type="button">انصراف</button>
+<button onclick="previewReportFromModal()" type="button">👁️ پیش‌نمایش</button>
+<button class="primary" onclick="confirmReportPrint()" type="button">🖨 چاپ گزارش</button>
+</div>
+</div>
+</div>
+<style>
+/* مرحله 26 - فقط بهبود ظاهری کنترل ارسال */
+#sendControl .send-control-page{padding-top:4px}
+#sendControl .send-control-toolbar{padding:14px 16px!important;border-radius:14px!important;background:linear-gradient(135deg,rgba(239,247,251,.96),rgba(220,236,244,.88))!important;border:1px solid #c5d9e3!important;box-shadow:0 7px 22px rgba(35,78,98,.10),inset 0 1px 0 rgba(255,255,255,.85)!important}
+#sendControl .send-control-toolbar-title{font-size:19px!important;font-weight:900!important;color:#1f4f68!important}
+#sendControl .send-control-toolbar-subtitle{font-size:11px!important;color:#657d89!important}
+#sendControl .send-control-mini-dashboard{gap:12px!important;margin:13px 0!important}
+#sendControl .send-mini-card{min-height:74px!important;padding:12px 15px!important;border-radius:13px!important;border:1px solid rgba(185,208,220,.85)!important;background:linear-gradient(135deg,#f8fcfe,#e6f1f6)!important;box-shadow:0 5px 16px rgba(35,78,98,.08)!important}
+#sendControl .send-mini-card span{font-size:11px!important;color:#607783!important}
+#sendControl .send-mini-card strong{font-size:24px!important;color:#244f66!important}
+#sendControl .send-mini-card.sent{background:linear-gradient(135deg,#f2fbf4,#dff2e4)!important;border-color:#b9dcc2!important}
+#sendControl .send-mini-card.pending{background:linear-gradient(135deg,#fffaf0,#f8ebc9)!important;border-color:#e5d3a5!important}
+#sendControl .send-mini-card.customers{background:linear-gradient(135deg,#f3f7ff,#e2eafb)!important;border-color:#c4d1e8!important}
+#sendControl .send-control-registration-card,#sendControl .send-control-report-card{border:1px solid #c5d8e1!important;border-radius:14px!important;box-shadow:0 7px 22px rgba(35,78,98,.09)!important;background:rgba(255,255,255,.94)!important}
+#sendControl .send-control-table-title{padding:11px 14px!important;background:linear-gradient(135deg,#edf6fa,#dcebf2)!important;border-bottom:1px solid #c9dbe4!important;font-size:14px!important;font-weight:850!important;color:#214e66!important}
+#sendControl .send-entry-field label{font-size:11px!important;font-weight:800!important;color:#496876!important;margin-bottom:5px!important}
+#sendControl .send-control-input,#sendControl .send-customer-search{height:36px!important;background:#f4f9fb!important;border:1px solid #bfd2dc!important;border-radius:8px!important;font-size:12px!important;color:#294f62!important}
+#sendControl .send-control-input:hover,#sendControl .send-customer-search:hover{background:#f0f7fa!important;border-color:#a9c5d2!important}
+#sendControl .send-control-input:focus,#sendControl .send-customer-search:focus{background:#fff!important;border-color:#5e9dbc!important;box-shadow:0 0 0 3px rgba(65,145,190,.12)!important}
+#sendControl .send-control-add{height:38px!important;border-radius:9px!important;font-size:12px!important;font-weight:850!important;box-shadow:0 5px 13px rgba(40,100,130,.14)!important}
+#sendControl .send-customer-edit-tools{gap:6px!important}
+#sendControl .send-customer-edit-toggle,#sendControl .send-control-create-customer,#sendControl .send-control-create-type{height:32px!important;border-radius:8px!important;font-size:10.5px!important}
+#sendControl .send-customer-edit-panel{border:1px solid #bfd4de!important;border-radius:9px!important;background:#f3f8fa!important;box-shadow:0 7px 18px rgba(30,70,90,.10)!important}
+#sendControl .send-report-tools{gap:8px!important}
+#sendControl .send-report-search,#sendControl .send-status-filter{height:34px!important;border-radius:8px!important;background:#f5f9fb!important;border:1px solid #c0d2db!important;font-size:11px!important}
+#sendControl .send-control-table{border-collapse:separate!important;border-spacing:0 4px!important}
+#sendControl .send-control-table thead th{font-size:11px!important;color:#4b6876!important;padding:10px 7px!important;background:#e9f3f7!important;border-bottom:1px solid #c7d9e2!important}
+#sendControl .send-control-table tbody tr{box-shadow:0 2px 7px rgba(35,78,98,.045)!important}
+#sendControl .send-control-table tbody td{font-size:11px!important;padding:9px 7px!important;background:#fbfdfe!important;border-top:1px solid #e1ebef!important;border-bottom:1px solid #e1ebef!important}
+#sendControl .send-control-table tbody tr:hover td{background:#eef7fb!important}
+#sendControl .send-status-btn{font-size:10.5px!important;border-radius:7px!important;min-width:54px!important}
+</style>
+
+</body>
+</html>

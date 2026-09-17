@@ -1,0 +1,5 @@
+const digits="۰۱۲۳۴۵۶۷۸۹";
+function fa(n){return String(n).replace(/\d/g,d=>digits[Number(d)]);}
+function setProgress(n){const p=Math.max(0,Math.min(100,n));const f=document.getElementById("fill");const t=document.getElementById("percent");if(f)f.style.width=p+"%";if(t)t.textContent=fa(p)+"٪";}
+async function loadImage(){try{const r=await window.pasargad.getSplashImage();if(r&&r.path){document.getElementById("splashImage").src=r.path;}}catch(e){console.error(e);}}
+document.addEventListener("DOMContentLoaded",()=>{loadImage();let p=0;const messages=["در حال آماده‌سازی محیط نرم‌افزار...","در حال بارگذاری اطلاعات...","در حال بررسی ماژول‌ها...","در حال اعمال تنظیمات...","در حال راه‌اندازی پاسارگاد..."];let mi=0;const sub=document.getElementById("loadingSub");setProgress(0);const timer=setInterval(()=>{p+=Math.floor(Math.random()*5)+2;if(p>96)p=96;setProgress(p);if(sub&&p>mi*22){mi=Math.min(messages.length-1,Math.floor(p/22));sub.textContent=messages[mi];}if(p>=96)clearInterval(timer);},150);window.addEventListener("pasargad-splash-ready",()=>{setProgress(100);if(sub)sub.textContent="راه‌اندازی با موفقیت انجام شد.";});});
